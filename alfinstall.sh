@@ -11,7 +11,7 @@ export CATALINA_HOME=$ALF_HOME/tomcat
 export ALF_USER=alfresco
 
 
-export BASE_DOWNLOAD=https://raw.github.com/loftuxab/alfresco-ubuntu-install
+export BASE_DOWNLOAD=https://raw.github.com/loftuxab/alfresco-ubuntu-install/master
 export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
 
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
