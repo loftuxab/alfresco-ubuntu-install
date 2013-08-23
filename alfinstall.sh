@@ -125,8 +125,8 @@ if [ "$installtomcat" = "y" ]; then
   sudo curl -# -o $CATALINA_HOME/conf/catalina.properties $BASE_DOWNLOAD/tomcat/catalina.properties
   sudo curl -# -o /etc/init/alfresco.conf $BASE_DOWNLOAD/tomcat/alfresco.conf
   # Create /shared
-  sudo mkdir -p $CATALINA_HOME/shared/classes/extension
-  sudo mkdir -p $CATALINA_HOME/shared/classes/web-extension
+  sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/extension
+  sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/web-extension
   # Add default alfresco-global.propertis
   sudo curl -# -o $CATALINA_HOME/shared/classes/alfresco-global.properties $BASE_DOWNLOAD/tomcat/alfresco-global.properties
   # Add Xalan to endorsed
