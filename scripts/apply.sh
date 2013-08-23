@@ -6,6 +6,8 @@
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
 export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/"
+export JRE_HOME=$JAVA_HOME/jre
+export PATH=$PATH:$HOME/bin:$JRE_HOME/bin
 export ALF_HOME=/opt/alfresco
 export CATALINA_HOME=$ALF_HOME/tomcat
 export CATALINA_PID="${ALF_HOME}/tomcat.pid"
