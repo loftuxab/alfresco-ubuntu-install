@@ -68,7 +68,12 @@ In this step ImageMagick is also installed from Ubuntu standard packages, if you
 
 Swftools
 ---------
-Downloaded and compiled. Currently a very specific version that is known to work with Alfresco.  
+Downloaded and compiled. Since it is compiled locally the script first installs tools for compiling using standard Ubuntu packages.
+
+ImageMagick  
+---------  
+Installed using the Ubuntu default package.  
+If you get the error `no decode delegate for this image format` on start in the alfresco.log make sure to check that the path for `img.coders=` in alfresco-global.properties. The path may be version specific for the installed version.  
 
 Alfresco
 ---------
