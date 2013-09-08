@@ -93,15 +93,7 @@
       <Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol" SSLEnabled="true" URIEncoding="UTF-8"
                maxThreads="150" scheme="https" keystoreFile="/opt/alfresco/alf_data/keystore/ssl.keystore" keystorePass="kT9X6oe68t" keystoreType="JCEKS"
                secure="true" connectionTimeout="240000" truststoreFile="/opt/alfresco/alf_data/keystore/ssl.truststore" truststorePass="kT9X6oe68t" truststoreType="JCEKS"
-               clientAuth="false" sslProtocol="TLS" maxSavePostSize="-1" /> 
-<!-- For Mac -->
-<!--
-      <Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol" SSLEnabled="true" URIEncoding="UTF-8" allowUnsafeLegacyRenegotiation="true"
-               maxThreads="150" scheme="https" keystoreFile="/opt/alfresco/tomcat/webapps/alfresco/WEB-INF/classes/alfresco/keystore/ssl.keystore" keystorePass="kT9X6oe68t" keystoreType="JCEKS"
-               secure="true" connectionTimeout="240000" truststoreFile="/opt/alfresco/tomcat/webapps/alfresco/WEB-INF/classes/alfresco/keystore/ssl.truststore" truststorePass="kT9X6oe68t" truststoreType="JCEKS"
-               clientAuth="false" sslProtocol="TLS" maxSavePostSize="-1" /> 
--->
-
+               clientAuth="want" allowUnsafeLegacyRenegotiation="true" maxHttpHeaderSize="32768" sslProtocol="TLS" maxSavePostSize="-1" /> 
 
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" URIEncoding="UTF-8" />

@@ -24,13 +24,13 @@ export JDBCPOSTGRES=postgresql-9.2-1003.jdbc4.jar
 export JDBCMYSQLURL=http://ftp.sunet.se/pub/unix/databases/relational/mysql/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.26.tar.gz
 
-export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.1.0/deb/x86_64/LibreOffice_4.1.0_Linux_x86-64_deb.tar.gz
-export SWFTOOLS=http://www.swftools.org/swftools-0.9.1.tar.gz
-export ALFWARZIP=http://dl.alfresco.com/release/community/build-04576/alfresco-community-4.2.c.zip
-export GOOGLEDOCSREPO=http://dl.alfresco.com/release/community/build-04576/alfresco-googledocs-repo-2.0.3-23.amp
-export GOOGLEDOCSSHARE=http://dl.alfresco.com/release/community/build-04576/alfresco-googledocs-share-2.0.3-23.amp
-export SOLR=http://dl.alfresco.com/release/community/build-04576/alfresco-community-solr-4.2.c.zip
-export SPP=http://dl.alfresco.com/release/community/build-04576/alfresco-community-spp-4.2.c.zip
+export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.1.1/deb/x86_64/LibreOffice_4.1.1_Linux_x86-64_deb.tar.gz
+export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
+export ALFWARZIP=http://dl.alfresco.com/release/community/build-4795/alfresco-community-4.2.d.zip
+export GOOGLEDOCSREPO=http://dl.alfresco.com/release/community/build-4795/alfresco-googledocs-repo-2.0.4-31c.amp
+export GOOGLEDOCSSHARE=http://dl.alfresco.com/release/community/build-4795/alfresco-googledocs-share-2.0.4-31c.amp
+export SOLR=http://dl.alfresco.com/release/community/build-4795/alfresco-community-solr-4.2.d.zip
+export SPP=http://dl.alfresco.com/release/community/build-4795/alfresco-community-spp-4.2.d.zip
 
 # Color variables
 txtund=$(tput sgr 0 1)          # Underline
@@ -230,8 +230,7 @@ if [ "$installibreoffice" = "y" ]; then
   sudo dpkg -i *.deb
   echo
   echoblue "Installing some support fonts for better transformations."
-  echoblue "Installing ImageMagick."
-  sudo apt-get install ttf-mscorefonts-installer fonts-droid imagemagick
+  sudo apt-get install ttf-mscorefonts-installer fonts-droid
   echo
   echogreen "Finished installing LibreOffice"
   echo
@@ -239,7 +238,29 @@ else
   echo
   echo "Skipping install of LibreOffice"
   echored "If you install LibreOffice/OpenOffice separetely, remember to update alfresco-global.properties"
-  echored "Also run: sudo apt-get install ttf-mscorefonts-installer fonts-droid imagemagick"
+  echored "Also run: sudo apt-get install ttf-mscorefonts-installer fonts-droid"
+  echo
+fi
+
+echo
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "Install ImageMagick."
+echo "This will ImageMagick from Ubuntu packages."
+echo "It is recommended that you install ImageMagick."
+echo "If you prefer some other way of installing ImageMagick, skip this step."
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+read -e -p "Install LibreOffice${ques} [y/n] " -i "n" installimagemagick
+if [ "$installimagemagick" = "y" ]; then
+
+  echoblue "Installing ImageMagick."
+  sudo apt-get install imagemagick ghostscript libgs-dev libjpeg62 libpng3
+  echo
+  echogreen "Finished installing ImageMagick"
+  echo
+else
+  echo
+  echo "Skipping install of ImageMagick"
+  echored "Remember to install ImageMagick later. It is needed for thumbnail transformations."
   echo
 fi
 
@@ -248,7 +269,7 @@ echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 echo "Install Swftools."
 echo "This will download and install swftools used for transformations to Flash."
 echo "Since the swftools Ubuntu package is not included in all versions of Ubuntu,"
-echo "this install downloads from swftools.org and compile."
+echo "this install downloads from swftools.org and compiles."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 read -e -p "Install Swftools${ques} [y/n] " -i "n" installswftools
 
