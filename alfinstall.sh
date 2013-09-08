@@ -249,7 +249,7 @@ echo "This will ImageMagick from Ubuntu packages."
 echo "It is recommended that you install ImageMagick."
 echo "If you prefer some other way of installing ImageMagick, skip this step."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install LibreOffice${ques} [y/n] " -i "n" installimagemagick
+read -e -p "Install ImageMagick${ques} [y/n] " -i "n" installimagemagick
 if [ "$installimagemagick" = "y" ]; then
 
   echoblue "Installing ImageMagick."
