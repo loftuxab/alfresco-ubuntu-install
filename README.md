@@ -83,7 +83,8 @@ You can completely skip this step if you intend to use Enterprise version or any
 
 Solr
 ---------
-You have a choice lucene (default) or Solr as indexing engine. Solr runs as a separate application and is slightly more complex to configure. As Solr is more advanced and handle multilingual better it is recommended that you install Solr.  
+You have a choice lucene (default) or Solr as indexing engine. Solr runs as a separate application and is slightly more complex to configure. As Solr is more advanced and handle multilingual better it is recommended that you install Solr.
+If you choose to use Solr, remember to update default indexing engine (currently lucene) in alfresco-global.properties.  
 
 Addons - Manage amps and war files.
 ========
