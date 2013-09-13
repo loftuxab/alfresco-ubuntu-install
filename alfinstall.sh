@@ -334,6 +334,10 @@ echo
     echo "Downloading iptables.sh script..."
     sudo curl -# -o $ALF_HOME/scripts/iptables.sh $BASE_DOWNLOAD/scripts/iptables.sh
   fi
+  if [ ! -f "$ALF_HOME/scripts/alfresco-iptables.conf" ]; then
+    echo "Downloading alfresco-iptables.conf upstart script..."
+    sudo curl -# -o $ALF_HOME/scripts/alfresco-iptables.conf $BASE_DOWNLOAD/scripts/alfresco-iptables.conf
+  fi
   sudo chmod u+x $ALF_HOME/scripts/*.sh
   
   # Keystore
