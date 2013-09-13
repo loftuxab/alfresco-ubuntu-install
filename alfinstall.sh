@@ -104,7 +104,7 @@ echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "Tomcat is the application server that runs Alfresco."
 echo "You will also get the option to install jdbc lib for Postgresql or MySql/MariaDB."
-echo "Install the jdbc lib for the database you intend to use.
+echo "Install the jdbc lib for the database you intend to use."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 read -e -p "Install Tomcat${ques} [y/n] " -i "n" installtomcat
 
