@@ -102,9 +102,10 @@ If you didn't install Alfresco war files with the install script you can use thi
 Scripts - Supporting scripts
 ============================
 In the directory `/opt/alfresco/scripts` there are some useful scripts installed. Or if you did not run the install script, grab them from github. Here is what they do:  
-* `libreoffice.sh` - Start/stop libreoffice manually. Sometimes libreoffice crashes during a transformation, use this script to start it again. Alfresco will re-connect when the server detects libreoffice is running. Or add this to crontab:  
-`*/10 * * * * /opt/alfresco/scripts/libreoffice.sh start 2>&1 >> /opt/alfresco/office.log`  
-and it will automatically make sure libreoffice is running (if not started and tomcat is running).  
+* `libreoffice.sh` - Start/stop libreoffice manually. Sometimes libreoffice crashes during a transformation, use this script to start it again. Alfresco will re-connect when the server detects libreoffice is running. You can add this to crontab for automatic checks:  
+`*/10 * * * * /opt/alfresco/scripts/libreoffice.sh start 2>&1 >> /opt/alfresco/logs/office.log`
+`0 2 * * * /opt/alfresco/scripts/libreoffice.sh restart 2>&1 > /opt/alfresco/logs/office.log` 
+This will make sure libreoffice is running (if not already started and tomcat is running). Once per night it will also do a complete restart (in case LibreOffice behaves badly).  
 * `iptables.sh` - Script to add port forwarding. Useful if you want to use cifs, ftp that will not run on lower port numbers if not root. Or if you´re not using nginx as front end and want to forward port 80 to 8080.  
 * `limitconvert.sh` - Script to limit the number of cpu:s ImageMagick convert can use during transformations. Some Document library views with large thumbnails can cause intensive transformation load, and this script make sure some resources are left for other work.  
 * `createssl.sh` - Create self signed certificates, useful for testing purposes. Works well with nginx.  
