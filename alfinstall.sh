@@ -186,6 +186,13 @@ EOF
   sudo curl -# -o /etc/nginx/nginx.conf $BASE_DOWNLOAD/nginx/nginx.conf
   sudo mkdir -p /var/cache/nginx/alfresco
   sudo chown -R www-data:root /var/cache/nginx/alfresco
+  if [ "$installtomcat" = "y" ]; 
+    read -e -p "Please enter the host's fully qualified domain name${ques} [`hostname`] " -i "`hostname`" HOSTNAME
+    SHARE_SECURITY=$ALF_HOME/tomcat/webapps/share/WEB-INF/classes/alfresco/share-security-config.xml
+    sudo cp $SHARE_SECURITY $SHARE_SECURITY.backup
+    sudo sed -i 's@<referer></referer>@<referer>http://'"$HOSTNAME"'/.*|https://'"$HOSTNAME"'/.*</referer>@g' $SHARE_SECURITY
+    sudo sed -i 's@<origin></origin>@<origin>http://'"$HOSTNAME"'|https://'"$HOSTNAME"'</origin>@g' $SHARE_SECURITY
+  fi
   echo
   echogreen "Finished installing nginx"
   echo
