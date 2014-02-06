@@ -57,6 +57,17 @@ The script will use the latest version of the Ubuntu package from Nginx instead 
 
 **Caveat:** The upload progress bar in Share will show the upload as complete when the upload from client to nginx is complete, but the upload from nginx to Tomcat Share/Alfresco continues shortly. Usually this is barely noticeable, since server connections speeds are a lot faster than client server connections.
 
+### Maintenance message support
+If you are using Nginx as front-end there is a built in fallback to a maintenance page when the Alfresco tomcat instance is stopped. Nginx will detect that tomcat is not responding and show this page. It will display expected downtime and a progress bar.  
+To set the the downtime (in minutes) and a custom message, call the ams.sh script found in script folder.
+`ams.sh 20 "Custom message displayed in page"`  
+The above example will set the downtime to 20 minutes (from when you shut down) and with a custom message. If called without parameters it defaults to 10 minutes. Custom message is optional, but if used you also must set the timeout.  
+The script will shut down Alfresco tomcat instance. To start it you must call `sudo start alfresco`.  
+
+The maintenance.html page is found in its default location /opt/alfresco/www and can be customized to your needs.  
+
+If you want to implement this support and already have run the alfinstall.sh script, compare your nginx.conf to what is currently in git/master. 
+
 Java JDK
 --------
 Install OpenJDK. You may want to use Oracle Java, but download and install of Oracle Java could not be scripted. If you choose to use Oracle Java, adjust paths setting in `/etc/init/alfresco.conf`.
@@ -111,6 +122,7 @@ This will make sure libreoffice is running (if not already started and tomcat is
 * `createssl.sh` - Create self signed certificates, useful for testing purposes. Works well with nginx.  
 * `mariadb.sh` - Install the mariadb database server (the MySql alternative). It is recommended that you instead use a dedicated database server. Seriously, do that. And do some database optimizations, out of scope for this install guide.  
 * `postgresql.sh` - Same as for MariaDB, but the postgres version.  
+* `ms.sh` - To do a maintenance shutdown. For more, see section under nginx.  
 
 FAQ  
 ===

@@ -185,7 +185,15 @@ EOF
   sudo mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
   sudo curl -# -o /etc/nginx/nginx.conf $BASE_DOWNLOAD/nginx/nginx.conf
   sudo mkdir -p /var/cache/nginx/alfresco
+  sudo mkdir -p $ALF_HOME/www
+  if [ ! -f "$ALF_HOME/www/maintenance.html" ]; then
+    echo "Downloading maintenance html page..."
+    sudo curl -# -o $ALF_HOME/www/maintenance.html $BASE_DOWNLOAD/nginx/maintenance.html
+  fi
   sudo chown -R www-data:root /var/cache/nginx/alfresco
+  sudo chown -R www-data:root $ALF_HOME/www  
+
+  
   echo
   echogreen "Finished installing nginx"
   echo
@@ -338,6 +346,10 @@ echo
     echo "Downloading alfresco-iptables.conf upstart script..."
     sudo curl -# -o $ALF_HOME/scripts/alfresco-iptables.conf $BASE_DOWNLOAD/scripts/alfresco-iptables.conf
   fi
+  if [ ! -f "$ALF_HOME/scripts/ams.sh" ]; then
+    echo "Downloading maintenance shutdown script..."
+    sudo curl -# -o $ALF_HOME/scripts/ams.sh $BASE_DOWNLOAD/scripts/ams.sh
+  fi
   sudo chmod u+x $ALF_HOME/scripts/*.sh
   
   # Keystore
@@ -457,6 +469,9 @@ else
 fi
 
 sudo chown -R $ALF_USER:$ALF_USER $ALF_HOME
+if [ -d "$ALF_HOME/www" ]; then
+   sudo chown -R www-data:root $ALF_HOME/www 
+fi
 
 echo
 echogreen "- - - - - - - - - - - - - - - - -"
