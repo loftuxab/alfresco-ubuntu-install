@@ -122,7 +122,7 @@ This will make sure libreoffice is running (if not already started and tomcat is
 * `createssl.sh` - Create self signed certificates, useful for testing purposes. Works well with nginx.  
 * `mariadb.sh` - Install the mariadb database server (the MySql alternative). It is recommended that you instead use a dedicated database server. Seriously, do that. And do some database optimizations, out of scope for this install guide.  
 * `postgresql.sh` - Same as for MariaDB, but the postgres version.  
-* `ms.sh` - To do a maintenance shutdown. For more, see section under nginx.  
+* `ams.sh` - To do a maintenance shutdown. For more, see section under nginx.  
 
 FAQ  
 ===
