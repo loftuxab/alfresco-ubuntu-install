@@ -1,0 +1,71 @@
+<alfresco-config>
+
+   <!-- Global config section -->
+   <config replace="true">
+      <flags>
+         <!-- Developer debugging setting to turn on DEBUG mode for client scripts in the browser -->
+         <client-debug>false</client-debug>
+         <!-- LOGGING can always be toggled at runtime when in DEBUG mode (Ctrl, Ctrl, Shift, Shift).
+              This flag automatically activates logging on page load -->
+         <client-debug-autologging>false</client-debug-autologging>
+      </flags>
+   </config>
+   
+   <config evaluator="string-compare" condition="WebFramework">
+      <web-framework>
+         <autowire>
+            <!-- Pick the mode: "production" or "development" -->
+            <mode>production</mode>
+         </autowire>
+      </web-framework>
+   </config>
+
+   <config evaluator="string-compare" condition="CSRFPolicy" replace="true">
+      <properties>
+         <token>Alfresco-CSRFToken</token>
+         <referer>https?:\/\/@@ALFRESCO_SHARE_SERVER@@\/.*</referer>
+         <origin>https?:\/\/@@ALFRESCO_SHARE_SERVER@@.*</origin>
+      </properties>
+   </config>
+   
+   <config evaluator="string-compare" condition="Remote">
+      <remote>
+         <endpoint>
+            <id>alfresco-noauth</id>
+            <name>Alfresco - unauthenticated access</name>
+            <description>Access to Alfresco Repository WebScripts that do not require authentication</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/s</endpoint-url>
+            <identity>none</identity>
+         </endpoint>
+
+         <endpoint>
+            <id>alfresco</id>
+            <name>Alfresco - user access</name>
+            <description>Access to Alfresco Repository WebScripts that require user authentication</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/s</endpoint-url>
+            <identity>user</identity>
+         </endpoint>
+
+         <endpoint>
+            <id>alfresco-feed</id>
+            <name>Alfresco Feed</name>
+            <description>Alfresco Feed - supports basic HTTP authentication via the EndPointProxyServlet</description>
+            <connector-id>http</connector-id>
+            <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/s</endpoint-url>
+            <basic-auth>true</basic-auth>
+            <identity>user</identity>
+         </endpoint>
+         
+         <endpoint>
+            <id>activiti-admin</id>
+            <name>Activiti Admin UI - user access</name>
+            <description>Access to Activiti Admin UI, that requires user authentication</description>
+            <connector-id>activiti-admin-connector</connector-id>
+            <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/activiti-admin</endpoint-url>
+            <identity>user</identity>
+         </endpoint>
+      </remote>
+   </config>
+</alfresco-config>

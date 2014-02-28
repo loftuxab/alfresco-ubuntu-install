@@ -134,12 +134,42 @@ if [ "$installtomcat" = "y" ]; then
   # Create /shared
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/extension
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/web-extension
-  # Add default alfresco-global.propertis
-  sudo curl -# -o $CATALINA_HOME/shared/classes/alfresco-global.properties $BASE_DOWNLOAD/tomcat/alfresco-global.properties
   # Add Xalan to endorsed
   sudo mkdir -p $CATALINA_HOME/endorsed
   sudo curl -# -o $CATALINA_HOME/endorsed/xalan.jar $XALAN/xalan.jar
   sudo curl -# -o $CATALINA_HOME/endorsed/serializer.jar $XALAN/serializer.jar
+  echo
+  echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+  echo "You need to add the dns name, port and protocol for your server(s)."
+  echo "It is important that this is is a resolvable server name."
+  echo "This information will be added to default configuration files."
+  echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+  read -e -p "Please enter the public host name for Share server (fully qualified domain name)${ques} [`hostname`] " -i "`hostname`" SHARE_HOSTNAME
+  read -e -p "Please enter the protocol to use for public Share server (http or https)${ques} [http] " -i "http" SHARE_PROTOCOL
+  SHARE_PORT=80
+  if [ "${SHARE_PROTOCOL,,}" = "https" ]; then
+    SHARE_PORT=443
+  fi
+  read -e -p "Please enter the host name for Alfresco Repository server (fully qualified domain name)${ques} [$SHARE_HOSTNAME] " -i "$SHARE_HOSTNAME" REPO_HOSTNAME
+
+  # Add default alfresco-global.propertis
+  ALFRESCO_GLOBAL_PROPERTIES=/tmp/alfrescoinstall/alfresco-global.properties
+  sudo curl -# -o $ALFRESCO_GLOBAL_PROPERTIES $BASE_DOWNLOAD/tomcat/alfresco-global.properties
+  sed -i "s/@@ALFRESCO_SHARE_SERVER@@/$SHARE_HOSTNAME/g" $ALFRESCO_GLOBAL_PROPERTIES
+  sed -i "s/@@ALFRESCO_SHARE_PORT@@/$SHARE_PORT/g" $ALFRESCO_GLOBAL_PROPERTIES
+  sed -i "s/@@ALFRESCO_SHARE_SERVER_PROTOCOL@@/$SHARE_PROTOCOL/g" $ALFRESCO_GLOBAL_PROPERTIES
+  sed -i "s/@@ALFRESCO_REPO_SERVER@@/$REPO_HOSTNAME/g" $ALFRESCO_GLOBAL_PROPERTIES
+  sudo mv $ALFRESCO_GLOBAL_PROPERTIES $CATALINA_HOME/shared/classes/
+  
+  read -e -p "Install Share config file (recommended)${ques} [y/n] " -i "n" installshareconfig
+  if [ "$installshareconfig" = "y" ]; then
+    SHARE_CONFIG_CUSTOM=/tmp/alfrescoinstall/share-config-custom.xml
+    sudo curl -# -o $SHARE_CONFIG_CUSTOM $BASE_DOWNLOAD/tomcat/share-config-custom.xml
+    sed -i "s/@@ALFRESCO_SHARE_SERVER@@/$SHARE_HOSTNAME/g" $SHARE_CONFIG_CUSTOM
+    sed -i "s/@@ALFRESCO_REPO_SERVER@@/$REPO_HOSTNAME/g" $SHARE_CONFIG_CUSTOM
+    sudo mv $SHARE_CONFIG_CUSTOM $CATALINA_HOME/shared/classes/alfresco/web-extension/
+  fi
+  
   echo
   read -e -p "Install Postgres JDBC Connector${ques} [y/n] " -i "n" installpg
   if [ "$installpg" = "y" ]; then
