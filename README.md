@@ -20,7 +20,11 @@ To start the install, in Ubuntu terminal run
 All install options will be presented with an introduction. They default to 'n' (no), so type y to actually install that component. You need **sudo** access to install.  
 
 But please do read all of this README before you go ahead.  
-There is also lots of documentation at http://docs.alfresco.com/4.2/index.jsp. To become an Alfresco server Administator, read the 'Administering' section.
+There is also lots of documentation at http://docs.alfresco.com/4.2/index.jsp. To become an Alfresco server Administator, read the 'Administering' section.  
+
+>###Known issues
+>Many components have their download url:s point to specific version. 
+>Whenever a new version comes out, the older version is removed from the download server and this script breaks. I try to update as soon as I find out. This is known to happen with LibreOffice and Tomcat. You can check that the download url:s are valid before running the script, the are all in the beginning of the script.
 
 More on the components/installation steps.
 =======
