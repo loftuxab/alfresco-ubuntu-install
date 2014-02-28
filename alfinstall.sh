@@ -199,7 +199,8 @@ EOF
   fi
   sudo chown -R www-data:root /var/cache/nginx/alfresco
   sudo chown -R www-data:root $ALF_HOME/www
-
+  ## Reload config file 
+  sudo service nginx reload
   
   echo
   echogreen "Finished installing nginx"
