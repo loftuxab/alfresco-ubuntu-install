@@ -61,6 +61,13 @@ fi
 mkdir alfrescoinstall
 cd ./alfrescoinstall
 
+if [ "`which curl`" = "" ]; then 
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "You need to install curl. Curl is used for downloading components to install."
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+sudo apt-get install curl; 
+fi
+
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "You need to add a system user that runs the tomcat Alfresco instance."
@@ -191,7 +198,7 @@ EOF
     sudo curl -# -o $ALF_HOME/www/maintenance.html $BASE_DOWNLOAD/nginx/maintenance.html
   fi
   sudo chown -R www-data:root /var/cache/nginx/alfresco
-  sudo chown -R www-data:root $ALF_HOME/www  
+  sudo chown -R www-data:root $ALF_HOME/www
 
   
   echo
