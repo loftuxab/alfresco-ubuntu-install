@@ -263,6 +263,10 @@ if [ "$installimagemagick" = "y" ]; then
   echoblue "Installing ImageMagick."
   sudo apt-get install imagemagick ghostscript libgs-dev libjpeg62 libpng3
   echo
+  IMAGEMAGICKVERSION=`ls /usr/lib/|grep -i imagemagick`
+  echoblue "Creating symbolic link for ImageMagick."
+  sudo ln -s /usr/lib/$IMAGEMAGICKVERSION /usr/lib/ImageMagick
+  echo
   echogreen "Finished installing ImageMagick"
   echo
 else
