@@ -17,7 +17,7 @@ export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
 export LOCALESUPPORT=sv_SE.utf8
 
-export TOMCAT_DOWNLOAD=ftp://ftp.sunet.se/pub/www/servers/apache/dist/tomcat/tomcat-7/v7.0.50/bin/apache-tomcat-7.0.50.tar.gz
+export TOMCAT_DOWNLOAD=ftp://ftp.sunet.se/pub/www/servers/apache/dist/tomcat/tomcat-7/v7.0.52/bin/apache-tomcat-7.0.52.tar.gz
 export XALAN=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/3rd-party/lib/xalan-2.7.0/
 export JDBCPOSTGRESURL=http://jdbc.postgresql.org/download
 export JDBCPOSTGRES=postgresql-9.3-1100.jdbc4.jar
