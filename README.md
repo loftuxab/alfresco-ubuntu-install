@@ -142,7 +142,7 @@ At this time, this is not the intended use. So short answer is no.
 Longer answer is, you can probably grab pieces of the script to upgrade individual components. Or as is recommended when upgrading, test your upgrade on a separate server. So install a new server with fresh install, then grab a copy of your data and do a test upgrade. If this works, switch to this server. Did you make a backup of your data first?
 I want Alfresco and Share on separate server, can this script be used?
 ---
-Yes (and is also recommended for best performance), but all components are not needed on both servers. The Alfresco server probably doesn't need nginx, the Share server doesn't need LibreOffice, Swftools and Solr. The 'Alfresco' install step will download both alfresco.war and share.war if run, just remove the one that doesn't apply from tomcat/webapps and addons/war directory.
+Yes (and is also recommended for best performance), but all components are not needed on both servers. The Alfresco server probably doesn't need nginx, the Share server doesn't need LibreOffice, ImageMagick, Swftools and Solr. The 'Alfresco' install step will download both alfresco.war and share.war if run, just remove the one that doesn't apply from tomcat/webapps and addons/war directory.
 The script does not use version x of component z, can you fix this?
 ---
 Probably, but you can also. Just edit the script with the version you want to use, most of the specific links can be found in the beginning of the script.  
