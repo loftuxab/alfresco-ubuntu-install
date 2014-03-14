@@ -24,13 +24,14 @@ export JDBCPOSTGRES=postgresql-9.3-1100.jdbc4.jar
 export JDBCMYSQLURL=http://ftp.sunet.se/pub/unix/databases/relational/mysql/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.28.tar.gz
 
-export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.2.1/deb/x86_64/LibreOffice_4.2.1_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.2.2/deb/x86_64/LibreOffice_4.2.2_Linux_x86-64_deb.tar.gz
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
-export ALFWARZIP=http://dl.alfresco.com/release/community/build-4848/alfresco-community-4.2.e.zip
-export GOOGLEDOCSREPO=http://dl.alfresco.com/release/community/build-4848/alfresco-googledocs-repo-2.0.5-6com.amp
-export GOOGLEDOCSSHARE=http://dl.alfresco.com/release/community/build-4848/alfresco-googledocs-share-2.0.5-6com.amp
-export SOLR=http://dl.alfresco.com/release/community/build-4848/alfresco-community-solr-4.2.e.zip
-export SPP=http://dl.alfresco.com/release/community/build-4848/alfresco-community-spp-4.2.e.zip
+
+export ALFWARZIP=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-4.2.f.zip
+export GOOGLEDOCSREPO=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-googledocs-repo-2.0.5-6com.amp
+export GOOGLEDOCSSHARE=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-googledocs-share-2.0.5-6com.amp
+export SOLR=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-solr-4.2.f.zip
+export SPP=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-spp-4.2.f.zip
 
 # Color variables
 txtund=$(tput sgr 0 1)          # Underline
