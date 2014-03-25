@@ -11,7 +11,7 @@
     ALF_HOME=/opt/alfresco
     cd "$ALF_HOME"
     # export LC_ALL else openoffice may use en settings on dates etc
-    export LC_ALL=sv_SE.utf8
+    export LC_ALL=@@LOCALESUPPORT@@
     export CATALINA_PID="${ALF_HOME}/tomcat.pid"
 
     RETVAL=0

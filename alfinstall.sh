@@ -132,6 +132,7 @@ if [ "$installtomcat" = "y" ]; then
   sudo curl -# -o $CATALINA_HOME/conf/server.xml $BASE_DOWNLOAD/tomcat/server.xml
   sudo curl -# -o $CATALINA_HOME/conf/catalina.properties $BASE_DOWNLOAD/tomcat/catalina.properties
   sudo curl -# -o /etc/init/alfresco.conf $BASE_DOWNLOAD/tomcat/alfresco.conf
+  sed -i "s/@@LOCALESUPPORT@@/$LOCALESUPPORT/g" $BASE_DOWNLOAD/tomcat/alfresco.conf
   # Create /shared
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/extension
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/web-extension
@@ -380,6 +381,7 @@ echo
   if [ ! -f "$ALF_HOME/scripts/libreoffice.sh" ]; then
     echo "Downloading libreoffice.sh script..."
     sudo curl -# -o $ALF_HOME/scripts/libreoffice.sh $BASE_DOWNLOAD/scripts/libreoffice.sh
+    sed -i "s/@@LOCALESUPPORT@@/$LOCALESUPPORT/g" $BASE_DOWNLOAD/scripts/libreoffice.sh
   fi
   if [ ! -f "$ALF_HOME/scripts/iptables.sh" ]; then
     echo "Downloading iptables.sh script..."
