@@ -63,6 +63,12 @@ fi
 mkdir alfrescoinstall
 cd ./alfrescoinstall
 
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "Preparing for install. Updating the apt package index files..."
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+sudo apt-get update; 
+echo
+
 if [ "`which curl`" = "" ]; then 
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "You need to install curl. Curl is used for downloading components to install."
@@ -328,7 +334,7 @@ read -e -p "Install Swftools${ques} [y/n] " -i "n" installswftools
 
 if [ "$installswftools" = "y" ]; then
   echo "Installing build tools and libraries needed to compile swftools..."
-  sudo apt-get install libjpeg62-dev libfreetype6-dev libpng3-dev libt1-dev libungif4-dev make ccache build-essential
+  sudo apt-get install make build-essential ccache g++ libgif-dev libjpeg62-dev libfreetype6-dev libpng12-dev libt1-dev
   cd /tmp/alfrescoinstall
   echo "Downloading swftools..."
   curl -# -O $SWFTOOLS
