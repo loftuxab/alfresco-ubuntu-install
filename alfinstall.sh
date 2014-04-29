@@ -20,9 +20,9 @@ export LOCALESUPPORT=sv_SE.utf8
 export TOMCAT_DOWNLOAD=http://ftp.sunet.se/pub/www/servers/apache/dist/tomcat/tomcat-7/v7.0.53/bin/apache-tomcat-7.0.53.tar.gz
 export XALAN=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/3rd-party/lib/xalan-2.7.0/
 export JDBCPOSTGRESURL=http://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.3-1100.jdbc4.jar
+export JDBCPOSTGRES=postgresql-9.3-1101.jdbc41.jar
 export JDBCMYSQLURL=http://ftp.sunet.se/pub/unix/databases/relational/mysql/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.28.tar.gz
+export JDBCMYSQL=mysql-connector-java-5.1.30.tar.gz
 
 export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.2.3/deb/x86_64/LibreOffice_4.2.3_Linux_x86-64_deb.tar.gz
 
