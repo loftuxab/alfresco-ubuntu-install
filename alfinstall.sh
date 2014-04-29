@@ -24,7 +24,8 @@ export JDBCPOSTGRES=postgresql-9.3-1100.jdbc4.jar
 export JDBCMYSQLURL=http://ftp.sunet.se/pub/unix/databases/relational/mysql/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.28.tar.gz
 
-export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.2.2/deb/x86_64/LibreOffice_4.2.2_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.2.3/deb/x86_64/LibreOffice_4.2.3_Linux_x86-64_deb.tar.gz
+
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
 export ALFWARZIP=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-4.2.f.zip
