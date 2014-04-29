@@ -9,7 +9,7 @@
 export ALF_HOME=/opt/alfresco
 export CATALINA_HOME=$ALF_HOME/tomcat
 export ALF_USER=alfresco
-
+export APTVERBOSITY="-qq -y"
 
 export BASE_DOWNLOAD=https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/master
 export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
@@ -63,17 +63,26 @@ fi
 mkdir alfrescoinstall
 cd ./alfrescoinstall
 
+echo
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echogreen "Alfresco Ubuntu installer by Loftux AB."
+echogreen "Please read the documentation at"
+echogreen "https://github.com/loftuxab/alfresco-ubuntu-install."
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo
+
+echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "Preparing for install. Updating the apt package index files..."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-sudo apt-get update; 
+sudo apt-get $APTVERBOSITY update; 
 echo
 
 if [ "`which curl`" = "" ]; then 
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "You need to install curl. Curl is used for downloading components to install."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-sudo apt-get install curl; 
+sudo apt-get $APTVERBOSITY install curl; 
 fi
 
 echo
@@ -215,7 +224,7 @@ echo "forwarding, sample script in $ALF_HOME/scripts/iptables.sh"
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 read -e -p "Install nginx${ques} [y/n] " -i "n" installnginx
 if [ "$installnginx" = "y" ]; then
-  echo "Installing nginx"
+  echoblue "Installing nginx. Fetching packages..."
   echo
 sudo -s << EOF
   echo "deb http://nginx.org/packages/mainline/ubuntu $(lsb_release -cs) nginx" >> /etc/apt/sources.list
@@ -227,7 +236,7 @@ sudo -s << EOF
   #echo "deb http://ppa.launchpad.net/brianmercer/nginx/ubuntu $(lsb_release -cs) main" >> /etc/apt/sources.list 
   #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8D0DC64F
 EOF
-  sudo apt-get update && sudo apt-get install nginx
+  sudo apt-get $APTVERBOSITY update && sudo apt-get $APTVERBOSITY install nginx
   sudo mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
   sudo curl -# -o /etc/nginx/nginx.conf $BASE_DOWNLOAD/nginx/nginx.conf
   sudo mkdir -p /var/cache/nginx/alfresco
@@ -256,7 +265,8 @@ echo "you need to download and install that manually."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 read -e -p "Install OpenJDK7${ques} [y/n] " -i "n" installjdk
 if [ "$installjdk" = "y" ]; then
-  sudo apt-get install openjdk-7-jdk
+  echoblue "Installing OpenJDK7. Fetching packages..."
+  sudo apt-get $APTVERBOSITY install openjdk-7-jdk
   echo
   echogreen "Finished installing OpenJDK"
   echo
@@ -285,7 +295,7 @@ if [ "$installibreoffice" = "y" ]; then
   sudo dpkg -i *.deb
   echo
   echoblue "Installing some support fonts for better transformations."
-  sudo apt-get install ttf-mscorefonts-installer fonts-droid
+  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid
   echo
   echogreen "Finished installing LibreOffice"
   echo
@@ -307,8 +317,8 @@ echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 read -e -p "Install ImageMagick${ques} [y/n] " -i "n" installimagemagick
 if [ "$installimagemagick" = "y" ]; then
 
-  echoblue "Installing ImageMagick."
-  sudo apt-get install imagemagick ghostscript libgs-dev libjpeg62 libpng3
+  echoblue "Installing ImageMagick. Fetching packages..."
+  sudo apt-get $APTVERBOSITY install imagemagick ghostscript libgs-dev libjpeg62 libpng3
   echo
   IMAGEMAGICKVERSION=`ls /usr/lib/|grep -i imagemagick`
   echoblue "Creating symbolic link for ImageMagick."
@@ -333,8 +343,8 @@ echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 read -e -p "Install Swftools${ques} [y/n] " -i "n" installswftools
 
 if [ "$installswftools" = "y" ]; then
-  echo "Installing build tools and libraries needed to compile swftools..."
-  sudo apt-get install make build-essential ccache g++ libgif-dev libjpeg62-dev libfreetype6-dev libpng12-dev libt1-dev
+  echoblue "Installing build tools and libraries needed to compile swftools. Fetching packages..."
+  sudo apt-get $APTVERBOSITY install make build-essential ccache g++ libgif-dev libjpeg62-dev libfreetype6-dev libpng12-dev libt1-dev
   cd /tmp/alfrescoinstall
   echo "Downloading swftools..."
   curl -# -O $SWFTOOLS
@@ -432,7 +442,7 @@ if [ "$installwar" = "y" ]; then
 
   cd /tmp/alfrescoinstall
 
-  sudo apt-get install unzip
+  sudo apt-get $APTVERBOSITY install unzip
   echo "Downloading war files..."
   curl -# -o /tmp/alfrescoinstall/alfwar.zip $ALFWARZIP
   unzip -q alfwar.zip
