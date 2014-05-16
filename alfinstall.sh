@@ -1,7 +1,7 @@
 #!/bin/bash
 # -------
 # Script for install of Alfresco
-# 
+#
 # Copyright 2013 Loftux AB, Peter Löfgren
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
@@ -29,8 +29,8 @@ export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.2.3/d
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
 export ALFWARZIP=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-4.2.f.zip
-export GOOGLEDOCSREPO=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-googledocs-repo-2.0.5-6com.amp
-export GOOGLEDOCSSHARE=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-googledocs-share-2.0.5-6com.amp
+export GOOGLEDOCSREPO=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-googledocs-repo-2.0.7-18com.amp
+export GOOGLEDOCSSHARE=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-googledocs-share-2.0.7-18com.amp
 export SOLR=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-solr-4.2.f.zip
 export SPP=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-spp-4.2.f.zip
 
@@ -48,17 +48,17 @@ warn=${bldred}*${txtrst}
 ques=${bldblu}?${txtrst}
 
 echoblue () {
-  echo "${bldblu}$1${txtrst}" 
+  echo "${bldblu}$1${txtrst}"
 }
 echored () {
-  echo "${bldred}$1${txtrst}" 
+  echo "${bldred}$1${txtrst}"
 }
 echogreen () {
-  echo "${bldgre}$1${txtrst}" 
+  echo "${bldgre}$1${txtrst}"
 }
 cd /tmp
 if [ -d "alfrescoinstall" ]; then
-	rm -rf alfrescoinstall	
+	rm -rf alfrescoinstall
 fi
 mkdir alfrescoinstall
 cd ./alfrescoinstall
@@ -75,14 +75,14 @@ echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "Preparing for install. Updating the apt package index files..."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-sudo apt-get $APTVERBOSITY update; 
+sudo apt-get $APTVERBOSITY update;
 echo
 
-if [ "`which curl`" = "" ]; then 
+if [ "`which curl`" = "" ]; then
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "You need to install curl. Curl is used for downloading components to install."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-sudo apt-get $APTVERBOSITY install curl; 
+sudo apt-get $APTVERBOSITY install curl;
 fi
 
 echo
@@ -178,7 +178,7 @@ if [ "$installtomcat" = "y" ]; then
   sed -i "s/@@ALFRESCO_SHARE_SERVER_PROTOCOL@@/$SHARE_PROTOCOL/g" $ALFRESCO_GLOBAL_PROPERTIES
   sed -i "s/@@ALFRESCO_REPO_SERVER@@/$REPO_HOSTNAME/g" $ALFRESCO_GLOBAL_PROPERTIES
   sudo mv $ALFRESCO_GLOBAL_PROPERTIES $CATALINA_HOME/shared/classes/
-  
+
   read -e -p "Install Share config file (recommended)${ques} [y/n] " -i "n" installshareconfig
   if [ "$installshareconfig" = "y" ]; then
     SHARE_CONFIG_CUSTOM=/tmp/alfrescoinstall/share-config-custom.xml
@@ -187,7 +187,7 @@ if [ "$installtomcat" = "y" ]; then
     sed -i "s/@@ALFRESCO_REPO_SERVER@@/$REPO_HOSTNAME/g" $SHARE_CONFIG_CUSTOM
     sudo mv $SHARE_CONFIG_CUSTOM $CATALINA_HOME/shared/classes/alfresco/web-extension/
   fi
-  
+
   echo
   read -e -p "Install Postgres JDBC Connector${ques} [y/n] " -i "n" installpg
   if [ "$installpg" = "y" ]; then
@@ -232,8 +232,8 @@ sudo -s << EOF
   apt-key add /tmp/alfrescoinstall/nginx_signing.key
   #echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu $(lsb_release -cs) main" >> /etc/apt/sources.list
   #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C
-  # Alternate with spdy support and more, change  apt install -> nginx-custom 
-  #echo "deb http://ppa.launchpad.net/brianmercer/nginx/ubuntu $(lsb_release -cs) main" >> /etc/apt/sources.list 
+  # Alternate with spdy support and more, change  apt install -> nginx-custom
+  #echo "deb http://ppa.launchpad.net/brianmercer/nginx/ubuntu $(lsb_release -cs) main" >> /etc/apt/sources.list
   #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8D0DC64F
 EOF
   sudo apt-get $APTVERBOSITY update && sudo apt-get $APTVERBOSITY install nginx
@@ -247,9 +247,9 @@ EOF
   fi
   sudo chown -R www-data:root /var/cache/nginx/alfresco
   sudo chown -R www-data:root $ALF_HOME/www
-  ## Reload config file 
+  ## Reload config file
   sudo service nginx reload
-  
+
   echo
   echogreen "Finished installing nginx"
   echo
@@ -282,7 +282,7 @@ echo "Install LibreOffice."
 echo "This will download and install the latest LibreOffice from libreoffice.org"
 echo "Newer version of Libreoffice has better document filters, and produce better"
 echo "transformations. If you prefer to use Ubuntu standard packages you can skip"
-echo "this install." 
+echo "this install."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 read -e -p "Install LibreOffice${ques} [y/n] " -i "n" installibreoffice
 if [ "$installibreoffice" = "y" ]; then
@@ -377,7 +377,7 @@ echo
   if [ ! -f "$ALF_HOME/addons/alfresco-mmt.jar" ]; then
     sudo curl -# -o $ALF_HOME/addons/alfresco-mmt.jar $BASE_DOWNLOAD/scripts/alfresco-mmt.jar
   fi
-  
+
   sudo mkdir -p $ALF_HOME/scripts
   if [ ! -f "$ALF_HOME/scripts/mariadb.sh" ]; then
     echo "Downloading mariadb.sh install and setup script..."
@@ -413,7 +413,7 @@ echo
     sudo curl -# -o $ALF_HOME/scripts/ams.sh $BASE_DOWNLOAD/scripts/ams.sh
   fi
   sudo chmod u+x $ALF_HOME/scripts/*.sh
-  
+
   # Keystore
   sudo mkdir -p $ALF_HOME/alf_data/keystore
   # Only check for precesence of one file, assume all the rest exists as well if so.
@@ -426,9 +426,9 @@ echo
     sudo curl -# -o $ALF_HOME/alf_data/keystore/ssl-keystore-passwords.properties $KEYSTOREBASE/ssl-keystore-passwords.properties
     sudo curl -# -o $ALF_HOME/alf_data/keystore/ssl-truststore-passwords.properties $KEYSTOREBASE/ssl-truststore-passwords.properties
     sudo curl -# -o $ALF_HOME/alf_data/keystore/ssl.keystore $KEYSTOREBASE/ssl.keystore
-    sudo curl -# -o $ALF_HOME/alf_data/keystore/ssl.truststore $KEYSTOREBASE/ssl.truststore    
+    sudo curl -# -o $ALF_HOME/alf_data/keystore/ssl.truststore $KEYSTOREBASE/ssl.truststore
   fi
-  
+
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "Install Alfresco war files."
@@ -437,7 +437,7 @@ echo "If you have downloaded your war files you can skip this step add them manu
 echo "This install place downloaded files in the $ALF_HOME/addons and then use the"
 echo "apply.sh script to add them to tomcat/webapps. Se this script for more info."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Add Alfresco war files${ques} [y/n] " -i "n" installwar 
+read -e -p "Add Alfresco war files${ques} [y/n] " -i "n" installwar
 if [ "$installwar" = "y" ]; then
 
   cd /tmp/alfrescoinstall
@@ -448,7 +448,7 @@ if [ "$installwar" = "y" ]; then
   unzip -q alfwar.zip
   sudo cp /tmp/alfrescoinstall/web-server/webapps/*.war $ALF_HOME/addons/war/
   sudo rm -rf /tmp/alfrescoinstall/*
-  
+
   read -e -p "Add Google docs integration${ques} [y/n] " -i "n" installgoogledocs
   if [ "$installgoogledocs" = "y" ]; then
   	echo "Downloading Google docs addon..."
@@ -462,12 +462,12 @@ if [ "$installwar" = "y" ]; then
   if [ "$installspp" = "y" ]; then
     echo "Downloading Sharepoint addon..."
     curl -# -O $SPP
-    unzip -q alfresco-community-spp*.zip    
+    unzip -q alfresco-community-spp*.zip
     sudo mv alfresco-community-spp*.amp $ALF_HOME/addons/alfresco/
   fi
-  
+
   sudo $ALF_HOME/addons/apply.sh all
-    
+
   echo
   echogreen "Finished adding Alfresco war files"
   echo
@@ -485,7 +485,7 @@ echo "Solr runs as a separate application and is slightly more complex to config
 echo "As Solr is more advanced and handle multilingual better it is recommended that"
 echo "you install Solr."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install Solr indexing engine${ques} [y/n] " -i "n" installsolr 
+read -e -p "Install Solr indexing engine${ques} [y/n] " -i "n" installsolr
 if [ "$installsolr" = "y" ]; then
 
   sudo mkdir -p $ALF_HOME/solr
@@ -513,10 +513,10 @@ if [ "$installsolr" = "y" ]; then
   echo "  <Environment name=\"solr/home\" type=\"java.lang.String\" value=\"$ALF_HOME/solr\" override=\"true\"/>" >> /tmp/alfrescoinstall/solr.xml
   echo "</Context>" >> /tmp/alfrescoinstall/solr.xml
   sudo mv /tmp/alfrescoinstall/solr.xml $CATALINA_HOME/conf/Catalina/localhost/solr.xml
-  
+
   # Remove some unused stuff
   sudo rm $ALF_HOME/solr/solr.zip
-  sudo rm -rf $ALF_HOME/solr/alf_data    
+  sudo rm -rf $ALF_HOME/solr/alf_data
 
   echo
   echogreen "Finished installing Solr engine."
@@ -532,7 +532,7 @@ fi
 
 sudo chown -R $ALF_USER:$ALF_USER $ALF_HOME
 if [ -d "$ALF_HOME/www" ]; then
-   sudo chown -R www-data:root $ALF_HOME/www 
+   sudo chown -R www-data:root $ALF_HOME/www
 fi
 
 echo
@@ -551,4 +551,3 @@ echo "4. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have mo
 echo "5. Start nginx if you have installed it: /etc/init.d/nginx start"
 echo "6. Start Alfresco/tomcat: sudo service alfresco start"
 echo
-
