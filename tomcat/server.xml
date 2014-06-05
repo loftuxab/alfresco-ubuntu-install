@@ -77,6 +77,8 @@
                compressableMimeType="text/html,text/xml,text/plain,application/json,text/javascript,application/x-javascript,text/css,text/csv,text/x-web-markdown,application/atom+xml,application/rss+xml,application/atomsvc+xml"
                noCompressionUserAgents=".*MSIE 6.*"
                compressionMinSize="256"
+               maxThreads="200"
+               acceptCount="100"
                />
     <!-- A "Connector" using the shared thread pool-->
     <!--
