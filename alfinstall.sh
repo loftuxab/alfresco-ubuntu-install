@@ -2,7 +2,7 @@
 # -------
 # Script for install of Alfresco
 #
-# Copyright 2013 Loftux AB, Peter Löfgren
+# Copyright 2013-2014 Loftux AB, Peter Löfgren
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
 
@@ -22,17 +22,18 @@ export XALAN=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/ro
 export JDBCPOSTGRESURL=http://jdbc.postgresql.org/download
 export JDBCPOSTGRES=postgresql-9.3-1101.jdbc41.jar
 export JDBCMYSQLURL=http://ftp.sunet.se/pub/unix/databases/relational/mysql/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.30.tar.gz
+export JDBCMYSQL=mysql-connector-java-5.1.31.tar.gz
 
-export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.2.4/deb/x86_64/LibreOffice_4.2.4_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.2.5/deb/x86_64/LibreOffice_4.2.5_Linux_x86-64_deb.tar.gz
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
-export ALFWARZIP=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-4.2.f.zip
-export GOOGLEDOCSREPO=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-googledocs-repo-2.0.7-18com.amp
-export GOOGLEDOCSSHARE=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-googledocs-share-2.0.7-18com.amp
-export SOLR=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-solr-4.2.f.zip
-export SPP=http://dl.alfresco.com/release/community/4.2.f-build-00012/alfresco-community-spp-4.2.f.zip
+export ALFWARZIP=http://dl.alfresco.com/release/community/5.0.a-build-00023/alfresco-community-5.0.a.zip
+export GOOGLEDOCSREPO=http://dl.alfresco.com/release/community/5.0.a-build-00023/alfresco-googledocs-repo-2.0.7.amp
+export GOOGLEDOCSSHARE=http://dl.alfresco.com/release/community/5.0.a-build-00023/alfresco-googledocs-share-2.0.7.amp
+export SOLR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr/5.0.a/alfresco-solr-5.0.a-config.zip
+export SOLRWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr/5.0.a/alfresco-solr-5.0.a.war
+export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.a/alfresco-spp-5.0.a.amp
 
 # Color variables
 txtund=$(tput sgr 0 1)          # Underline
@@ -440,15 +441,18 @@ echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 read -e -p "Add Alfresco war files${ques} [y/n] " -i "n" installwar
 if [ "$installwar" = "y" ]; then
 
-  cd /tmp/alfrescoinstall
+  # Make extract dir
+  mkdir -p /tmp/alfrescoinstall/war
+  cd /tmp/alfrescoinstall/war
 
   sudo apt-get $APTVERBOSITY install unzip
   echo "Downloading war files..."
-  curl -# -o /tmp/alfrescoinstall/alfwar.zip $ALFWARZIP
-  unzip -q alfwar.zip
-  sudo cp /tmp/alfrescoinstall/web-server/webapps/*.war $ALF_HOME/addons/war/
-  sudo rm -rf /tmp/alfrescoinstall/*
+  curl -# -o /tmp/alfrescoinstall/war/alfwar.zip $ALFWARZIP
+  unzip -q -j alfwar.zip
+  sudo cp /tmp/alfrescoinstall/war/*.war $ALF_HOME/addons/war/
+  sudo rm -rf /tmp/alfrescoinstall/war
 
+  cd /tmp/alfrescoinstall
   read -e -p "Add Google docs integration${ques} [y/n] " -i "n" installgoogledocs
   if [ "$installgoogledocs" = "y" ]; then
   	echo "Downloading Google docs addon..."
@@ -462,8 +466,7 @@ if [ "$installwar" = "y" ]; then
   if [ "$installspp" = "y" ]; then
     echo "Downloading Sharepoint addon..."
     curl -# -O $SPP
-    unzip -q alfresco-community-spp*.zip
-    sudo mv alfresco-community-spp*.amp $ALF_HOME/addons/alfresco/
+    sudo mv alfresco-spp*.amp $ALF_HOME/addons/alfresco/
   fi
 
   sudo $ALF_HOME/addons/apply.sh all
@@ -491,6 +494,7 @@ if [ "$installsolr" = "y" ]; then
   sudo mkdir -p $ALF_HOME/solr
   sudo mkdir -p $CATALINA_HOME/conf/Catalina/localhost
   sudo curl -# -o $ALF_HOME/solr/solr.zip $SOLR
+  sudo curl -# -o $ALF_HOME/solr/apache-solr-1.4.1.war $SOLRWAR
   sudo curl -# -o $CATALINA_HOME/conf/tomcat-users.xml $BASE_DOWNLOAD/tomcat/tomcat-users.xml
   cd $ALF_HOME/solr/
 
@@ -516,7 +520,6 @@ if [ "$installsolr" = "y" ]; then
 
   # Remove some unused stuff
   sudo rm $ALF_HOME/solr/solr.zip
-  sudo rm -rf $ALF_HOME/solr/alf_data
 
   echo
   echogreen "Finished installing Solr engine."
