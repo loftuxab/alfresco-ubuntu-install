@@ -17,14 +17,14 @@ export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
 export LOCALESUPPORT=sv_SE.utf8
 
-export TOMCAT_DOWNLOAD=http://ftp.sunet.se/pub/www/servers/apache/dist/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.tar.gz
+export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.tar.gz
 export XALAN=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/3rd-party/lib/xalan-2.7.0/
 export JDBCPOSTGRESURL=http://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.3-1101.jdbc41.jar
-export JDBCMYSQLURL=http://ftp.sunet.se/pub/unix/databases/relational/mysql/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.31.tar.gz
+export JDBCPOSTGRES=postgresql-9.3-1102.jdbc41.jar
+export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
+export JDBCMYSQL=mysql-connector-java-5.1.32.tar.gz
 
-export LIBREOFFICE=http://ftp.sunet.se/pub/Office/tdf/libreoffice/stable/4.2.6/deb/x86_64/LibreOffice_4.2.6-secfix_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://download.documentfoundation.org/libreoffice/stable/4.3.1/deb/x86_64/LibreOffice_4.3.1_Linux_x86-64_deb.tar.gz
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
@@ -87,7 +87,7 @@ do
         wget --spider $REMOTE  >& /dev/null
         if [ $? != 0 ]
         then
-                echored "In alfinstall.sh, please fix this URL: $REMOTE" 
+                echored "In alfinstall.sh, please fix this URL: $REMOTE"
                 URLERROR=1
         fi
 done
@@ -164,7 +164,7 @@ read -e -p "Install Tomcat${ques} [y/n] " -i "n" installtomcat
 if [ "$installtomcat" = "y" ]; then
   echogreen "Installing Tomcat"
   echo "Downloading tomcat..."
-  curl -# -O $TOMCAT_DOWNLOAD
+  curl -# -L -O $TOMCAT_DOWNLOAD
   # Make sure install dir exists
   sudo mkdir -p $ALF_HOME
   echo "Extracting..."
@@ -227,7 +227,7 @@ if [ "$installtomcat" = "y" ]; then
   read -e -p "Install Mysql JDBC Connector${ques} [y/n] " -i "n" installmy
   if [ "$installmy" = "y" ]; then
     cd /tmp/alfrescoinstall
-	curl -# -O $JDBCMYSQLURL/$JDBCMYSQL
+	curl -# -L -O $JDBCMYSQLURL/$JDBCMYSQL
 	tar xf $JDBCMYSQL
 	cd "$(find . -type d -name "mysql-connector*")"
 	sudo mv mysql-connector*.jar $CATALINA_HOME/lib
@@ -317,7 +317,7 @@ read -e -p "Install LibreOffice${ques} [y/n] " -i "n" installibreoffice
 if [ "$installibreoffice" = "y" ]; then
 
   cd /tmp/alfrescoinstall
-  curl -# -O $LIBREOFFICE
+  curl -# -L -O $LIBREOFFICE
   tar xf LibreOffice*.tar.gz
   cd "$(find . -type d -name "LibreOffice*")"
   cd DEBS
