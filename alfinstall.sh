@@ -18,7 +18,6 @@ export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/
 export LOCALESUPPORT=sv_SE.utf8
 
 export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.tar.gz
-export XALAN=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/3rd-party/lib/xalan-2.7.0/
 export JDBCPOSTGRESURL=http://jdbc.postgresql.org/download
 export JDBCPOSTGRES=postgresql-9.3-1102.jdbc41.jar
 export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
@@ -181,10 +180,8 @@ if [ "$installtomcat" = "y" ]; then
   # Create /shared
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/extension
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/web-extension
-  # Add Xalan to endorsed
+  # Add endorsed dir
   sudo mkdir -p $CATALINA_HOME/endorsed
-  sudo curl -# -o $CATALINA_HOME/endorsed/xalan.jar $XALAN/xalan.jar
-  sudo curl -# -o $CATALINA_HOME/endorsed/serializer.jar $XALAN/serializer.jar
   echo
   echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
   echo "You need to add the dns name, port and protocol for your server(s)."
