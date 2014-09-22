@@ -23,7 +23,7 @@ export JDBCPOSTGRES=postgresql-9.3-1102.jdbc41.jar
 export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.32.tar.gz
 
-export LIBREOFFICE=http://download.documentfoundation.org/libreoffice/stable/4.3.1/deb/x86_64/LibreOffice_4.3.1_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://download.documentfoundation.org/libreoffice/stable/4.2.6/deb/x86_64/LibreOffice_4.2.6-secfix_Linux_x86-64_deb.tar.gz
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
