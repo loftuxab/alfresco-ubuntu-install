@@ -12,7 +12,7 @@ export ALF_USER=alfresco
 export APTVERBOSITY="-qq -y"
 
 # export BASE_DOWNLOAD=https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/master
-export BASE_DOWNLOAD=https://raw.githubusercontent.com/savicprvoslav/alfresco-ubuntu-install/master/
+export BASE_DOWNLOAD=https://raw.githubusercontent.com/savicprvoslav/alfresco-ubuntu-install/master
 export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
 
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
