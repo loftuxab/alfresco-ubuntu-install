@@ -36,6 +36,13 @@ export SOLR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/publi
 export SOLRWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr/5.0.a/alfresco-solr-5.0.a.war
 export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.a/alfresco-spp-5.0.a.amp
 
+
+export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/savicprvoslav/alfresco-backup-and-recovery-tool/master/src/
+
+export BART_PROPERTIES=alfresco-bart.properties
+export BART_EXECUTE=alfresco-bart.sh
+
+
 # Color variables
 txtund=$(tput sgr 0 1)          # Underline
 txtbld=$(tput bold)             # Bold
@@ -563,6 +570,50 @@ fi
 sudo chown -R $ALF_USER:$ALF_USER $ALF_HOME
 if [ -d "$ALF_HOME/www" ]; then
    sudo chown -R www-data:root $ALF_HOME/www
+fi
+
+
+echo
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "Alfresco BART - Backup and Recovery Tool"
+echo "Alfresco BART is a backup and recovery tool for Alfresco ECM. Is a shell script tool based on Duplicity for Alfresco backups and restore from a local file system, FTP, SCP"
+echo "or Amazon S3 of all its components: indexes, data base, content store and all deployment and configuration files. It should runs in most Linux distributions, for Windows" echo "you may use Cygwin (non tested yet)."
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+read -p "Install B.A.R.T${ques} [y/n] " installbart
+
+if [ "$installbart" = "y" ]; then
+  echogreen "Installing B.A.R.T"
+
+
+ sudo mkdir -p $ALF_HOME/scripts/bart 
+ sudo curl -# -o $ALF_HOME/scripts/bart/$BART_PROPERTIES $BASE_BART_DOWNLOAD$BART_PROPERTIES 
+ sudo curl -# -o $ALF_HOME/scripts/bart/$BART_EXECUTE $BASE_BART_DOWNLOAD$BART_EXECUTE 
+
+ sudo chmod 755 $ALF_HOME/scripts/bart/$BART_PROPERTIES
+ sudo chmod 774 $ALF_HOME/scripts/bart/$BART_EXECUTE
+
+ # Add to cron tab
+ tmpfile=/tmp/crontab.tmp
+
+ # read crontab and remove custom entries (usually not there since after a reboot
+ # QNAP restores to default crontab: http://wiki.qnap.com/wiki/Add_items_to_crontab#Method_2:_autorun.sh
+ crontab -l | grep -vi "alfresco-bart.sh" > $tmpfile
+
+ # add custom entries to crontab
+ echo "0 5 * * * $ALF_HOME/scripts/bart/$BART_EXECUTE backup" >> $tmpfile
+
+ #load crontab from file
+ crontab $tmpfile
+
+ # remove temporary file
+ rm $tmpfile
+
+ # restart crontab
+ sudo service cron restart
+
+ echogreen "B.A.R.T Cron is installed to run in 5AM every day"
+
+
 fi
 
 echo
