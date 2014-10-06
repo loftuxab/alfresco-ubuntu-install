@@ -634,7 +634,10 @@ echo "   Match the locale LC_ALL (or remove) setting to the one used in this scr
 echo "   Locale setting is needed for LibreOffice date handling support."
 echo "3. Update database and other settings in alfresco-global.properties"
 echo "   You will find this file in $CATALINA_HOME/shared/classes"
-echo "4. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have more than 2 cores."
-echo "5. Start nginx if you have installed it: /etc/init.d/nginx start"
-echo "6. Start Alfresco/tomcat: sudo service alfresco start"
+echo "4.  update properties for BART in /opt/alfresco/scripts/bart/alfresco-bart.properties"
+echo "    ALFBRT_LOG_DIR=/opt/alfresco/scripts/bart/logs"
+echo "    ALF_INSTALLATION_DIR=/opt/alfresco/"
+echo "5. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have more than 2 cores."
+echo "6. Start nginx if you have installed it: /etc/init.d/nginx start"
+echo "7. Start Alfresco/tomcat: sudo service alfresco start"
 echo
