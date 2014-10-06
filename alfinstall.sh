@@ -422,6 +422,12 @@ echo
     echo "Downloading postgresql.sh install and setup script..."
     sudo curl -# -o $ALF_HOME/scripts/postgresql.sh $BASE_DOWNLOAD/scripts/postgresql.sh
   fi
+  
+  if [ ! -f "$ALF_HOME/scripts/mysql.sh" ]; then
+    echo "Downloading mysql.sh install and setup script..."
+    sudo curl -# -o $ALF_HOME/scripts/mysql.sh $BASE_DOWNLOAD/scripts/mysql.sh
+  fi
+  
   if [ ! -f "$ALF_HOME/scripts/limitconvert.sh" ]; then
     echo "Downloading limitconvert.sh script..."
     sudo curl -# -o $ALF_HOME/scripts/limitconvert.sh $BASE_DOWNLOAD/scripts/limitconvert.sh
