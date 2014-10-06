@@ -37,7 +37,7 @@ export SOLRWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/pu
 export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.a/alfresco-spp-5.0.a.amp
 
 
-export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/savicprvoslav/alfresco-backup-and-recovery-tool/master/src/
+export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
 
 export BART_PROPERTIES=alfresco-bart.properties
 export BART_EXECUTE=alfresco-bart.sh
