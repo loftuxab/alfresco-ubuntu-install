@@ -7,6 +7,7 @@
 # -------
 
 export ALFRESCODB=alfresco
+export ALFRESCODBBART=alfresco_rec
 export ALFRESCOUSER=alfresco
 
 echo
@@ -34,8 +35,12 @@ then
   echo "You must supply the root user password for MYSQL-DB:"
   mysql -u root -p << EOF
 create database $ALFRESCODB default character set utf8 collate utf8_bin;
+create database $ALFRESCODBBART default character set utf8 collate utf8_bin;
 grant all on $ALFRESCODB.* to '$ALFRESCOUSER'@'localhost' identified by '$ALFRESCOPASSWORD' with grant option;
 grant all on $ALFRESCODB.* to '$ALFRESCOUSER'@'localhost.localdomain' identified by '$ALFRESCOPASSWORD' with grant option;
+
+grant all on $ALFRESCODBBART.* to '$ALFRESCOUSER'@'localhost' identified by '$ALFRESCOPASSWORD' with grant option;
+grant all on $ALFRESCODBBART.* to '$ALFRESCOUSER'@'localhost.localdomain' identified by '$ALFRESCOPASSWORD' with grant option;
 EOF
   echo
   echo "Remember to update alfresco-global.properties with the alfresco database password"
