@@ -1,5 +1,9 @@
-Alfresco Ubuntu install with Alfresco B.A.R.T
+Alfresco Ubuntu install
 =======================
+
+This install script and guide was created by Peter Löfgren, Loftux AB.  
+Please visit https://loftux.se (Swedish) https://loftux.com (English) for more information.  
+![Loftux AB](https://loftux.se/themes/loftux_theme/assets/images/loftux-logo/logo-loftux-prefixed-small.png?ref=ubuntuinstall)
 
 Alfresco script based install for Ubuntu servers.
 ----------------------------
@@ -12,10 +16,12 @@ Alfresco does have installers for Linux, and you may be better off with using th
 Installing
 ----
 To start the install, in Ubuntu terminal run  
- 
-`curl -O https://raw.githubusercontent.com/savicprvoslav/alfresco-ubuntu-install/master/alfinstall.sh`  
-`chmod u+x alfinstall.sh`  
-`./alfinstall.sh` 
+
+```
+curl -O https://raw.githubusercontent.com/savicprvoslav/alfresco-ubuntu-install/master/alfinstall.sh  
+chmod u+x alfinstall.sh
+./alfinstall.sh
+```
 
 All install options will be presented with an introduction. They default to 'n' (no), so type y to actually install that component. You need **sudo** access to install.  
 
@@ -23,8 +29,8 @@ But please do read all of this README before you go ahead.
 There is also lots of documentation at http://docs.alfresco.com/4.2/index.jsp. To become an Alfresco server Administator, read the 'Administering' section.  
 
 >###Known issues
->Many components have their download url:s point to specific version. 
->Whenever a new version comes out, the older version is removed from the download server and this script breaks. I try to update as soon as I find out. This is known to happen with LibreOffice and Tomcat. You can check that the download url:s are valid before running the script, the are all in the beginning of the script.
+>Many components have their download url:s point to specific version.
+>Whenever a new version comes out, the older version is removed from the download server and this script breaks. I try to update as soon as I find out. This is known to happen with LibreOffice and Tomcat. The script will check if the needed components are available and break if they are not.
 
 More on the components/installation steps.
 =======
@@ -51,7 +57,7 @@ About memory, it has default max set to 2G. That is good enough if you have abou
 You will be presented with the option to add either MySql or Postgresql jdbc libraries. You should probably add at least one of them.
 
 Once the install is complete (the entire script and the manual steps following that), run  
-`sudo service alfresco start` to start and `sudo service alfresco stop` to stop tomcat.   
+`sudo service alfresco start` to start and `sudo service alfresco stop` to stop tomcat.
 
 Nginx
 --------
@@ -70,7 +76,7 @@ The script will shut down Alfresco tomcat instance. To start it you must call `s
 
 The maintenance.html page is found in its default location /opt/alfresco/www and can be customized to your needs.  
 
-If you want to implement this support and already have run the alfinstall.sh script, compare your nginx.conf to what is currently in git/master. 
+If you want to implement this support and already have run the alfinstall.sh script, compare your nginx.conf to what is currently in git/master.
 
 Java JDK
 --------
@@ -119,7 +125,7 @@ Scripts - Supporting scripts
 In the directory `/opt/alfresco/scripts` there are some useful scripts installed. Or if you did not run the install script, grab them from github. Here is what they do:  
 * `libreoffice.sh` - Start/stop libreoffice manually. Sometimes libreoffice crashes during a transformation, use this script to start it again. Alfresco will re-connect when the server detects libreoffice is running. You can add this to crontab for automatic checks:  
 `*/10 * * * * /opt/alfresco/scripts/libreoffice.sh start 2>&1 >> /opt/alfresco/logs/office.log`
-`0 2 * * * /opt/alfresco/scripts/libreoffice.sh restart 2>&1 > /opt/alfresco/logs/office.log` 
+`0 2 * * * /opt/alfresco/scripts/libreoffice.sh restart 2>&1 > /opt/alfresco/logs/office.log`  
 This will make sure libreoffice is running (if not already started and tomcat is running). Once per night it will also do a complete restart (in case LibreOffice behaves badly).  
 * `iptables.sh` - Script to add port forwarding. Useful if you want to use cifs, ftp that will not run on lower port numbers if not root. Or if you´re not using nginx as front end and want to forward port 80 to 8080.  
 * `limitconvert.sh` - Script to limit the number of cpu:s ImageMagick convert can use during transformations. Some Document library views with large thumbnails can cause intensive transformation load, and this script make sure some resources are left for other work.  
@@ -127,6 +133,11 @@ This will make sure libreoffice is running (if not already started and tomcat is
 * `mariadb.sh` - Install the mariadb database server (the MySql alternative). It is recommended that you instead use a dedicated database server. Seriously, do that. And do some database optimizations, out of scope for this install guide.  
 * `postgresql.sh` - Same as for MariaDB, but the postgres version.  
 * `ams.sh` - To do a maintenance shutdown. For more, see section under nginx.  
+
+Alfresco BART - Backup and Recovery Tool
+========================================
+Alfresco BART is a third party tool to aid with your Backup and Recovery requirements.  
+You can do the basic install using this script, but it is **highly recommended** that you visit https://github.com/toniblyx/alfresco-backup-and-recovery-tool/ page to learn more on how to configure this tool.  
 
 FAQ  
 ===
@@ -150,12 +161,8 @@ Why does the script use the latest versions/not use Ubuntu packages?
 ---
 This combination of packages/downloaded install has been found to work well. But that may not hold true always. If you feel more confident to run a specific version of a component, or want to use a standard Ubuntu package, modify the script. Or skip that part in the install script, and just use this script as an install guide on what needs to be in place for a production server.  
 
-About
-===
-This install script and guide was created by Peter Löfgren, Loftux AB. http://loftux.se (Swedish) http://loftux.com (English).
 
 License
 ===
-Copyright 2013 Loftux AB, Peter Löfgren  
+Copyright 2013-2014 Loftux AB, Peter Löfgren  
 Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
-
