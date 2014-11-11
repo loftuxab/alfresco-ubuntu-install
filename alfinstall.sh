@@ -11,13 +11,12 @@ export CATALINA_HOME=$ALF_HOME/tomcat
 export ALF_USER=alfresco
 export APTVERBOSITY="-qq -y"
 
-# export BASE_DOWNLOAD=https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/master
-export BASE_DOWNLOAD=https://raw.githubusercontent.com/savicprvoslav/alfresco-ubuntu-install/master
+export BASE_DOWNLOAD=https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/master
 export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
 
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
 #export LOCALESUPPORT=sv_SE.utf8
-export LOCALESUPPORT=en_GB.utf8
+export LOCALESUPPORT=en_US.utf8
 
 export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.56/bin/apache-tomcat-7.0.56.tar.gz
 export JDBCPOSTGRESURL=http://jdbc.postgresql.org/download
@@ -582,34 +581,50 @@ fi
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "Alfresco BART - Backup and Recovery Tool"
-echo "Alfresco BART is a backup and recovery tool for Alfresco ECM. Is a shell script tool based on Duplicity for Alfresco backups and restore from a local file system, FTP, SCP"
-echo "or Amazon S3 of all its components: indexes, data base, content store and all deployment and configuration files. It should runs in most Linux distributions, for Windows" echo "you may use Cygwin (non tested yet)."
+echo "Alfresco BART is a backup and recovery tool for Alfresco ECM. Is a shell script"
+echo "tool based on Duplicity for Alfresco backups and restore from a local file system,"
+echo "FTP, SCP or Amazon S3 of all its components: indexes, data base, content store "
+echo "and all deployment and configuration files."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -p "Install B.A.R.T${ques} [y/n] " installbart
+read -p "Install B.A.R.T${ques} [y/n] " -i "n" installbart
 
 if [ "$installbart" = "y" ]; then
   echogreen "Installing B.A.R.T"
 
 
  sudo mkdir -p $ALF_HOME/scripts/bart 
- sudo curl -# -o $ALF_HOME/scripts/bart/$BART_PROPERTIES $BASE_BART_DOWNLOAD$BART_PROPERTIES 
+ sudo mkdir -p $ALF_HOME/logs/bart
+ sudo curl -# -o /tmp/alfrescoinstall/$BART_PROPERTIES $BASE_BART_DOWNLOAD$BART_PROPERTIES
  sudo curl -# -o $ALF_HOME/scripts/bart/$BART_EXECUTE $BASE_BART_DOWNLOAD$BART_EXECUTE 
 
- sudo chmod 755 $ALF_HOME/scripts/bart/$BART_PROPERTIES
+ # Update bart settings
+ ALFHOMEESCAPED="${ALF_HOME//\//\\/}"
+ BARTLOGPATH="$ALF_HOME/logs/bart"
+ # Escape for sed
+ BARTLOGPATH="${BARTLOGPATH//\//\\/}"
+
+ sed -i "s/ALF_INSTALLATION_DIR\=.*/ALF_INSTALLATION_DIR\=$ALFHOMEESCAPED/g" /tmp/alfrescoinstall/$BART_PROPERTIES
+ sed -i "s/ALFBRT_LOG_DIR\=.*/ALFBRT_LOG_DIR\=$BARTLOGPATH/g" /tmp/alfrescoinstall/$BART_PROPERTIES
+ sudo cp /tmp/alfrescoinstall/$BART_PROPERTIES $ALF_HOME/scripts/bart/$BART_PROPERTIES
+
+ sudo chmod 700 $ALF_HOME/scripts/bart/$BART_PROPERTIES
  sudo chmod 774 $ALF_HOME/scripts/bart/$BART_EXECUTE
+
+ # Install dependency
+ sudo apt-get $APTVERBOSITY install duplicity;
 
  # Add to cron tab
  tmpfile=/tmp/crontab.tmp
 
  # read crontab and remove custom entries (usually not there since after a reboot
  # QNAP restores to default crontab: http://wiki.qnap.com/wiki/Add_items_to_crontab#Method_2:_autorun.sh
- crontab -l | grep -vi "alfresco-bart.sh" > $tmpfile
+ sudo -u $ALF_USER crontab -l | grep -vi "alfresco-bart.sh" > $tmpfile
 
  # add custom entries to crontab
  echo "0 5 * * * $ALF_HOME/scripts/bart/$BART_EXECUTE backup" >> $tmpfile
 
  #load crontab from file
- crontab $tmpfile
+ sudo -u $ALF_USER crontab $tmpfile
 
  # remove temporary file
  rm $tmpfile
@@ -617,8 +632,7 @@ if [ "$installbart" = "y" ]; then
  # restart crontab
  sudo service cron restart
 
- echogreen "B.A.R.T Cron is installed to run in 5AM every day"
-
+ echogreen "B.A.R.T Cron is installed to run in 5AM every day as the $ALF_USER user"
 
 fi
 
@@ -634,9 +648,7 @@ echo "   Match the locale LC_ALL (or remove) setting to the one used in this scr
 echo "   Locale setting is needed for LibreOffice date handling support."
 echo "3. Update database and other settings in alfresco-global.properties"
 echo "   You will find this file in $CATALINA_HOME/shared/classes"
-echo "4.  update properties for BART in /opt/alfresco/scripts/bart/alfresco-bart.properties"
-echo "    ALFBRT_LOG_DIR=/opt/alfresco/scripts/bart/logs"
-echo "    ALF_INSTALLATION_DIR=/opt/alfresco/"
+echo "4. Update properties for BART (if installed) in $ALF_HOME/scripts/bart/alfresco-bart.properties"
 echo "    DBNAME,DBUSER,DBPASS,DBHOST,REC_MYDBNAME,REC_MYUSER,REC_MYPASS,REC_MYHOST,DBTYPE "
 echo "5. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have more than 2 cores."
 echo "6. Start nginx if you have installed it: /etc/init.d/nginx start"
