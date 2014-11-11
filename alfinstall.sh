@@ -572,12 +572,6 @@ else
   echo
 fi
 
-sudo chown -R $ALF_USER:$ALF_USER $ALF_HOME
-if [ -d "$ALF_HOME/www" ]; then
-   sudo chown -R www-data:root $ALF_HOME/www
-fi
-
-
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "Alfresco BART - Backup and Recovery Tool"
@@ -634,6 +628,12 @@ if [ "$installbart" = "y" ]; then
 
  echogreen "B.A.R.T Cron is installed to run in 5AM every day as the $ALF_USER user"
 
+fi
+
+# Finally, set the permissions
+sudo chown -R $ALF_USER:$ALF_USER $ALF_HOME
+if [ -d "$ALF_HOME/www" ]; then
+   sudo chown -R www-data:root $ALF_HOME/www
 fi
 
 echo
