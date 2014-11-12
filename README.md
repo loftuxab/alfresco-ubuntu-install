@@ -3,7 +3,7 @@ Alfresco Ubuntu install
 
 This install script and guide was created by Peter Löfgren, Loftux AB.  
 Please visit https://loftux.se (Swedish) https://loftux.com (English) for more information.  
-![Loftux AB](https://loftux.se/themes/loftux_theme/assets/images/loftux-logo/logo-loftux-prefixed-small.png?ref=ubuntuinstall)
+[![Loftux AB](https://loftux.se/themes/loftux_theme/assets/images/loftux-logo/logo-loftux-prefixed-small.png?ref=ubuntuinstall)](https://loftux.se)
 
 Alfresco script based install for Ubuntu servers.
 ----------------------------
