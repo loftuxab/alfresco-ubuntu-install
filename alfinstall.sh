@@ -7,6 +7,7 @@
 # -------
 
 export ALF_HOME=/opt/alfresco
+export ALF_DATA_HOME=$ALF_HOME/alf_data
 export CATALINA_HOME=$ALF_HOME/tomcat
 export ALF_USER=alfresco
 export ALF_GROUP=$ALF_USER
@@ -460,18 +461,18 @@ echo
   sudo chmod u+x $ALF_HOME/scripts/*.sh
 
   # Keystore
-  sudo mkdir -p $ALF_HOME/alf_data/keystore
+  sudo mkdir -p $ALF_DATA_HOME/keystore
   # Only check for precesence of one file, assume all the rest exists as well if so.
-  if [ ! -f "$ALF_HOME/alf_data/keystore/ssl.keystore" ]; then
+  if [ ! -f " $ALF_DATA_HOME/keystore/ssl.keystore" ]; then
     echo "Downloading keystore files..."
-    sudo curl -# -o $ALF_HOME/alf_data/keystore/browser.p12 $KEYSTOREBASE/browser.p12
-    sudo curl -# -o $ALF_HOME/alf_data/keystore/generate_keystores.sh $KEYSTOREBASE/generate_keystores.sh
-    sudo curl -# -o $ALF_HOME/alf_data/keystore/keystore $KEYSTOREBASE/keystore
-    sudo curl -# -o $ALF_HOME/alf_data/keystore/keystore-passwords.properties $KEYSTOREBASE/keystore-passwords.properties
-    sudo curl -# -o $ALF_HOME/alf_data/keystore/ssl-keystore-passwords.properties $KEYSTOREBASE/ssl-keystore-passwords.properties
-    sudo curl -# -o $ALF_HOME/alf_data/keystore/ssl-truststore-passwords.properties $KEYSTOREBASE/ssl-truststore-passwords.properties
-    sudo curl -# -o $ALF_HOME/alf_data/keystore/ssl.keystore $KEYSTOREBASE/ssl.keystore
-    sudo curl -# -o $ALF_HOME/alf_data/keystore/ssl.truststore $KEYSTOREBASE/ssl.truststore
+    sudo curl -# -o $ALF_DATA_HOME/keystore/browser.p12 $KEYSTOREBASE/browser.p12
+    sudo curl -# -o $ALF_DATA_HOME/keystore/generate_keystores.sh $KEYSTOREBASE/generate_keystores.sh
+    sudo curl -# -o $ALF_DATA_HOME/keystore/keystore $KEYSTOREBASE/keystore
+    sudo curl -# -o $ALF_DATA_HOME/keystore/keystore-passwords.properties $KEYSTOREBASE/keystore-passwords.properties
+    sudo curl -# -o $ALF_DATA_HOME/keystore/ssl-keystore-passwords.properties $KEYSTOREBASE/ssl-keystore-passwords.properties
+    sudo curl -# -o $ALF_DATA_HOME/keystore/ssl-truststore-passwords.properties $KEYSTOREBASE/ssl-truststore-passwords.properties
+    sudo curl -# -o $ALF_DATA_HOME/keystore/ssl.keystore $KEYSTOREBASE/ssl.keystore
+    sudo curl -# -o $ALF_DATA_HOME/keystore/ssl.truststore $KEYSTOREBASE/ssl.truststore
   fi
 
 echo
@@ -584,7 +585,7 @@ if [ "$installsolr" = "y" ]; then
 
   echo
   echogreen "Finished installing Solr4 engine."
-  echored "You must manually update alfresco-global.properties."
+  echored "Verify your setting in alfresco-global.properties."
   echo "Set property value index.subsystem.name=solr4"
   echo
 else
