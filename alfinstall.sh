@@ -9,7 +9,9 @@
 export ALF_HOME=/opt/alfresco
 export CATALINA_HOME=$ALF_HOME/tomcat
 export ALF_USER=alfresco
+export ALF_GROUP=$ALF_USER
 export APTVERBOSITY="-qq -y"
+export TMP_INSTALL=/tmp/alfrescoinstall
 
 export BASE_DOWNLOAD=https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/master
 export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
@@ -22,18 +24,20 @@ export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.
 export JDBCPOSTGRESURL=http://jdbc.postgresql.org/download
 export JDBCPOSTGRES=postgresql-9.3-1102.jdbc41.jar
 export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.32.tar.gz
+export JDBCMYSQL=mysql-connector-java-5.1.34.tar.gz
 
-export LIBREOFFICE=http://download.documentfoundation.org/libreoffice/stable/4.2.6/deb/x86_64/LibreOffice_4.2.6-secfix_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/4.2.7.2/deb/x86_64/LibreOffice_4.2.7.2_Linux_x86-64_deb.tar.gz
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
-export ALFWARZIP=http://dl.alfresco.com/release/community/5.0.a-build-00023/alfresco-community-5.0.a.zip
-export GOOGLEDOCSREPO=http://dl.alfresco.com/release/community/5.0.a-build-00023/alfresco-googledocs-repo-2.0.7.amp
-export GOOGLEDOCSSHARE=http://dl.alfresco.com/release/community/5.0.a-build-00023/alfresco-googledocs-share-2.0.7.amp
-export SOLR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr/5.0.a/alfresco-solr-5.0.a-config.zip
-export SOLRWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr/5.0.a/alfresco-solr-5.0.a.war
-export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.a/alfresco-spp-5.0.a.amp
+export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.0.b/alfresco-5.0.b.war
+export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.0.b/share-5.0.b.war
+export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/integrations/alfresco-googledocs-repo/2.0.8/alfresco-googledocs-repo-2.0.8.amp
+export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/integrations/alfresco-googledocs-share/2.0.8/alfresco-googledocs-share-2.0.8.amp
+export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.b/alfresco-spp-5.0.b.amp
+
+export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.b/alfresco-solr4-5.0.b-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.b/alfresco-solr4-5.0.b-ssl.war
 
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
@@ -183,6 +187,7 @@ if [ "$installtomcat" = "y" ]; then
   echo "Downloading tomcat configuration files..."
   sudo curl -# -o $CATALINA_HOME/conf/server.xml $BASE_DOWNLOAD/tomcat/server.xml
   sudo curl -# -o $CATALINA_HOME/conf/catalina.properties $BASE_DOWNLOAD/tomcat/catalina.properties
+  sudo curl -# -o $CATALINA_HOME/conf/tomcat-users.xml $BASE_DOWNLOAD/tomcat/tomcat-users.xml
   sudo curl -# -o /etc/init/alfresco.conf $BASE_DOWNLOAD/tomcat/alfresco.conf
   sudo sed -i "s/@@LOCALESUPPORT@@/$LOCALESUPPORT/g" /etc/init/alfresco.conf
   # Create /shared
@@ -237,7 +242,7 @@ if [ "$installtomcat" = "y" ]; then
 	cd "$(find . -type d -name "mysql-connector*")"
 	sudo mv mysql-connector*.jar $CATALINA_HOME/lib
   fi
-  sudo chown -R $ALF_USER:$ALF_USER $CATALINA_HOME
+  sudo chown -R $ALF_USER:$ALF_GROUP $CATALINA_HOME
   echo
   echogreen "Finished installing Tomcat"
   echo
@@ -421,12 +426,12 @@ echo
     echo "Downloading postgresql.sh install and setup script..."
     sudo curl -# -o $ALF_HOME/scripts/postgresql.sh $BASE_DOWNLOAD/scripts/postgresql.sh
   fi
-  
+
   if [ ! -f "$ALF_HOME/scripts/mysql.sh" ]; then
     echo "Downloading mysql.sh install and setup script..."
     sudo curl -# -o $ALF_HOME/scripts/mysql.sh $BASE_DOWNLOAD/scripts/mysql.sh
   fi
-  
+
   if [ ! -f "$ALF_HOME/scripts/limitconvert.sh" ]; then
     echo "Downloading limitconvert.sh script..."
     sudo curl -# -o $ALF_HOME/scripts/limitconvert.sh $BASE_DOWNLOAD/scripts/limitconvert.sh
@@ -480,16 +485,9 @@ echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 read -e -p "Add Alfresco war files${ques} [y/n] " -i "n" installwar
 if [ "$installwar" = "y" ]; then
 
-  # Make extract dir
-  mkdir -p /tmp/alfrescoinstall/war
-  cd /tmp/alfrescoinstall/war
-
-  sudo apt-get $APTVERBOSITY install unzip
-  echo "Downloading war files..."
-  curl -# -o /tmp/alfrescoinstall/war/alfwar.zip $ALFWARZIP
-  unzip -q -j alfwar.zip
-  sudo cp /tmp/alfrescoinstall/war/*.war $ALF_HOME/addons/war/
-  sudo rm -rf /tmp/alfrescoinstall/war
+  echogreen "Downloading alfresco and share war files..."
+  sudo curl -# -o $ALF_HOME/addons/war/alfresco.war $ALFREPOWAR
+  sudo curl -# -o $ALF_HOME/addons/war/share.war $ALFSHAREWAR
 
   cd /tmp/alfrescoinstall
   read -e -p "Add Google docs integration${ques} [y/n] " -i "n" installgoogledocs
@@ -521,54 +519,78 @@ fi
 
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-echo "Install Solr indexing engine."
-echo "You have a choice lucene (default) or Solr as indexing engine."
-echo "Solr runs as a separate application and is slightly more complex to configure."
-echo "As Solr is more advanced and handle multilingual better it is recommended that"
-echo "you install Solr."
+echo "Install Solr4 indexing engine."
+echo "You can run Solr4 on a separate server, unless you plan to do that you should"
+echo "install the Solr4 indexing engine on the same server as your repository server."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install Solr indexing engine${ques} [y/n] " -i "n" installsolr
+read -e -p "Install Solr4 indexing engine${ques} [y/n] " -i "n" installsolr
 if [ "$installsolr" = "y" ]; then
 
-  sudo mkdir -p $ALF_HOME/solr
-  sudo mkdir -p $CATALINA_HOME/conf/Catalina/localhost
-  sudo curl -# -o $ALF_HOME/solr/solr.zip $SOLR
-  sudo curl -# -o $ALF_HOME/solr/apache-solr-1.4.1.war $SOLRWAR
-  sudo curl -# -o $CATALINA_HOME/conf/tomcat-users.xml $BASE_DOWNLOAD/tomcat/tomcat-users.xml
-  cd $ALF_HOME/solr/
+  # Make sure we have unzip available
+  sudo apt-get $APTVERBOSITY install unzip
 
-  sudo unzip -q solr.zip
+  # Check if we have an old install
+  if [ -d "$ALF_HOME/solr4" ]; then
+     sudo mv $ALF_HOME/solr4 $ALF_HOME/solr4_BACKUP_`eval date +%Y%m%d%H%M`
+  fi
+  sudo mkdir -p $ALF_HOME/solr4
+  cd $ALF_HOME/solr4
+
+  echogreen "Downloading solr4.war file..."
+  sudo curl -# -o $CATALINA_HOME/webapps/solr4.war $SOLR4_WAR_DOWNLOAD
+
+  echogreen "Downloading config file..."
+  sudo curl -# -o $ALF_HOME/solr4/solrconfig.zip $SOLR4_CONFIG_DOWNLOAD
+  echogreen "Expanding config file..."
+  sudo unzip -q solrconfig.zip
+  sudo rm solrconfig.zip
+
+  echogreen "Configuring..."
+
+  # Make sure dir exist
+  sudo mkdir -p $CATALINA_HOME/conf/Catalina/localhost
+  sudo mkdir -p $ALF_DATA_HOME/solr4
+  mkdir -p $TMP_INSTALL
+
+  # Remove old config if exists
+  if [ -f "$CATALINA_HOME/conf/Catalina/localhost/solr.xml" ]; then
+     sudo rm $CATALINA_HOME/conf/Catalina/localhost/solr.xml
+  fi
+
   # Set the solr data path
-  SOLRDATAPATH="$ALF_HOME/alf_data/solr"
+  SOLRDATAPATH="$ALF_DATA_HOME/solr4"
   # Escape for sed
   SOLRDATAPATH="${SOLRDATAPATH//\//\\/}"
 
-  sudo mv $ALF_HOME/solr/workspace-SpacesStore/conf/solrcore.properties $ALF_HOME/solr/workspace-SpacesStore/conf/solrcore.properties.orig
-  sudo mv $ALF_HOME/solr/archive-SpacesStore/conf/solrcore.properties $ALF_HOME/solr/archive-SpacesStore/conf/solrcore.properties.orig
-  sed "s/@@ALFRESCO_SOLR_DIR@@/$SOLRDATAPATH/g" $ALF_HOME/solr/workspace-SpacesStore/conf/solrcore.properties.orig > /tmp/alfrescoinstall/solrcore.properties
-  sudo mv /tmp/alfrescoinstall/solrcore.properties $ALF_HOME/solr/workspace-SpacesStore/conf/solrcore.properties
-  sed "s/@@ALFRESCO_SOLR_DIR@@/$SOLRDATAPATH/g" $ALF_HOME/solr/archive-SpacesStore/conf/solrcore.properties.orig > /tmp/alfrescoinstall/solrcore.properties
-  sudo mv /tmp/alfrescoinstall/solrcore.properties $ALF_HOME/solr/archive-SpacesStore/conf/solrcore.properties
-  SOLRDATAPATH="$ALF_HOME/solr"
+  sudo mv $ALF_HOME/solr4/workspace-SpacesStore/conf/solrcore.properties $ALF_HOME/solr4/workspace-SpacesStore/conf/solrcore.properties.orig
+  sudo mv $ALF_HOME/solr4/archive-SpacesStore/conf/solrcore.properties $ALF_HOME/solr4/archive-SpacesStore/conf/solrcore.properties.orig
+  sed "s/@@ALFRESCO_SOLR4_DATA_DIR@@/$SOLRDATAPATH/g" $ALF_HOME/solr4/workspace-SpacesStore/conf/solrcore.properties.orig >  $TMP_INSTALL/solrcore.properties
+  sudo mv  $TMP_INSTALL/solrcore.properties $ALF_HOME/solr4/workspace-SpacesStore/conf/solrcore.properties
+  sed "s/@@ALFRESCO_SOLR4_DATA_DIR@@/$SOLRDATAPATH/g" $ALF_HOME/solr4/archive-SpacesStore/conf/solrcore.properties.orig >  $TMP_INSTALL/solrcore.properties
+  sudo mv  $TMP_INSTALL/solrcore.properties $ALF_HOME/solr4/archive-SpacesStore/conf/solrcore.properties
 
-  echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" > /tmp/alfrescoinstall/solr.xml
-  echo "<Context docBase=\"$ALF_HOME/solr/apache-solr-1.4.1.war\" debug=\"0\" crossContext=\"true\">" >> /tmp/alfrescoinstall/solr.xml
-  echo "  <Environment name=\"solr/home\" type=\"java.lang.String\" value=\"$ALF_HOME/solr\" override=\"true\"/>" >> /tmp/alfrescoinstall/solr.xml
-  echo "</Context>" >> /tmp/alfrescoinstall/solr.xml
-  sudo mv /tmp/alfrescoinstall/solr.xml $CATALINA_HOME/conf/Catalina/localhost/solr.xml
+  echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" > $TMP_INSTALL/solr4.xml
+  echo "<Context debug=\"0\" crossContext=\"true\">" >> $TMP_INSTALL/solr4.xml
+  echo "  <Environment name=\"solr/home\" type=\"java.lang.String\" value=\"$ALF_HOME/solr4\" override=\"true\"/>" >> $TMP_INSTALL/solr4.xml
+  echo "  <Environment name=\"solr/model/dir\" type=\"java.lang.String\" value=\"$ALF_HOME/solr4/alfrescoModels\" override=\"true\"/>" >> $TMP_INSTALL/solr4.xml
+  echo "  <Environment name=\"solr/content/dir\" type=\"java.lang.String\" value=\"$ALF_DATA_HOME/solr4\" override=\"true\"/>" >> $TMP_INSTALL/solr4.xml
+  echo "</Context>" >> $TMP_INSTALL/solr4.xml
+  sudo mv $TMP_INSTALL/solr4.xml $CATALINA_HOME/conf/Catalina/localhost/solr4.xml
 
-  # Remove some unused stuff
-  sudo rm $ALF_HOME/solr/solr.zip
+  echogreen "Setting permissions..."
+  sudo chown -R $ALF_USER:$ALF_GROUP $CATALINA_HOME/webapps
+  sudo chown -R $ALF_USER:$ALF_GROUP $ALF_DATA_HOME/solr4
+  sudo chown -R $ALF_USER:$ALF_GROUP $ALF_HOME/solr4
 
   echo
-  echogreen "Finished installing Solr engine."
+  echogreen "Finished installing Solr4 engine."
   echored "You must manually update alfresco-global.properties."
-  echo "Set property value index.subsystem.name=solr"
+  echo "Set property value index.subsystem.name=solr4"
   echo
 else
   echo
-  echo "Skipping installing Solr."
-  echo "You can always install Solr at a later time."
+  echo "Skipping installing Solr4."
+  echo "You can always install Solr4 at a later time."
   echo
 fi
 
@@ -583,13 +605,13 @@ echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 read -p "Install B.A.R.T${ques} [y/n] " -i "n" installbart
 
 if [ "$installbart" = "y" ]; then
-  echogreen "Installing B.A.R.T"
+ echogreen "Installing B.A.R.T"
 
 
- sudo mkdir -p $ALF_HOME/scripts/bart 
+ sudo mkdir -p $ALF_HOME/scripts/bart
  sudo mkdir -p $ALF_HOME/logs/bart
  sudo curl -# -o /tmp/alfrescoinstall/$BART_PROPERTIES $BASE_BART_DOWNLOAD$BART_PROPERTIES
- sudo curl -# -o $ALF_HOME/scripts/bart/$BART_EXECUTE $BASE_BART_DOWNLOAD$BART_EXECUTE 
+ sudo curl -# -o $ALF_HOME/scripts/bart/$BART_EXECUTE $BASE_BART_DOWNLOAD$BART_EXECUTE
 
  # Update bart settings
  ALFHOMEESCAPED="${ALF_HOME//\//\\/}"
@@ -631,7 +653,7 @@ if [ "$installbart" = "y" ]; then
 fi
 
 # Finally, set the permissions
-sudo chown -R $ALF_USER:$ALF_USER $ALF_HOME
+sudo chown -R $ALF_USER:$ALF_GROUP $ALF_HOME
 if [ -d "$ALF_HOME/www" ]; then
    sudo chown -R www-data:root $ALF_HOME/www
 fi
@@ -649,7 +671,7 @@ echo "   Locale setting is needed for LibreOffice date handling support."
 echo "3. Update database and other settings in alfresco-global.properties"
 echo "   You will find this file in $CATALINA_HOME/shared/classes"
 echo "4. Update properties for BART (if installed) in $ALF_HOME/scripts/bart/alfresco-bart.properties"
-echo "    DBNAME,DBUSER,DBPASS,DBHOST,REC_MYDBNAME,REC_MYUSER,REC_MYPASS,REC_MYHOST,DBTYPE "
+echo "   DBNAME,DBUSER,DBPASS,DBHOST,REC_MYDBNAME,REC_MYUSER,REC_MYPASS,REC_MYHOST,DBTYPE "
 echo "5. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have more than 2 cores."
 echo "6. Start nginx if you have installed it: /etc/init.d/nginx start"
 echo "7. Start Alfresco/tomcat: sudo service alfresco start"
