@@ -18,7 +18,7 @@ Installing
 To start the install, in Ubuntu terminal run  
 
 ```
-curl -O https://raw.githubusercontent.com/savicprvoslav/alfresco-ubuntu-install/master/alfinstall.sh  
+curl -O https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/master/alfinstall.sh  
 chmod u+x alfinstall.sh
 ./alfinstall.sh
 ```
