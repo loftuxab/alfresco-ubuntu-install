@@ -335,7 +335,7 @@ if [ "$installibreoffice" = "y" ]; then
   sudo dpkg -i *.deb
   echo
   echoblue "Installing some support fonts for better transformations."
-  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid 
+  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid libxinerama1
   echo
   echogreen "Finished installing LibreOffice"
   echo
