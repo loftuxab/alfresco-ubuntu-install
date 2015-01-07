@@ -335,7 +335,7 @@ if [ "$installibreoffice" = "y" ]; then
   sudo dpkg -i *.deb
   echo
   echoblue "Installing some support fonts for better transformations."
-  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid
+  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid 
   echo
   echogreen "Finished installing LibreOffice"
   echo
@@ -343,7 +343,7 @@ else
   echo
   echo "Skipping install of LibreOffice"
   echored "If you install LibreOffice/OpenOffice separetely, remember to update alfresco-global.properties"
-  echored "Also run: sudo apt-get install ttf-mscorefonts-installer fonts-droid"
+  echored "Also run: sudo apt-get install ttf-mscorefonts-installer fonts-droid libxinerama1"
   echo
 fi
 
