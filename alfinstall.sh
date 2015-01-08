@@ -194,6 +194,7 @@ if [ "$installtomcat" = "y" ]; then
   # Create /shared
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/extension
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/web-extension
+  sudo mkdir -p $CATALINA_HOME/shared/lib
   # Add endorsed dir
   sudo mkdir -p $CATALINA_HOME/endorsed
   echo
