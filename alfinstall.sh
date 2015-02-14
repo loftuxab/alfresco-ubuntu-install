@@ -21,9 +21,9 @@ export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=pt_BR.utf8
 
-export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.57/bin/apache-tomcat-7.0.57.tar.gz
-export JDBCPOSTGRESURL=http://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.3-1102.jdbc41.jar
+export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz
+export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
+export JDBCPOSTGRES=postgresql-9.4-1200.jdbc41.jar
 export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.34.tar.gz
 
@@ -33,8 +33,8 @@ export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
 export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.0.c/alfresco-5.0.c.war
 export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.0.c/share-5.0.c.war
-export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/integrations/alfresco-googledocs-repo/2.0.8/alfresco-googledocs-repo-2.0.8.amp
-export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/integrations/alfresco-googledocs-share/2.0.8/alfresco-googledocs-share-2.0.8.amp
+export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/2.0.8/alfresco-googledocs-repo-2.0.8.amp
+export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/2.0.8/alfresco-googledocs-share-2.0.8.amp
 export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.c/alfresco-spp-5.0.c.amp
 
 export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.c/alfresco-solr4-5.0.c-config-ssl.zip
