@@ -96,7 +96,7 @@ for REMOTE in $TOMCAT_DOWNLOAD $JDBCPOSTGRESURL/$JDBCPOSTGRES $JDBCMYSQLURL/$JDB
         $LIBREOFFICE $SWFTOOLS $ALFWARZIP $GOOGLEDOCSREPO $GOOGLEDOCSSHARE $SOLR $SPP
 
 do
-        wget --spider $REMOTE  >& /dev/null
+        wget --spider $REMOTE --no-check-certificate >& /dev/null
         if [ $? != 0 ]
         then
                 echored "In alfinstall.sh, please fix this URL: $REMOTE"
