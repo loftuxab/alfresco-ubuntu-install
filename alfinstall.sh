@@ -19,7 +19,7 @@ export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/
 
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
 #export LOCALESUPPORT=sv_SE.utf8
-export LOCALESUPPORT=pt_BR.utf8
+export LOCALESUPPORT=en_US.utf8
 
 export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
