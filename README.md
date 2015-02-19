@@ -11,7 +11,9 @@ Alfresco script based install for Ubuntu servers.
 This script will help you set up an Alfresco server instance with all necessary third party components.  
 Some will be installed via Ubuntu packages, some directly downloaded. The script will walk you through the process. In the end, there will be some manual tasks to complete the installation.
 
-Alfresco does have installers for Linux, and you may be better off with using those installers if you just want to do a quick test install. However, if you intend to run Alfresco in production, this script can help you both with the install, and by examine what the script does, learn what components are involved running an Alfresco instance. Any Alfresco administrator will have to learn that if you intend to use Alfresco in production.
+Alfresco does have installers for Linux, and you may be better off with using those installers if you just want to do a quick test install. However, if you intend to run Alfresco in production, this script can help you both with the install, and by examine what the script does, learn what components are involved running an Alfresco instance. Any Alfresco administrator will have to learn that if you intend to use Alfresco in production.  
+
+Only 64-bit Ubuntu is supported. Java cannot address enough memory to support running Alfresco on a 32-bit system.
 
 Installing
 ----
