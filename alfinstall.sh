@@ -19,11 +19,11 @@ export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/
 
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
 #export LOCALESUPPORT=sv_SE.utf8
-export LOCALESUPPORT=en_US.utf8
+export LOCALESUPPORT=pt_BR.utf8
 
-export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.57/bin/apache-tomcat-7.0.57.tar.gz
-export JDBCPOSTGRESURL=http://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.3-1102.jdbc41.jar
+export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz
+export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
+export JDBCPOSTGRES=postgresql-9.4-1200.jdbc41.jar
 export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.34.tar.gz
 
@@ -33,8 +33,8 @@ export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
 export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.0.c/alfresco-5.0.c.war
 export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.0.c/share-5.0.c.war
-export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/integrations/alfresco-googledocs-repo/2.0.8/alfresco-googledocs-repo-2.0.8.amp
-export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/integrations/alfresco-googledocs-share/2.0.8/alfresco-googledocs-share-2.0.8.amp
+export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/2.0.8/alfresco-googledocs-repo-2.0.8.amp
+export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/2.0.8/alfresco-googledocs-share-2.0.8.amp
 export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.c/alfresco-spp-5.0.c.amp
 
 export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.c/alfresco-solr4-5.0.c-config-ssl.zip
@@ -96,7 +96,7 @@ for REMOTE in $TOMCAT_DOWNLOAD $JDBCPOSTGRESURL/$JDBCPOSTGRES $JDBCMYSQLURL/$JDB
         $LIBREOFFICE $SWFTOOLS $ALFWARZIP $GOOGLEDOCSREPO $GOOGLEDOCSSHARE $SOLR $SPP
 
 do
-        wget --spider $REMOTE  >& /dev/null
+        wget --spider $REMOTE --no-check-certificate >& /dev/null
         if [ $? != 0 ]
         then
                 echored "In alfinstall.sh, please fix this URL: $REMOTE"
@@ -194,6 +194,7 @@ if [ "$installtomcat" = "y" ]; then
   # Create /shared
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/extension
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/web-extension
+  sudo mkdir -p $CATALINA_HOME/shared/lib
   # Add endorsed dir
   sudo mkdir -p $CATALINA_HOME/endorsed
   echo
@@ -335,7 +336,7 @@ if [ "$installibreoffice" = "y" ]; then
   sudo dpkg -i *.deb
   echo
   echoblue "Installing some support fonts for better transformations."
-  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid
+  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid libxinerama1
   echo
   echogreen "Finished installing LibreOffice"
   echo
@@ -343,7 +344,7 @@ else
   echo
   echo "Skipping install of LibreOffice"
   echored "If you install LibreOffice/OpenOffice separetely, remember to update alfresco-global.properties"
-  echored "Also run: sudo apt-get install ttf-mscorefonts-installer fonts-droid"
+  echored "Also run: sudo apt-get install ttf-mscorefonts-installer fonts-droid libxinerama1"
   echo
 fi
 
