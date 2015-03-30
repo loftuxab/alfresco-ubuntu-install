@@ -158,7 +158,12 @@ if [ "$updatelimits" = "y" ]; then
   echo "alfresco  soft  nofile  8192" | sudo tee -a /etc/security/limits.conf
   echo "alfresco  hard  nofile  65536" | sudo tee -a /etc/security/limits.conf
   echo
-  echogreen "Updated limits.conf"
+  echogreen "Updated /etc/security/limits.conf"
+  echo
+  echo "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session
+  echo "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session-noninteractive
+  echo
+  echogreen "Updated /etc/security/common-session*"
   echo
 else
   echo "Skipped updating limits.conf"
