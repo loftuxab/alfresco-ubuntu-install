@@ -249,7 +249,7 @@ if [ "$installtomcat" = "y" ]; then
 	cd "$(find . -type d -name "mysql-connector*")"
 	sudo mv mysql-connector*.jar $CATALINA_HOME/lib
   fi
-  sudo chown -R $ALF_USER:$ALF_GROUP $CATALINA_HOME
+  sudo chown -R $ALF_USER:$ALF_GROUP $ALF_HOME
   echo
   echogreen "Finished installing Tomcat"
   echo
@@ -524,7 +524,7 @@ if [ "$installwar" = "y" ]; then
     echored "to install addons with Alfresco."
   fi
   if [[ "$_java" ]]; then
-  sudo $ALF_HOME/addons/apply.sh all
+    sudo $ALF_HOME/addons/apply.sh all
   fi
 
   echo
