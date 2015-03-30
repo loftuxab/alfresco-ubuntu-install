@@ -508,7 +508,19 @@ if [ "$installwar" = "y" ]; then
     sudo mv alfresco-spp*.amp $ALF_HOME/addons/alfresco/
   fi
 
+  # Check if Java is installed before trying to apply
+  if type -p java; then
+    _java=java
+  elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
+    _java="$JAVA_HOME/bin/java"
+  else
+    echored "No JDK installed. When you have installed JDK, run "
+    echored "$ALF_HOME/addons/apply.sh all"
+    echored "to install addons with Alfresco."
+  fi
+  if [[ "$_java" ]]; then
   sudo $ALF_HOME/addons/apply.sh all
+  fi
 
   echo
   echogreen "Finished adding Alfresco war files"
