@@ -18,27 +18,26 @@ export BASE_DOWNLOAD=https://raw.githubusercontent.com/douglascrp/alfresco-ubunt
 export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
 
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
-#export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=pt_BR.utf8
 
 export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.4-1200.jdbc41.jar
+export JDBCPOSTGRES=postgresql-9.4-1201.jdbc41.jar
 export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.34.tar.gz
+export JDBCMYSQL=mysql-connector-java-5.1.35.tar.gz
 
 export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/4.2.7.2/deb/x86_64/LibreOffice_4.2.7.2_Linux_x86-64_deb.tar.gz
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
-export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.0.c/alfresco-5.0.c.war
-export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.0.c/share-5.0.c.war
-export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/2.0.8/alfresco-googledocs-repo-2.0.8.amp
-export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/2.0.8/alfresco-googledocs-share-2.0.8.amp
-export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.c/alfresco-spp-5.0.c.amp
+export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.0.d/alfresco-5.0.d.war
+export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.0.d/share-5.0.d.war
+export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.0/alfresco-googledocs-repo-3.0.0.amp
+export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.0/alfresco-googledocs-share-3.0.0.amp
+export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.d/alfresco-spp-5.0.d.amp
 
-export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.c/alfresco-solr4-5.0.c-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.c/alfresco-solr4-5.0.c-ssl.war
+export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.d/alfresco-solr4-5.0.d-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.d/alfresco-solr4-5.0.d-ssl.war
 
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
@@ -93,7 +92,7 @@ echo
 URLERROR=0
 
 for REMOTE in $TOMCAT_DOWNLOAD $JDBCPOSTGRESURL/$JDBCPOSTGRES $JDBCMYSQLURL/$JDBCMYSQL \
-        $LIBREOFFICE $SWFTOOLS $ALFWARZIP $GOOGLEDOCSREPO $GOOGLEDOCSSHARE $SOLR $SPP
+        $LIBREOFFICE $SWFTOOLS $ALFWARZIP $GOOGLEDOCSREPO $GOOGLEDOCSSHARE $SOLR4_WAR_DOWNLOAD $SOLR4_CONFIG_DOWNLOAD $SPP
 
 do
         wget --spider $REMOTE --no-check-certificate >& /dev/null
@@ -158,7 +157,12 @@ if [ "$updatelimits" = "y" ]; then
   echo "alfresco  soft  nofile  8192" | sudo tee -a /etc/security/limits.conf
   echo "alfresco  hard  nofile  65536" | sudo tee -a /etc/security/limits.conf
   echo
-  echogreen "Updated limits.conf"
+  echogreen "Updated /etc/security/limits.conf"
+  echo
+  echo "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session
+  echo "session required pam_limits.so" | sudo tee -a /etc/pam.d/common-session-noninteractive
+  echo
+  echogreen "Updated /etc/security/common-session*"
   echo
 else
   echo "Skipped updating limits.conf"
@@ -244,7 +248,7 @@ if [ "$installtomcat" = "y" ]; then
 	cd "$(find . -type d -name "mysql-connector*")"
 	sudo mv mysql-connector*.jar $CATALINA_HOME/lib
   fi
-  sudo chown -R $ALF_USER:$ALF_GROUP $CATALINA_HOME
+  sudo chown -R $ALF_USER:$ALF_GROUP $ALF_HOME
   echo
   echogreen "Finished installing Tomcat"
   echo
@@ -508,7 +512,19 @@ if [ "$installwar" = "y" ]; then
     sudo mv alfresco-spp*.amp $ALF_HOME/addons/alfresco/
   fi
 
-  sudo $ALF_HOME/addons/apply.sh all
+  # Check if Java is installed before trying to apply
+  if type -p java; then
+    _java=java
+  elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
+    _java="$JAVA_HOME/bin/java"
+  else
+    echored "No JDK installed. When you have installed JDK, run "
+    echored "$ALF_HOME/addons/apply.sh all"
+    echored "to install addons with Alfresco."
+  fi
+  if [[ "$_java" ]]; then
+    sudo $ALF_HOME/addons/apply.sh all
+  fi
 
   echo
   echogreen "Finished adding Alfresco war files"
