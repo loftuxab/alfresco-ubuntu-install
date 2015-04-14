@@ -78,7 +78,7 @@
                compressionMinSize="256"
                maxThreads="200"
                acceptCount="100"
-               redirectPort="8443" />
+               />
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
