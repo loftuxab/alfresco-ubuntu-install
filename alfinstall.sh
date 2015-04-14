@@ -14,20 +14,22 @@ export ALF_GROUP=$ALF_USER
 export APTVERBOSITY="-qq -y"
 export TMP_INSTALL=/tmp/alfrescoinstall
 
-export BASE_DOWNLOAD=https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/master
+# Branch name to pull from server. Use master for stable.
+BRANCH=experimental
+export BASE_DOWNLOAD=https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/$BRANCH
 export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
 
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=en_US.utf8
 
-export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz
+export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-8/v8.0.21/bin/apache-tomcat-8.0.21.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
 export JDBCPOSTGRES=postgresql-9.4-1201.jdbc41.jar
 export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.35.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/4.2.7.2/deb/x86_64/LibreOffice_4.2.7.2_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/4.4.2.2/deb/x86_64/LibreOffice_4.4.2.2_Linux_x86-64_deb.tar.gz
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
@@ -306,18 +308,23 @@ fi
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "Install Java JDK."
-echo "This will install the OpenJDK version of Java. If you prefer Oracle Java"
+echo "This will install Oracle Java 8 version of Java. If you prefer OpenJDK"
 echo "you need to download and install that manually."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install OpenJDK7${ques} [y/n] " -i "n" installjdk
+read -e -p "Install Oracle Java 8${ques} [y/n] " -i "n" installjdk
 if [ "$installjdk" = "y" ]; then
-  echoblue "Installing OpenJDK7. Fetching packages..."
-  sudo apt-get $APTVERBOSITY install openjdk-7-jdk
+  echoblue "Installing Oracle Java 8. Fetching packages..."
+  sudo apt-get $APTVERBOSITY install software-properties-common
+  sudo add-apt-repository ppa:webupd8team/java
+  sudo apt-get $APTVERBOSITY update
+  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+  sudo apt-get $APTVERBOSITY install oracle-java8-installer
+  sudo update-java-alternatives -s java-8-oracle
   echo
-  echogreen "Finished installing OpenJDK"
+  echogreen "Finished installing Oracle Java 8"
   echo
 else
-  echo "Skipping install of OpenJDK 7"
+  echo "Skipping install of Oracle Java 8"
   echored "IMPORTANT: You need to install other JDK and adjust paths for the install to be complete"
   echo
 fi

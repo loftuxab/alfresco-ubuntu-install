@@ -26,12 +26,10 @@
   -->
   <!--APR library loader. Documentation at /docs/apr.html -->
   <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
-  <!--Initialize Jasper prior to webapps are loaded. Documentation at /docs/jasper-howto.html -->
-  <Listener className="org.apache.catalina.core.JasperListener" />
   <!-- Prevent memory leaks due to use of particular java/javax APIs-->
-  <!-- Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" /-->
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
-  <!-- Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" /-->
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
 
   <!-- Global JNDI resources
        Documentation at /docs/jndi-resources-howto.html
@@ -66,21 +64,21 @@
          Java HTTP Connector: /docs/config/http.html (blocking & non-blocking)
          Java AJP  Connector: /docs/config/ajp.html
          APR (HTTP/AJP) Connector: /docs/apr.html
-         Define a non-SSL HTTP/1.1 Connector on port 8080
+         Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
-    <Connector port="8080" 
+    <Connector port="8080"
                protocol="HTTP/1.1"
                URIEncoding="UTF-8"
                connectionTimeout="20000"
                redirectPort="8443"
                maxHttpHeaderSize="32768"
-               compression="off"               
+               compression="off"
                compressableMimeType="text/html,text/xml,text/plain,application/json,text/javascript,application/x-javascript,text/css,text/csv,text/x-web-markdown,application/atom+xml,application/rss+xml,application/atomsvc+xml"
                noCompressionUserAgents=".*MSIE 6.*"
                compressionMinSize="256"
                maxThreads="200"
                acceptCount="100"
-               />
+               redirectPort="8443" />
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
@@ -92,11 +90,12 @@
          This connector uses the JSSE configuration, when using APR, the
          connector should be using the OpenSSL style configuration
          described in the APR documentation -->
-         
+
       <Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol" SSLEnabled="true" URIEncoding="UTF-8"
                maxThreads="150" scheme="https" keystoreFile="/opt/alfresco/alf_data/keystore/ssl.keystore" keystorePass="kT9X6oe68t" keystoreType="JCEKS"
                secure="true" connectionTimeout="240000" truststoreFile="/opt/alfresco/alf_data/keystore/ssl.truststore" truststorePass="kT9X6oe68t" truststoreType="JCEKS"
-               clientAuth="want" allowUnsafeLegacyRenegotiation="true" maxHttpHeaderSize="32768" sslProtocol="TLS" maxSavePostSize="-1" /> 
+               clientAuth="want" allowUnsafeLegacyRenegotiation="true" maxHttpHeaderSize="32768" sslProtocol="TLS" maxSavePostSize="-1" />
+
 
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" URIEncoding="UTF-8" />
@@ -145,9 +144,10 @@
              Note: The pattern used is equivalent to using pattern="common" -->
 <!--
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-               prefix="localhost_access_log." suffix=".txt"
+               prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 -->
+
       </Host>
     </Engine>
   </Service>
