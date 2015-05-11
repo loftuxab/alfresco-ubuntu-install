@@ -15,13 +15,13 @@ export APTVERBOSITY="-qq -y"
 export TMP_INSTALL=/tmp/alfrescoinstall
 
 export BASE_DOWNLOAD=https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/master
-export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
+export KEYSTOREBASE=https://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
 
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=en_US.utf8
 
-export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz
+export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
 export JDBCPOSTGRES=postgresql-9.4-1201.jdbc41.jar
 export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
