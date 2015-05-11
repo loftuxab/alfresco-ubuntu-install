@@ -348,8 +348,8 @@ if [ "$installibreoffice" = "y" ]; then
   sudo dpkg -i *.deb
   echo
   echoblue "Installing some support fonts for better transformations."
-  # libxinerama1 libglu1-mesa needed to get LibreOffice 4.4 to work
-  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid libxinerama1 libglu1-mesa
+  # libxinerama1 libglu1-mesa needed to get LibreOffice 4.4 to work. Add the libraries that Alfresco mention in documentatinas required.
+  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid libxinerama1 libglu1-mesa libsm6 libxt6 libxrender1 libfontconfig1 libcups2
   echo
   echogreen "Finished installing LibreOffice"
   echo
