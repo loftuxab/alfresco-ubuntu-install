@@ -29,14 +29,14 @@ export JDBCPOSTGRES=postgresql-9.4-1201.jdbc41.jar
 export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.35.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/4.4.2.2/deb/x86_64/LibreOffice_4.4.2.2_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/4.4.3.2/deb/x86_64/LibreOffice_4.4.3.2_Linux_x86-64_deb.tar.gz
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
 export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.0.d/alfresco-5.0.d.war
 export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.0.d/share-5.0.d.war
-export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.0/alfresco-googledocs-repo-3.0.0.amp
-export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.0/alfresco-googledocs-share-3.0.0.amp
+export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.2/alfresco-googledocs-repo-3.0.2.amp
+export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.2/alfresco-googledocs-share-3.0.2.amp
 export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.d/alfresco-spp-5.0.d.amp
 
 export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.d/alfresco-solr4-5.0.d-config-ssl.zip
@@ -135,7 +135,7 @@ echo "Also updates locale support."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 read -e -p "Add alfresco system user${ques} [y/n] " -i "n" addalfresco
 if [ "$addalfresco" = "y" ]; then
-  sudo adduser --system --no-create-home --disabled-login --disabled-password --group $ALF_USER
+  sudo adduser --system --disabled-login --disabled-password --group $ALF_USER
   echo
   echo "Adding locale support"
   #install locale to support that locale date formats in open office transformations
