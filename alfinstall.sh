@@ -710,3 +710,11 @@ echo "5. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have mo
 echo "6. Start nginx if you have installed it: /etc/init.d/nginx start"
 echo "7. Start Alfresco/tomcat: sudo service alfresco start"
 echo
+
+echo
+echo "${warn}${bldblu} - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ${warn}"
+echogreen "Thanks for using Alfresco Ubuntu installer by Loftux AB."
+echogreen "Please visit https://loftux.com for more Alfresco Services and add-ons."
+echogreen "You are welcome to contact us at info@loftux.se"
+echo "${warn}${bldblu} - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ${warn}"
+echo
