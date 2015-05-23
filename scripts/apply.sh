@@ -1,11 +1,11 @@
 #!/bin/bash
 # -------
 # Script for apply AMPs to installed WAR
-# 
+#
 # Copyright 2013 Loftux AB, Peter Löfgren
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
-export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/"
+export JAVA_HOME="/usr/lib/jvm/java-8-oracle"
 export JRE_HOME=$JAVA_HOME/jre
 export PATH=$PATH:$HOME/bin:$JRE_HOME/bin
 export ALF_HOME=/opt/alfresco
@@ -40,9 +40,9 @@ if [ -e war/alfresco.war ]; then
     	continue
   	fi
   		echo "Applying $file"
-		java -jar alfresco-mmt.jar install $file alfresco.war -force -nobackup                                                       
+		java -jar alfresco-mmt.jar install $file alfresco.war -force -nobackup
 	done
-	
+
 else
 	echo "Skipping alfresco.war - not present in war directory"
 fi
@@ -59,7 +59,7 @@ if [ -e war/share.war ]; then
     	continue
   	fi
   		echo "Applying $file"
-		java -jar alfresco-mmt.jar install $file share.war -force -nobackup                                                       
+		java -jar alfresco-mmt.jar install $file share.war -force -nobackup
 	done
 else
 	echo "Skipping share.war - not present in war directory"
