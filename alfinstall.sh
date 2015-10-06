@@ -314,7 +314,7 @@ echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 read -e -p "Install Oracle Java 8${ques} [y/n] " -i "n" installjdk
 if [ "$installjdk" = "y" ]; then
   echoblue "Installing Oracle Java 8. Fetching packages..."
-  sudo apt-get $APTVERBOSITY install software-properties-common
+  sudo apt-get $APTVERBOSITY install python-software-properties software-properties-common
   sudo add-apt-repository ppa:webupd8team/java
   sudo apt-get $APTVERBOSITY update
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
