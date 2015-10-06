@@ -17,26 +17,26 @@ export TMP_INSTALL=/tmp/alfrescoinstall
 # Branch name to pull from server. Use master for stable.
 BRANCH=experimental
 export BASE_DOWNLOAD=https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/$BRANCH
-export KEYSTOREBASE=http://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
+export KEYSTOREBASE=https://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
 
 #Change this to prefered locale to make sure it exists. This has impact on LibreOffice transformations
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=en_US.utf8
 
-export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-8/v8.0.21/bin/apache-tomcat-8.0.21.tar.gz
+export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.64/bin/apache-tomcat-7.0.64.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.4-1201.jdbc41.jar
-export JDBCMYSQLURL=http://cdn.mysql.com/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.35.tar.gz
+export JDBCPOSTGRES=postgresql-9.4-1203.jdbc41.jar
+export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
+export JDBCMYSQL=mysql-connector-java-5.1.36.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/4.4.2.2/deb/x86_64/LibreOffice_4.4.2.2_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.0.2.2/deb/x86_64/LibreOffice_5.0.2.2_Linux_x86-64_deb.tar.gz
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
 export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.0.d/alfresco-5.0.d.war
 export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.0.d/share-5.0.d.war
-export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.0/alfresco-googledocs-repo-3.0.0.amp
-export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.0/alfresco-googledocs-share-3.0.0.amp
+export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.2/alfresco-googledocs-repo-3.0.2.amp
+export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.2/alfresco-googledocs-share-3.0.2.amp
 export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.d/alfresco-spp-5.0.d.amp
 
 export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.d/alfresco-solr4-5.0.d-config-ssl.zip
@@ -135,7 +135,7 @@ echo "Also updates locale support."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 read -e -p "Add alfresco system user${ques} [y/n] " -i "n" addalfresco
 if [ "$addalfresco" = "y" ]; then
-  sudo adduser --system --no-create-home --disabled-login --disabled-password --group $ALF_USER
+  sudo adduser --system --disabled-login --disabled-password --group $ALF_USER
   echo
   echo "Adding locale support"
   #install locale to support that locale date formats in open office transformations
@@ -314,7 +314,7 @@ echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 read -e -p "Install Oracle Java 8${ques} [y/n] " -i "n" installjdk
 if [ "$installjdk" = "y" ]; then
   echoblue "Installing Oracle Java 8. Fetching packages..."
-  sudo apt-get $APTVERBOSITY install software-properties-common
+  sudo apt-get $APTVERBOSITY install python-software-properties software-properties-common
   sudo add-apt-repository ppa:webupd8team/java
   sudo apt-get $APTVERBOSITY update
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
@@ -709,4 +709,12 @@ echo "   DBNAME,DBUSER,DBPASS,DBHOST,REC_MYDBNAME,REC_MYUSER,REC_MYPASS,REC_MYHO
 echo "5. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have more than 2 cores."
 echo "6. Start nginx if you have installed it: /etc/init.d/nginx start"
 echo "7. Start Alfresco/tomcat: sudo service alfresco start"
+echo
+
+echo
+echo "${warn}${bldblu} - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ${warn}"
+echogreen "Thanks for using Alfresco Ubuntu installer by Loftux AB."
+echogreen "Please visit https://loftux.com for more Alfresco Services and add-ons."
+echogreen "You are welcome to contact us at info@loftux.se"
+echo "${warn}${bldblu} - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ${warn}"
 echo

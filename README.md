@@ -1,9 +1,13 @@
-Alfresco Ubuntu install
+Alfresco Ubuntu Install
 =======================
 
 This install script and guide was created by Peter Löfgren, Loftux AB.  
-Please visit [https://loftux.se](https://loftux.se/sv?ref=ubuntuinstall "loftux.se") (Swedish) [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loftux.com") (English) for more information.  
+Please visit [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loftux.com") (English) [https://loftux.se](https://loftux.se/sv?ref=ubuntuinstall "loftux.se") (Swedish)  for more information.
+  
 [![Loftux AB](https://loftux.se/themes/loftux_theme/assets/images/loftux-logo/logo-loftux-prefixed-small.png?ref=ubuntuinstall)](https://loftux.se?ref=ubuntuinstall)
+
+Current version : **Alfresco Community 5.0d**
+
 
 Alfresco script based install for Ubuntu servers.
 ----------------------------
@@ -11,13 +15,13 @@ Alfresco script based install for Ubuntu servers.
 This script will help you set up an Alfresco server instance with all necessary third party components.  
 Some will be installed via Ubuntu packages, some directly downloaded. The script will walk you through the process. In the end, there will be some manual tasks to complete the installation.
 
-Alfresco does have installers for Linux, and you may be better off with using those installers if you just want to do a quick test install. However, if you intend to run Alfresco in production, this script can help you both with the install, and by examine what the script does, learn what components are involved running an Alfresco instance. Any Alfresco administrator will have to learn that if you intend to use Alfresco in production.  
+Alfresco does have installers for Linux, and you may be better off with using those installers if you just want to do a quick test install. However, if you intend to run Alfresco in production, this script can help you both with the install, and by examining what the script does, learn what components are involved running an Alfresco instance. Any Alfresco administrator will have to learn that if you intend to use Alfresco in production.  
 
 Only 64-bit Ubuntu is supported. Java cannot address enough memory to support running Alfresco on a 32-bit system.
 
 Installing
 ----
-To start the install, in Ubuntu terminal run  
+To start the install, in Ubuntu terminal run;  
 
 ```
 curl -O https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/master/alfinstall.sh  
@@ -28,7 +32,7 @@ chmod u+x alfinstall.sh
 All install options will be presented with an introduction. They default to 'n' (no), so type y to actually install that component. You need **sudo** access to install.  
 
 But please do read all of this README before you go ahead.  
-There is also lots of documentation at http://docs.alfresco.com/4.2/index.jsp. To become an Alfresco server Administator, read the 'Administering' section.  
+There is also lots of documentation at http://docs.alfresco.com/4.2/index.jsp. To become an Alfresco server Administrator, read the 'Administering' section.  
 
 >###Known issues
 >Many components have their download url:s point to specific version.
@@ -46,7 +50,7 @@ In this part of the install is also an update to make sure a specific locale is 
 
 Limits
 --------
-Ubuntu default for number of allowed open files in the file system is too low for alfresco use and tomcat may because of this stop with the error "too many open files". You should update this value if you have not done so. Read more at http://wiki.alfresco.com/wiki/Too_many_open_files.
+Ubuntu default for number of allowed open files in the file system is too low for alfresco use and tomcat may because of this stop with the error "too many open files". You should update this value if you have not done so. Read more at (http://wiki.alfresco.com/wiki/Too_many_open_files.
 
 Tomcat
 --------
@@ -71,7 +75,7 @@ The script will use the latest version of the Ubuntu package from Nginx instead 
 
 ### Maintenance message support
 If you are using Nginx as front-end there is a built in fallback to a maintenance page when the Alfresco tomcat instance is stopped. Nginx will detect that tomcat is not responding and show this page. It will display expected downtime and a progress bar.  
-To set the the downtime (in minutes) and a custom message, call the ams.sh script found in script folder.
+To set the downtime (in minutes) and a custom message, call the ams.sh script found in script folder.
 `ams.sh 20 "Custom message displayed in page"`  
 The above example will set the downtime to 20 minutes (from when you shut down) and with a custom message. If called without parameters it defaults to 10 minutes. Custom message is optional, but if used you also must set the timeout.  
 The script will shut down Alfresco tomcat instance. To start it you must call `sudo start alfresco`.  
@@ -141,7 +145,7 @@ Alfresco BART - Backup and Recovery Tool
 Alfresco BART is a third party tool to aid with your Backup and Recovery requirements.  
 You can do the basic install using this script, but it is **highly recommended** that you visit https://github.com/toniblyx/alfresco-backup-and-recovery-tool/ page to learn more on how to configure this tool.  
 
-FAQ  
+Frequently Asked Questions (FAQ)  
 ===
 Can this script be used for any version of Alfresco?
 ---
@@ -166,5 +170,5 @@ This combination of packages/downloaded install has been found to work well. But
 
 License
 ===
-Copyright 2013-2014 Loftux AB, Peter Löfgren  
+Copyright 2013-2015 Loftux AB, Peter Löfgren  
 Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
