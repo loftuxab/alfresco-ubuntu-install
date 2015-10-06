@@ -23,13 +23,13 @@ export KEYSTOREBASE=https://svn.alfresco.com/repos/alfresco-open-mirror/alfresco
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=en_US.utf8
 
-export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.63/bin/apache-tomcat-7.0.63.tar.gz
+export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.64/bin/apache-tomcat-7.0.64.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.4-1201.jdbc41.jar
+export JDBCPOSTGRES=postgresql-9.4-1203.jdbc41.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.36.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.0.1.1/deb/x86_64/LibreOffice_5.0.1.1_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.0.2.2/deb/x86_64/LibreOffice_5.0.2.2_Linux_x86-64_deb.tar.gz
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
