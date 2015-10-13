@@ -33,14 +33,16 @@ export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
-export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.0.d/alfresco-5.0.d.war
-export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.0.d/share-5.0.d.war
+export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.b-EA/alfresco-5.1.b-EA.war
+export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.b-EA/share-5.1.b-EA.war
+export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.b-EA/alfresco-share-services-5.1.b-EA.amp
+
 export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.2/alfresco-googledocs-repo-3.0.2.amp
 export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.2/alfresco-googledocs-share-3.0.2.amp
-export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.0.d/alfresco-spp-5.0.d.amp
+export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.1.b-EA/alfresco-spp-5.1.b-EA.amp
 
-export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.d/alfresco-solr4-5.0.d-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.0.d/alfresco-solr4-5.0.d-ssl.war
+export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.b-EA/alfresco-solr4-5.1.b-EA-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.b-EA/alfresco-solr4-5.1.b-EA.war
 
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
@@ -95,7 +97,8 @@ echo
 URLERROR=0
 
 for REMOTE in $TOMCAT_DOWNLOAD $JDBCPOSTGRESURL/$JDBCPOSTGRES $JDBCMYSQLURL/$JDBCMYSQL \
-        $LIBREOFFICE $SWFTOOLS $ALFWARZIP $GOOGLEDOCSREPO $GOOGLEDOCSSHARE $SOLR4_WAR_DOWNLOAD $SOLR4_CONFIG_DOWNLOAD $SPP
+        $LIBREOFFICE $SWFTOOLS $ALFREPOWAR $ALFSHAREWAR $ALFSHARESERVICES $GOOGLEDOCSREPO \
+        $GOOGLEDOCSSHARE $SOLR4_WAR_DOWNLOAD $SOLR4_CONFIG_DOWNLOAD $SPP
 
 do
         wget --spider $REMOTE --no-check-certificate >& /dev/null
@@ -131,15 +134,10 @@ fi
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "You need to add a system user that runs the tomcat Alfresco instance."
-echo "Also updates locale support."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 read -e -p "Add alfresco system user${ques} [y/n] " -i "n" addalfresco
 if [ "$addalfresco" = "y" ]; then
   sudo adduser --system --disabled-login --disabled-password --group $ALF_USER
-  echo
-  echo "Adding locale support"
-  #install locale to support that locale date formats in open office transformations
-  sudo locale-gen $LOCALESUPPORT
   echo
   echogreen "Finished adding alfresco user"
   echo
@@ -147,6 +145,19 @@ else
   echo "Skipping adding alfresco user"
   echo
 fi
+
+echo
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "You need to set the locale to use when running tomcat Alfresco instance."
+echo "This has an effect on date formats for transformations and support for"
+echo "international characters."
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+read -e -p "Enter the default locale to use: " -i "$LOCALESUPPORT" LOCALESUPPORT
+#install locale to support that locale date formats in open office transformations
+sudo locale-gen $LOCALESUPPORT
+echo
+echogreen "Finished updating locale"
+echo
 
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
@@ -493,55 +504,91 @@ echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "Install Alfresco war files."
 echo "Download war files and optional addons."
-echo "If you have downloaded your war files you can skip this step add them manually."
+echo "If you have already downloaded your war files you can skip this step and add "
+echo "them manually."
+echo
+echo "If you use separate Alfresco and Share serv, only install the needed for each"
+echo "server. Alfresco Repository will need Share Services if you use Share."
+echo
 echo "This install place downloaded files in the $ALF_HOME/addons and then use the"
 echo "apply.sh script to add them to tomcat/webapps. Se this script for more info."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Add Alfresco war files${ques} [y/n] " -i "n" installwar
+read -e -p "Add Alfresco Repository war file${ques} [y/n] " -i "n" installwar
 if [ "$installwar" = "y" ]; then
 
-  echogreen "Downloading alfresco and share war files..."
+  echogreen "Downloading alfresco war file..."
   sudo curl -# -o $ALF_HOME/addons/war/alfresco.war $ALFREPOWAR
+  echo
+  echogreen "Finished adding Alfresco Repository war file"
+  echo
+else
+  echo
+  echo "Skipping adding Alfresco Repository war file and addons"
+  echo
+fi
+
+read -e -p "Add Share Client war file${ques} [y/n] " -i "n" installsharewar
+if [ "$installsharewar" = "y" ]; then
+
+  echogreen "Downloading Share war file..."
   sudo curl -# -o $ALF_HOME/addons/war/share.war $ALFSHAREWAR
 
-  cd /tmp/alfrescoinstall
-  read -e -p "Add Google docs integration${ques} [y/n] " -i "n" installgoogledocs
-  if [ "$installgoogledocs" = "y" ]; then
-  	echo "Downloading Google docs addon..."
+  echo
+  echogreen "Finished adding Share war file"
+  echo
+else
+  echo
+  echo "Skipping adding Alfresco Share war file"
+  echo
+fi
+
+if [ "$installwar" = "y" ] || [ "$installsharewar" = "y" ]; then
+cd /tmp/alfrescoinstall
+if [ "$installwar" = "y" ]; then
+    echored "You must install Share Services if you intend to use Share Client."
+    read -e -p "Add Share Services plugin${ques} [y/n] " -i "n" installshareservices
+    if [ "$installshareservices" = "y" ]; then
+      echo "Downloading Share Services addon..."
+      curl -# -O $ALFSHARESERVICES
+      sudo mv alfresco-share-services*.amp $ALF_HOME/addons/alfresco/
+    fi
+fi
+read -e -p "Add Google docs integration${ques} [y/n] " -i "n" installgoogledocs
+if [ "$installgoogledocs" = "y" ]; then
+  echo "Downloading Google docs addon..."
+  if [ "$installwar" = "y" ]; then
     curl -# -O $GOOGLEDOCSREPO
     sudo mv alfresco-googledocs-repo*.amp $ALF_HOME/addons/alfresco/
+  fi
+  if [ "$installsharewar" = "y" ]; then
     curl -# -O $GOOGLEDOCSSHARE
     sudo mv alfresco-googledocs-share* $ALF_HOME/addons/share/
   fi
-
+fi
+if [ "$installwar" = "y" ]; then
   read -e -p "Add Sharepoint plugin${ques} [y/n] " -i "n" installspp
   if [ "$installspp" = "y" ]; then
     echo "Downloading Sharepoint addon..."
     curl -# -O $SPP
     sudo mv alfresco-spp*.amp $ALF_HOME/addons/alfresco/
   fi
+fi
+fi
 
-  # Check if Java is installed before trying to apply
-  if type -p java; then
-    _java=java
-  elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
-    _java="$JAVA_HOME/bin/java"
-  else
-    echored "No JDK installed. When you have installed JDK, run "
-    echored "$ALF_HOME/addons/apply.sh all"
-    echored "to install addons with Alfresco."
-  fi
-  if [[ "$_java" ]]; then
-    sudo $ALF_HOME/addons/apply.sh all
-  fi
-
-  echo
-  echogreen "Finished adding Alfresco war files"
-  echo
-else
-  echo
-  echo "Skipping adding Alfresco war files"
-  echo
+# Install of war and addons complete, apply them to war file
+if [ "$installwar" = "y" ] || [ "$installsharewar" = "y" ]; then
+    # Check if Java is installed before trying to apply
+    if type -p java; then
+        _java=java
+    elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
+        _java="$JAVA_HOME/bin/java"
+        echored "No JDK installed. When you have installed JDK, run "
+        echored "$ALF_HOME/addons/apply.sh all"
+        echored "to install addons with Alfresco or Share."
+    fi
+    if [[ "$_java" ]]; then
+        sudo $ALF_HOME/addons/apply.sh all
+    fi
 fi
 
 echo
