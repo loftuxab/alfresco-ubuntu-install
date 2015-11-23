@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset='UTF-8'>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+
+<title>Alfresco Maintenance</title>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script type="text/javascript" src="/downtime.js"></script>
+<script>
+    // Source for progress bar http://css-tricks.com/css3-progress-bars/
+    startTime = startTime * 1000 // javascript and bash, milliseconds vs seconds
+    var endTime = startTime + downTime * 60000, lastPercentValue = 0;
+
+    var reloadURL = document.URL;
+    if (reloadURL.indexOf('share') === -1)
+    {
+        reloadURL = '/share/';
+    }
+
+    function getPercent () {
+        var percentDone = 100 - Math.round((endTime - Date.now()) / (endTime - startTime) * 100);
+        if (percentDone > 100)
+        {
+            percentDone = 100;
+        }
+        if (percentDone < 0)
+        {
+            percentDone = 0;
+        }
+
+        return percentDone;
+    }
+    function updateProgress (percentDone) {
+
+        $(".meter > span").each(function() {
+            $(this)
+                    .data("origWidth", $(this).width())
+                    .width(0)
+                    .animate({
+                        width: percentDone + '%'
+                    }, 3000);
+        });
+        $(".percent").html('We have used ' + percentDone + '% of expected downtime of ' + downTime + ' minutes.');
+    }
+
+    function initialize ()
+    {
+        // Intial update
+        updateProgress(getPercent());
+
+        // Update button with current link
+        $("a.loadnowbutton").attr('href', reloadURL);
+
+        if (specialMessage)
+        {
+            $(".specialMessage").html(specialMessage);
+        }
+        // Check if already complete (if maintenance is taking longer)
+        if (getPercent() === 100)
+        {
+            console.log('All done');
+            $(".progressmessage").html('Since we have run out of expected downtime, something was clearly harder to fix than we anticipated. But we are working hard to get the system up and running. In fact, we may already be done. Try hitting Load Alfresco Now button.');
+        }
+        else
+        {
+            var refreshId = setInterval(function() {
+
+                var percentDone = getPercent();
+                if (lastPercentValue !== percentDone)
+                {
+                    lastPercentValue = percentDone;
+                    updateProgress(percentDone);
+                }
+                if (percentDone === 100)
+                {
+                    clearInterval(refreshId);
+                    window.location = reloadURL;
+                }
+            }, 10000);
+            $(".progressmessage").html('I know the Alfresco System administrators sometimes are very quick. Therefore I will hit the Load Alfresco Now button to see if they are done!');
+        }
+
+    }
+
+</script>
+
+<style>
+    body {
+        background: #333;
+        text-align: center;
+        color: #eee;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    }
+
+    h1 {
+        font-size: 42px;
+        font-weight: 600;
+        margin: 0 0 30px 0;
+    }
+
+    article, aside, figure, footer, header, hgroup,
+    menu, nav, section {
+        display: block;
+    }
+
+    #page-wrap {
+        width: 490px;
+        margin: 80px auto;
+    }
+
+    p {
+        padding-bottom: 20px;
+    }
+
+    a.plainlink {
+        color: #fba026;
+    }
+
+    a.plainlink:visited {
+        color: #F0FFFF;
+    }
+
+    a.plainlink:hover,
+    a.plainlink:focus {
+        color: #44a745;
+    }
+
+    .meter {
+        height: 20px;
+        position: relative;
+        margin: 5px 0 20px 0;
+        background: #555;
+        -moz-border-radius: 25px;
+        -webkit-border-radius: 25px;
+        border-radius: 25px;
+        padding: 10px;
+        -webkit-box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+        -moz-box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+        box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+    }
+
+    .meter > span {
+        display: block;
+        height: 100%;
+        -webkit-border-top-right-radius: 8px;
+        -webkit-border-bottom-right-radius: 8px;
+        -moz-border-radius-topright: 8px;
+        -moz-border-radius-bottomright: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        -webkit-border-top-left-radius: 20px;
+        -webkit-border-bottom-left-radius: 20px;
+        -moz-border-radius-topleft: 20px;
+        -moz-border-radius-bottomleft: 20px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-color: rgb(43, 194, 83);
+        background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(43, 194, 83)), color-stop(1, rgb(84, 240, 84)));
+        background-image: -moz-linear-gradient(center bottom, rgb(43, 194, 83) 37%, rgb(84, 240, 84) 69%);
+        -webkit-box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3), inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3), inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+        box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3), inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .meter > span:after, .animate > span > span {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent), to(transparent));
+        background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+        z-index: 1;
+        -webkit-background-size: 50px 50px;
+        -moz-background-size: 50px 50px;
+        -webkit-animation: move 2s linear infinite;
+        -webkit-border-top-right-radius: 8px;
+        -webkit-border-bottom-right-radius: 8px;
+        -moz-border-radius-topright: 8px;
+        -moz-border-radius-bottomright: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        -webkit-border-top-left-radius: 20px;
+        -webkit-border-bottom-left-radius: 20px;
+        -moz-border-radius-topleft: 20px;
+        -moz-border-radius-bottomleft: 20px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        overflow: hidden;
+    }
+
+    .animate > span:after {
+        display: none;
+    }
+
+    @-webkit-keyframes move {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: 50px 50px;
+        }
+    }
+
+    .orange > span {
+        background-color: #f1a165;
+        background-image: -moz-linear-gradient(top, #f1a165, #f36d0a);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f1a165), color-stop(1, #f36d0a));
+        background-image: -webkit-linear-gradient(#f1a165, #f36d0a);
+    }
+
+    .red > span {
+        background-color: #f0a3a3;
+        background-image: -moz-linear-gradient(top, #f0a3a3, #f42323);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f0a3a3), color-stop(1, #f42323));
+        background-image: -webkit-linear-gradient(#f0a3a3, #f42323);
+    }
+
+    .nostripes > span > span, .nostripes > span:after {
+        -webkit-animation: none;
+        background-image: none;
+    }
+
+    .loadnowbutton {
+        -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+        -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+        box-shadow: inset 0px 1px 0px 0px #ffffff;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+        background: -moz-linear-gradient(center top, #f9f9f9 5%, #e9e9e9 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9');
+        background-color: #f9f9f9;
+        -webkit-border-top-left-radius: 0px;
+        -moz-border-radius-topleft: 0px;
+        border-top-left-radius: 0px;
+        -webkit-border-top-right-radius: 0px;
+        -moz-border-radius-topright: 0px;
+        border-top-right-radius: 0px;
+        -webkit-border-bottom-right-radius: 0px;
+        -moz-border-radius-bottomright: 0px;
+        border-bottom-right-radius: 0px;
+        -webkit-border-bottom-left-radius: 0px;
+        -moz-border-radius-bottomleft: 0px;
+        border-bottom-left-radius: 0px;
+        text-indent: 0;
+        border: 1px solid #dcdcdc;
+        display: inline-block;
+        color: #666666;
+        font-family: Verdana;
+        font-size: 15px;
+        font-weight: bold;
+        font-style: normal;
+        height: 40px;
+        line-height: 40px;
+        width: 169px;
+        text-decoration: none;
+        text-align: center;
+        text-shadow: 1px 1px 0px #ffffff;
+    }
+
+    .loadnowbutton:hover {
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
+        background: -moz-linear-gradient(center top, #e9e9e9 5%, #f9f9f9 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9');
+        background-color: #e9e9e9;
+    }
+
+    .loadnowbutton:active {
+        position: relative;
+        top: 1px;
+    }
+</style>
+</head>
+
+<body onload="initialize()">
+
+<div id="page-wrap">
+    <img class="alfresco-logo" alt="Alfresco" src="https://www.alfresco.com/sites/www.alfresco.com/themes/alfrescodotcom/img/logo.png">
+
+    <h1>Alfresco down for maintenance</h1>
+
+    <p class="specialMessage"></p>
+
+    <p class="percent"></p>
+
+    <div class="meter">
+        <span style="width: 0%"></span>
+    </div>
+
+    <p class="progressmessage"></p>
+
+    <p><a href="/share/" onclick="window.location.reload(true);" class="loadnowbutton">Load Alfresco Now</a></p>
+
+    <p>While you are waiting, why not play a game of <a class="plainlink" href="http://www.kevs3d.co.uk/dev/asteroids/"
+                                                        target="_blank">Asteroids</a>. But only if boss is not looking!
+    </p>
+
+
+</div>
+
+</body>
+
+</html>

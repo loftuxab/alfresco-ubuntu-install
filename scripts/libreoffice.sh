@@ -1,17 +1,21 @@
 #!/bin/sh
 #
 # Script for starting/stopping LibreOffice without restarting Alfresco
-# 
+#
 # Copyright 2013 Loftux AB, Peter Löfgren
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
+
+    # JDK locations
+    export JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+    export JRE_HOME=$JAVA_HOME/jre
 
     # User under which tomcat will run
     USER=alfresco
     ALF_HOME=/opt/alfresco
     cd "$ALF_HOME"
     # export LC_ALL else openoffice may use en settings on dates etc
-    export LC_ALL=sv_SE.utf8
+    export LC_ALL=@@LOCALESUPPORT@@
     export CATALINA_PID="${ALF_HOME}/tomcat.pid"
 
     RETVAL=0
@@ -28,7 +32,7 @@
             export JAVA_HOME=$JAVA_HOME
             if [ $SHUTDOWN_PORT -ne 0 ]; then
 	        #/bin/su -s /bin/bash $USER -c "/usr/lib/openoffice/program/soffice.bin \"-accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager\" \"-env:UserInstallation=file:///opt/alfresco/alf_data/oouser\" -nologo -headless -nofirststartwizard -norestore &" >/dev/null
-	        /bin/su -s /bin/bash $USER -c "/opt/libreoffice4.1/program/soffice.bin \"--accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager\" \"-env:UserInstallation=file:///opt/alfresco/alf_data/oouser\" --nologo --headless --nofirststartwizard --norestore --nodefault &" >/dev/null
+            /bin/su -s /bin/bash $USER -c "/opt/libreoffice5.0/program/soffice.bin \"--accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager\" \"-env:UserInstallation=file:///opt/alfresco/alf_data/oouser\" --nologo --headless --nofirststartwizard --norestore --nodefault &" >/dev/null
             echo "Alfresco Open Office starting"
 	        logger Alfresco Open Office service started
             fi
@@ -76,4 +80,4 @@
             exit 1
     esac
 
-    exit $RETVAL 
+    exit $RETVAL

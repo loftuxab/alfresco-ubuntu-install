@@ -20,6 +20,7 @@
      Documentation at /docs/config/server.html
  -->
 <Server port="8005" shutdown="SHUTDOWN">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
   <!-- Security listener. Documentation at /docs/config/listeners.html
   <Listener className="org.apache.catalina.security.SecurityListener" />
   -->
@@ -70,13 +71,15 @@
     <Connector port="8080" 
                protocol="HTTP/1.1"
                URIEncoding="UTF-8"
-               connectionTimeout="20000" 
+               connectionTimeout="20000"
                redirectPort="8443"
                maxHttpHeaderSize="32768"
                compression="off"               
                compressableMimeType="text/html,text/xml,text/plain,application/json,text/javascript,application/x-javascript,text/css,text/csv,text/x-web-markdown,application/atom+xml,application/rss+xml,application/atomsvc+xml"
                noCompressionUserAgents=".*MSIE 6.*"
                compressionMinSize="256"
+               maxThreads="200"
+               acceptCount="100"
                />
     <!-- A "Connector" using the shared thread pool-->
     <!--
