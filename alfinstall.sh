@@ -33,17 +33,18 @@ export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old
 
 export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
 
-export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.c-EA/alfresco-5.1.c-EA.war
-export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.c-EA/share-5.1.c-EA.war
-export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.c-EA/alfresco-share-services-5.1.c-EA.amp
+export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.d-EA/alfresco-5.1.d-EA.war
+export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.d-EA/share-5.1.d-EA.war
+export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.d-EA/alfresco-share-services-5.1.d-EA.amp
 
 export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.2/alfresco-googledocs-repo-3.0.2.amp
 export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.2/alfresco-googledocs-share-3.0.2.amp
-export SPP=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-spp/5.1.c-EA/alfresco-spp-5.1.c-EA.amp
 
-export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.c-EA/alfresco-solr4-5.1.c-EA-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.c-EA/alfresco-solr4-5.1.c-EA.war
+export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.d-EA/alfresco-solr4-5.1.d-EA-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.d-EA/alfresco-solr4-5.1.d-EA.war
 
+export AOS_DOWNLOAD=http://dl.alfresco.com/release/community/201512-EA-build-00003/alfresco-sharepoint-imitation-distributionzip-1.0-SNAPSHOT.zip
+export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.d-EA/alfresco-server-root-5.1.d-EA.war
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
 
@@ -98,7 +99,7 @@ URLERROR=0
 
 for REMOTE in $TOMCAT_DOWNLOAD $JDBCPOSTGRESURL/$JDBCPOSTGRES $JDBCMYSQLURL/$JDBCMYSQL \
         $LIBREOFFICE $SWFTOOLS $ALFREPOWAR $ALFSHAREWAR $ALFSHARESERVICES $GOOGLEDOCSREPO \
-        $GOOGLEDOCSSHARE $SOLR4_WAR_DOWNLOAD $SOLR4_CONFIG_DOWNLOAD $SPP
+        $GOOGLEDOCSSHARE $SOLR4_WAR_DOWNLOAD $SOLR4_CONFIG_DOWNLOAD $AOS_DOWNLOAD $AOS_SERVER_ROOT
 
 do
         wget --spider $REMOTE --no-check-certificate >& /dev/null
@@ -536,18 +537,33 @@ if [ "$installgoogledocs" = "y" ]; then
     sudo mv alfresco-googledocs-share* $ALF_HOME/addons/share/
   fi
 fi
-if [ "$installwar" = "y" ]; then
-  read -e -p "Add Sharepoint plugin${ques} [y/n] " -i "n" installspp
-  if [ "$installspp" = "y" ]; then
-    echo "Downloading Sharepoint addon..."
-    curl -# -O $SPP
-    sudo mv alfresco-spp*.amp $ALF_HOME/addons/alfresco/
-  fi
 fi
+
+
+echo
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "Install Alfresco Sharepoint integration."
+echo "This allows you to open and save Microsoft Office documents onlin"
+echored "This module is not Open Source (Alfresco proprietary)."
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+read -e -p "Install Alfresco Sharepoint integration${ques} [y/n] " -i "n" installssharepoint
+if [ "$installssharepoint" = "y" ]; then
+    # Make sure we have unzip available
+    sudo apt-get $APTVERBOSITY install unzip
+    echogreen "Downloading sharepoint bundle..."
+    mkdir -p $TMP_INSTALL/sharepoint
+    sudo curl -# -o $TMP_INSTALL/sharepoint/sharepoint.zip $AOS_DOWNLOAD
+    echogreen "Expanding file..."
+    cd $TMP_INSTALL/sharepoint
+    sudo unzip -q sharepoint.zip
+    sudo mv _vti_bin.war $ALF_HOME/tomcat/webapps/
+    sudo mv alfresco-sharepoint*.amp $ALF_HOME/addons/alfresco/
+    echogreen "Downloading ROOT.war"
+    sudo curl -# -o $ALF_HOME/tomcat/webapps/ROOT.war $AOS_DOWNLOAD
 fi
 
 # Install of war and addons complete, apply them to war file
-if [ "$installwar" = "y" ] || [ "$installsharewar" = "y" ]; then
+if [ "$installwar" = "y" ] || [ "$installsharewar" = "y" ] || [ "$installssharepoint" = "y" ]; then
     # Check if Java is installed before trying to apply
     if type -p java; then
         _java=java
