@@ -559,7 +559,7 @@ if [ "$installssharepoint" = "y" ]; then
     sudo mv _vti_bin.war $ALF_HOME/tomcat/webapps/
     sudo mv alfresco-sharepoint*.amp $ALF_HOME/addons/alfresco/
     echogreen "Downloading ROOT.war"
-    sudo curl -# -o $ALF_HOME/tomcat/webapps/ROOT.war $AOS_DOWNLOAD
+    sudo curl -# -o $ALF_HOME/tomcat/webapps/ROOT.war $AOS_SERVER_ROOT
 fi
 
 # Install of war and addons complete, apply them to war file
@@ -634,7 +634,7 @@ if [ "$installsolr" = "y" ]; then
   echo "<Context debug=\"0\" crossContext=\"true\">" >> $TMP_INSTALL/solr4.xml
   echo "  <Environment name=\"solr/home\" type=\"java.lang.String\" value=\"$ALF_HOME/solr4\" override=\"true\"/>" >> $TMP_INSTALL/solr4.xml
   echo "  <Environment name=\"solr/model/dir\" type=\"java.lang.String\" value=\"$ALF_HOME/solr4/alfrescoModels\" override=\"true\"/>" >> $TMP_INSTALL/solr4.xml
-  echo "  <Environment name=\"solr/content/dir\" type=\"java.lang.String\" value=\"$ALF_DATA_HOME/solr4\" override=\"true\"/>" >> $TMP_INSTALL/solr4.xml
+  echo "  <Environment name=\"solr/content/dir\" type=\"java.lang.String\" value=\"$ALF_DATA_HOME/solr4/content\" override=\"true\"/>" >> $TMP_INSTALL/solr4.xml
   echo "</Context>" >> $TMP_INSTALL/solr4.xml
   sudo mv $TMP_INSTALL/solr4.xml $CATALINA_HOME/conf/Catalina/localhost/solr4.xml
 
