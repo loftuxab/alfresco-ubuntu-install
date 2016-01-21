@@ -10,7 +10,7 @@
          <client-debug-autologging>false</client-debug-autologging>
       </flags>
    </config>
-   
+
    <config evaluator="string-compare" condition="WebFramework">
       <web-framework>
          <autowire>
@@ -27,7 +27,7 @@
          <origin>https?:\/\/@@ALFRESCO_SHARE_SERVER@@.*</origin>
       </properties>
    </config>
-   
+
    <config evaluator="string-compare" condition="Remote">
       <remote>
          <endpoint>
@@ -57,7 +57,7 @@
             <basic-auth>true</basic-auth>
             <identity>user</identity>
          </endpoint>
-         
+
          <endpoint>
             <id>activiti-admin</id>
             <name>Activiti Admin UI - user access</name>
@@ -65,7 +65,18 @@
             <connector-id>activiti-admin-connector</connector-id>
             <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/activiti-admin</endpoint-url>
             <identity>user</identity>
-         </endpoint>
+        </endpoint>
+
+        <endpoint>
+            <id>alfresco-api</id>
+            <parent-id>alfresco</parent-id>
+            <name>Alfresco Public API - user access</name>
+            <description>Access to Alfresco Repository Public API that require user authentication.
+                         This makes use of the authentication that is provided by parent 'alfresco' endpoint.</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/api</endpoint-url>
+            <identity>user</identity>
+        </endpoint>
       </remote>
    </config>
 </alfresco-config>
