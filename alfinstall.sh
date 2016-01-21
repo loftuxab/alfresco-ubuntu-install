@@ -297,9 +297,16 @@ sudo -s << EOF
   #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8D0DC64F
 EOF
   sudo apt-get $APTVERBOSITY update && sudo apt-get $APTVERBOSITY install nginx
+  sudo service nginx stop
   sudo mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
+  sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.sample
   sudo curl -# -o /etc/nginx/nginx.conf $BASE_DOWNLOAD/nginx/nginx.conf
+  sudo curl -# -o /etc/nginx/conf.d/alfresco.conf $BASE_DOWNLOAD/nginx/alfresco.conf
+  sudo curl -# -o /etc/nginx/conf.d/alfresco.conf.ssl $BASE_DOWNLOAD/nginx/alfresco.conf.ssl
+  sudo curl -# -o /etc/nginx/conf.d/basic-settings.conf $BASE_DOWNLOAD/nginx/basic-settings.conf
   sudo mkdir -p /var/cache/nginx/alfresco
+  # Make the ssl dir as this is what is used in sample config
+  sudo mkdir -p /etc/nginx/ssl
   sudo mkdir -p $ALF_HOME/www
   if [ ! -f "$ALF_HOME/www/maintenance.html" ]; then
     echo "Downloading maintenance html page..."
@@ -308,7 +315,7 @@ EOF
   sudo chown -R www-data:root /var/cache/nginx/alfresco
   sudo chown -R www-data:root $ALF_HOME/www
   ## Reload config file
-  sudo service nginx reload
+  sudo service nginx start
 
   echo
   echogreen "Finished installing nginx"
