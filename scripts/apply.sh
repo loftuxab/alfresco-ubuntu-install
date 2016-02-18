@@ -2,7 +2,7 @@
 # -------
 # Script for apply AMPs to installed WAR
 #
-# Copyright 2013 Loftux AB, Peter Löfgren
+# Copyright 2013-2016 Loftux AB, Peter Löfgren
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
 export JAVA_HOME="/usr/lib/jvm/java-8-oracle"

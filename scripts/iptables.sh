@@ -1,8 +1,8 @@
 #!/bin/bash
 # -------
 # Script to set up iptables for Alfresco use
-# 
-# Copyright 2013 Loftux AB, Peter Löfgren
+#
+# Copyright 2013-2016 Loftux AB, Peter Löfgren
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
 
@@ -38,7 +38,7 @@ export IPADRESS=192.168.0.10
 	    redirect 139 1139 tcp
 	    redirect 137 1137 udp
 	    redirect 138 1138 udp
-	    
+
 	    # Forward http
 	    #redirect 80 8080 tcp
     }
@@ -80,4 +80,4 @@ export IPADRESS=192.168.0.10
             exit 1
     esac
 
-    exit $RETVAL 
+    exit $RETVAL

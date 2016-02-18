@@ -3,10 +3,10 @@ Alfresco Ubuntu Install
 
 This install script and guide was created by Peter Löfgren, Loftux AB.  
 Please visit [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loftux.com") (English) [https://loftux.se](https://loftux.se/sv?ref=ubuntuinstall "loftux.se") (Swedish)  for more information.
-  
+
 [![Loftux AB](https://loftux.se/themes/loftux_theme/assets/images/loftux-logo/logo-loftux-prefixed-small.png?ref=ubuntuinstall)](https://loftux.se?ref=ubuntuinstall)
 
-Current version : **Alfresco Community 5.0d**
+Current version : **Alfresco Community 5.1.e**
 
 
 Alfresco script based install for Ubuntu servers.
@@ -24,7 +24,7 @@ Installing
 To start the install, in Ubuntu terminal run;  
 
 ```
-curl -O https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/master/alfinstall.sh  
+curl -O https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/experimental/alfinstall.sh  
 chmod u+x alfinstall.sh
 ./alfinstall.sh
 ```
@@ -69,7 +69,9 @@ Nginx
 --------
 It is sometimes useful to have a front-end for your Tomcat Alfresco instance. Since Tomcat runs default on port 8080, you can use Nginx as proxy. It is also a lot easier to add ssl support. The default config includes sample configuration for this. Share resource files (anything loaded from /share/res/) is cached in nginx, so it doesn't need to be fetched from tomcat.  
 
-The script will use the latest version of the Ubuntu package from Nginx instead of default Ubuntu nginx packages. This allows for spdy support, sample config for this is included (you need an ssl certificate for this).
+The script will use the latest version of the Ubuntu package from Nginx instead of default Ubuntu nginx packages. This allows for http/2 support.  
+
+The default config file is found in folder `/etc/nginx/conf.d/alfresco.conf`. If you want to use ssl, you can replace this file with the sample config in `alfresco.conf.ssl`. Common settings is found in file `basic-settings.conf`.
 
 **Caveat:** The upload progress bar in Share will show the upload as complete when the upload from client to nginx is complete, but the upload from nginx to Tomcat Share/Alfresco continues shortly. Usually this is barely noticeable, since server connections speeds are a lot faster than client server connections.
 
@@ -86,16 +88,13 @@ If you want to implement this support and already have run the alfinstall.sh scr
 
 Java JDK
 --------
-Install OpenJDK. You may want to use Oracle Java, but download and install of Oracle Java could not be scripted. If you choose to use Oracle Java, adjust paths setting in `/etc/init/alfresco.conf`.
+Download and install of Oracle Java 8.  
+If you choose to use any other Java JDK, adjust paths setting in `/etc/init/alfresco.conf`.
 
 LibreOffice
 -------------
 Downloads and install LibreOffice from libreoffice.org (technically from a mirror). Alfresco just use LibreOffice for transformations, and later versions have better (hopefully) conversion filters.
 In this step ImageMagick is also installed from Ubuntu standard packages, if you skip this step install ImageMagick separately. Some extra font packages like Microsoft true type fonts is also installed, since you likely will add documents to Alfresco that have used them, this will result in better transformations.  
-
-Swftools
----------
-Downloaded and compiled. Since it is compiled locally the script first installs tools for compiling using standard Ubuntu packages.
 
 ImageMagick  
 ---------  
@@ -104,7 +103,7 @@ If you get the error `no decode delegate for this image format` on start in the 
 
 Alfresco
 ---------
-Download and install of Alfresco itself. Or rather, the alfresco.war and share.war and adds them to tomcat/webapps folder. Current version is 5.0.b.
+Download and install of Alfresco itself. Or rather, the alfresco.war and share.war and adds them to tomcat/webapps folder.  
 You also have the option to install Google Docs and Sharepoint addons. Skip if you do not intend to use them, you can always add then later.
 You can completely skip this step if you intend to use Enterprise version or any other version. See also the special section about the addons directory.
 
@@ -170,5 +169,5 @@ This combination of packages/downloaded install has been found to work well. But
 
 License
 ===
-Copyright 2013-2015 Loftux AB, Peter Löfgren  
+Copyright 2013-2016 Loftux AB, Peter Löfgren  
 Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
