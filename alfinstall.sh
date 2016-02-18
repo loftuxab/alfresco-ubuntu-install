@@ -547,7 +547,7 @@ fi
 
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-echo "Install Alfresco Office Services (Sharepoint prptocol emulation)."
+echo "Install Alfresco Office Services (Sharepoint protocol emulation)."
 echo "This allows you to open and save Microsoft Office documents online."
 echored "This module is not Open Source (Alfresco proprietary)."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
