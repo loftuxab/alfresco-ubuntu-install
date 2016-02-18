@@ -23,28 +23,26 @@ export KEYSTOREBASE=https://svn.alfresco.com/repos/alfresco-open-mirror/alfresco
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=en_US.utf8
 
-export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.67/bin/apache-tomcat-7.0.67.tar.gz
+export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.68/bin/apache-tomcat-7.0.68.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.4-1205.jdbc41.jar
+export JDBCPOSTGRES=postgresql-9.4.1207.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.37.tar.gz
+export JDBCMYSQL=mysql-connector-java-5.1.38.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.1.0.2/deb/x86_64/LibreOffice_5.1.0.2_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.1.1.1/deb/x86_64/LibreOffice_5.1.1.1_Linux_x86-64_deb.tar.gz
 
-export SWFTOOLS=http://www.swftools.org/swftools-2013-04-09-1007.tar.gz
+export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.e/alfresco-5.1.e.war
+export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.e/share-5.1.e.war
+export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.e/alfresco-share-services-5.1.e.amp
 
-export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.d-EA/alfresco-5.1.d-EA.war
-export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.d-EA/share-5.1.d-EA.war
-export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.d-EA/alfresco-share-services-5.1.d-EA.amp
+export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
+export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
 
-export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.2/alfresco-googledocs-repo-3.0.2.amp
-export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.2/alfresco-googledocs-share-3.0.2.amp
+export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.e/alfresco-solr4-5.1.e-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.e/alfresco-solr4-5.1.e.war
 
-export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.d-EA/alfresco-solr4-5.1.d-EA-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.d-EA/alfresco-solr4-5.1.d-EA.war
-
-export AOS_DOWNLOAD=http://dl.alfresco.com/release/community/201512-EA-build-00003/alfresco-sharepoint-imitation-distributionzip-1.0-SNAPSHOT.zip
-export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.d-EA/alfresco-server-root-5.1.d-EA.war
+export AOS_DOWNLOAD=http://dl.alfresco.com/release/community/201602-build-00005/alfresco-aos-module-1.1-65.zip
+export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.e/alfresco-server-root-5.1.e.war
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
 
@@ -98,7 +96,7 @@ echo
 URLERROR=0
 
 for REMOTE in $TOMCAT_DOWNLOAD $JDBCPOSTGRESURL/$JDBCPOSTGRES $JDBCMYSQLURL/$JDBCMYSQL \
-        $LIBREOFFICE $SWFTOOLS $ALFREPOWAR $ALFSHAREWAR $ALFSHARESERVICES $GOOGLEDOCSREPO \
+        $LIBREOFFICE $ALFREPOWAR $ALFSHAREWAR $ALFSHARESERVICES $GOOGLEDOCSREPO \
         $GOOGLEDOCSSHARE $SOLR4_WAR_DOWNLOAD $SOLR4_CONFIG_DOWNLOAD $AOS_DOWNLOAD $AOS_SERVER_ROOT
 
 do
@@ -549,8 +547,8 @@ fi
 
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-echo "Install Alfresco Sharepoint integration."
-echo "This allows you to open and save Microsoft Office documents onlin"
+echo "Install Alfresco Office Services (Sharepoint prptocol emulation)."
+echo "This allows you to open and save Microsoft Office documents online."
 echored "This module is not Open Source (Alfresco proprietary)."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 read -e -p "Install Alfresco Sharepoint integration${ques} [y/n] " -i "n" installssharepoint
@@ -564,7 +562,7 @@ if [ "$installssharepoint" = "y" ]; then
     cd $TMP_INSTALL/sharepoint
     sudo unzip -q sharepoint.zip
     sudo mv _vti_bin.war $ALF_HOME/tomcat/webapps/
-    sudo mv alfresco-sharepoint*.amp $ALF_HOME/addons/alfresco/
+    sudo mv alfresco-aos-module*.amp $ALF_HOME/addons/alfresco/
     echogreen "Downloading ROOT.war"
     sudo curl -# -o $ALF_HOME/tomcat/webapps/ROOT.war $AOS_SERVER_ROOT
 fi
@@ -737,18 +735,26 @@ echo
 echogreen "- - - - - - - - - - - - - - - - -"
 echo "Scripted install complete"
 echored "Manual tasks remaining:"
+echo
 echo "1. Add database. Install scripts available in $ALF_HOME/scripts"
 echored "   It is however recommended that you use a separate database server."
+echo
 echo "2. Verify Tomcat memory and locale settings in /etc/init/alfresco.conf."
 echo "   Alfresco runs best with lots of memory. Add some more to \"lots\" and you will be fine!"
 echo "   Match the locale LC_ALL (or remove) setting to the one used in this script."
 echo "   Locale setting is needed for LibreOffice date handling support."
+echo
 echo "3. Update database and other settings in alfresco-global.properties"
 echo "   You will find this file in $CATALINA_HOME/shared/classes"
+echored "   Really, do this. There are some settings there that you need to verify."
+echo
 echo "4. Update properties for BART (if installed) in $ALF_HOME/scripts/bart/alfresco-bart.properties"
 echo "   DBNAME,DBUSER,DBPASS,DBHOST,REC_MYDBNAME,REC_MYUSER,REC_MYPASS,REC_MYHOST,DBTYPE "
+echo
 echo "5. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have more than 2 cores."
+echo
 echo "6. Start nginx if you have installed it: /etc/init.d/nginx start"
+echo
 echo "7. Start Alfresco/tomcat: sudo service alfresco start"
 echo
 
