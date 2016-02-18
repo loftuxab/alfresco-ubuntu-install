@@ -1,0 +1,19 @@
+server {
+        listen        80;
+        listen   [::]:80;
+        server_name example.com www.example.com;
+
+        location /.well-known/acme-challenge {
+                alias /usr/share/nginx/example.com/.well-known/acme-challenge;
+                location ~ /.well-known/acme-challenge/(.*) {
+                        add_header Content-Type application/jose+json;
+                }
+        }
+
+        location / {
+                server_name_in_redirect off;
+                rewrite ^ https://$host$request_uri? permanent;
+        }
+
+
+}
