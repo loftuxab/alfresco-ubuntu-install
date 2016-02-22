@@ -753,7 +753,7 @@ echo "   DBNAME,DBUSER,DBPASS,DBHOST,REC_MYDBNAME,REC_MYUSER,REC_MYPASS,REC_MYHO
 echo
 echo "5. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have more than 2 cores."
 echo
-echo "6. Start nginx if you have installed it: /etc/init.d/nginx start"
+echo "6. Start nginx if you have installed it: sudo service nginx start"
 echo
 echo "7. Start Alfresco/tomcat: sudo service alfresco start"
 echo

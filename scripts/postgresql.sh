@@ -52,5 +52,5 @@ echo "located in folder /etc/postgresql/<version>/main/"
 echo
 echo "host all all 127.0.0.1/32 password"
 echo
-echo "After you have updated, restart the postgres server /etc/init.d/postgresql restart"
+echo "After you have updated, restart the postgres server: sudo service postgresql restart"
 echo
