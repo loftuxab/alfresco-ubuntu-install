@@ -6,7 +6,7 @@
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
 
-export INSTALLDIR=/opt/letsencrypt
+export INSTALLDIR=/opt/letsencrypt/letsencrypt
 # Location where you put your letsencrypt config files
 export CONFIGDIR=/etc/letsencrypt/configs/
 # Location to webpath-root where letsencrypt places domain verification files.
@@ -56,17 +56,21 @@ init() {
     fi
 
     sudo mkdir -p $CONFIGDIR
-    sudo mkdir -p mkdir $BASECHALLENGELOCATION/$2
+    sudo mkdir -p $BASECHALLENGELOCATION
+    sud chown -r www-data:www-data $BASECHALLENGELOCATION
 
     if [ ! -f "$CONFIGDIR/letsencryptc.com.conf.sample" ]; then
       echo "Downloading sample domain config..."
-      sudo curl -# -o $CONFIGDIR/letsencryptc.com.conf.sample $BASE_DOWNLOAD/nginx/letsencrypt/letsencryptc.com.conf
+      sudo curl -# -o $CONFIGDIR/example.com.conf.sample $BASE_DOWNLOAD/nginx/letsencrypt/example.com.conf
     fi
 
 }
 
 create() {
     echoblue "Creating certificates for $1"
+    sudo mkdir -p $BASECHALLENGELOCATION/$1
+    # Make sure we have correct permissions
+    sudo chown -R www-data:www-data $BASECHALLENGELOCATION
     if [ -f "$CONFIGDIR/$1.conf" ]; then
         cd $INSTALLDIR
         sudo ./letsencrypt-auto --config "$CONFIGDIR/$1.conf" certonly
@@ -80,6 +84,9 @@ create() {
 }
 
 renew() {
+    # Make sure we have correct permissions
+    sudo chown -R www-data:www-data $BASECHALLENGELOCATION
+
     cd $INSTALLDIR
     for conf in $(ls $CONFIGDIR/*.conf); do
         sudo ./letsencrypt-auto --renew --config "$conf" certonly
