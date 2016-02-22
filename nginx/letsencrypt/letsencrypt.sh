@@ -84,7 +84,7 @@ renew() {
     for conf in $(ls $CONFIGDIR/*.conf); do
         sudo ./letsencrypt-auto --renew --config "$conf" certonly
     done
-    sudo service alfresco restart
+    sudo service nginx restart
 }
 
 case "$1" in
