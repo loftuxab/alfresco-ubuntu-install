@@ -362,6 +362,9 @@ if [ "$installibreoffice" = "y" ]; then
   tar xf LibreOffice*.tar.gz
   cd "$(find . -type d -name "LibreOffice*")"
   cd DEBS
+  rm *gnome-integration*.deb &&\
+  rm *kde-integration*.deb &&\
+  rm *debian-menus*.deb &&\
   sudo dpkg -i *.deb
   echo
   echoblue "Installing some support fonts for better transformations."
