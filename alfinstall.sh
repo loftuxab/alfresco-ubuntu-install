@@ -94,6 +94,27 @@ echo "Checking for the availability of the URLs inside script..."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo
 
+echo
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "Preparing for install. Updating the apt package index files..."
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+sudo apt-get $APTVERBOSITY update;
+echo
+
+if [ "`which curl`" = "" ]; then
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "You need to install curl. Curl is used for downloading components to install."
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+sudo apt-get $APTVERBOSITY install curl;
+fi
+
+if [ "`which wget`" = "" ]; then
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "You need to install wget. Wget is used for downloading components to install."
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+sudo apt-get $APTVERBOSITY install wget;
+fi
+
 URLERROR=0
 
 for REMOTE in $TOMCAT_DOWNLOAD $JDBCPOSTGRESURL/$JDBCPOSTGRES $JDBCMYSQLURL/$JDBCMYSQL \
