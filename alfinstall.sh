@@ -533,15 +533,17 @@ fi
 
 if [ "$installwar" = "y" ] || [ "$installsharewar" = "y" ]; then
 cd /tmp/alfrescoinstall
-if [ "$installwar" = "y" ]; then
-    echored "You must install Share Services if you intend to use Share Client."
-    read -e -p "Add Share Services plugin${ques} [y/n] " -i "n" installshareservices
-    if [ "$installshareservices" = "y" ]; then
-      echo "Downloading Share Services addon..."
-      curl -# -O $ALFSHARESERVICES
-      sudo mv alfresco-share-services*.amp $ALF_HOME/addons/alfresco/
-    fi
-fi
+
+#if [ "$installwar" = "y" ]; then
+#    echored "You must install Share Services if you intend to use Share Client."
+#    read -e -p "Add Share Services plugin${ques} [y/n] " -i "n" installshareservices
+#    if [ "$installshareservices" = "y" ]; then
+#      echo "Downloading Share Services addon..."
+#      curl -# -O $ALFSHARESERVICES
+#      sudo mv alfresco-share-services*.amp $ALF_HOME/addons/alfresco/
+#    fi
+#fi
+
 read -e -p "Add Google docs integration${ques} [y/n] " -i "n" installgoogledocs
 if [ "$installgoogledocs" = "y" ]; then
   echo "Downloading Google docs addon..."
