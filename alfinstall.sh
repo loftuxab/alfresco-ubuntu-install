@@ -34,6 +34,7 @@ export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old
 export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.e/alfresco-5.1.e.war
 export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.e/share-5.1.e.war
 export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.e/alfresco-share-services-5.1.e.amp
+export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-mmt/5.1.e/alfresco-mmt-5.1.e.jar
 
 export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
 export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
@@ -420,7 +421,7 @@ echo
     sudo chmod u+x $ALF_HOME/addons/apply.sh
   fi
   if [ ! -f "$ALF_HOME/addons/alfresco-mmt.jar" ]; then
-    sudo curl -# -o $ALF_HOME/addons/alfresco-mmt.jar $BASE_DOWNLOAD/scripts/alfresco-mmt.jar
+    sudo curl -# -o $ALF_HOME/addons/alfresco-mmt.jar $ALFMMTJAR
   fi
 
   sudo mkdir -p $ALF_HOME/scripts
