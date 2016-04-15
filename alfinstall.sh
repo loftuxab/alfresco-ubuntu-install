@@ -138,19 +138,6 @@ then
     exit
 fi
 
-echo
-echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-echo "Preparing for install. Updating the apt package index files..."
-echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-sudo apt-get $APTVERBOSITY update;
-echo
-
-if [ "`which curl`" = "" ]; then
-echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-echo "You need to install curl. Curl is used for downloading components to install."
-echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-sudo apt-get $APTVERBOSITY install curl;
-fi
 
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
