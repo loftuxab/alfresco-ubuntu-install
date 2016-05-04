@@ -6,7 +6,7 @@ Please visit [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loft
 
 [![Loftux AB](https://loftux.se/themes/loftux_theme/assets/images/loftux-logo/logo-loftux-prefixed-small.png?ref=ubuntuinstall)](https://loftux.se?ref=ubuntuinstall)
 
-Current version : **Alfresco Community 5.1.e**
+Current version : **Alfresco Community 5.1.f / 201604GA**
 
 
 Alfresco script based install for Ubuntu servers.

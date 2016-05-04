@@ -23,27 +23,27 @@ export KEYSTOREBASE=https://svn.alfresco.com/repos/alfresco-open-mirror/alfresco
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=en_US.utf8
 
-export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.68/bin/apache-tomcat-7.0.68.tar.gz
+export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.69/bin/apache-tomcat-7.0.69.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.4.1207.jar
+export JDBCPOSTGRES=postgresql-9.4.1208.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.38.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.1.2.2/deb/x86_64/LibreOffice_5.1.2.2_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.1.3.1/deb/x86_64/LibreOffice_5.1.3.1_Linux_x86-64_deb.tar.gz
 
-export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.e/alfresco-5.1.e.war
-export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.e/share-5.1.e.war
-export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.e/alfresco-share-services-5.1.e.amp
-export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-mmt/5.1.e/alfresco-mmt-5.1.e.jar
+export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.f/alfresco-5.1.f.war
+export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.f/share-5.1.f.war
+export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.f/alfresco-share-services-5.1.f.amp
+export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-mmt/5.1.f/alfresco-mmt-5.1.f.jar
 
 export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
 export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
 
-export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.e/alfresco-solr4-5.1.e-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.e/alfresco-solr4-5.1.e.war
+export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f.war
 
 export AOS_DOWNLOAD=http://dl.alfresco.com/release/community/201602-build-00005/alfresco-aos-module-1.1-65.zip
-export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.e/alfresco-server-root-5.1.e.war
+export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.f/alfresco-server-root-5.1.f.war
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
 
@@ -283,8 +283,7 @@ echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "Nginx can be used as frontend to Tomcat."
 echo "This installation will add config default proxying to Alfresco tomcat."
-echo "The config file also have sample config for ssl and proxying"
-echo "to Sharepoint plugin."
+echo "The config file also have sample config for ssl."
 echo "You can run Alfresco fine without installing nginx."
 echo "If you prefer to use Apache, install that manually. Or you can use iptables"
 echo "forwarding, sample script in $ALF_HOME/scripts/iptables.sh"
@@ -565,7 +564,7 @@ echo "Install Alfresco Office Services (Sharepoint protocol emulation)."
 echo "This allows you to open and save Microsoft Office documents online."
 echored "This module is not Open Source (Alfresco proprietary)."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install Alfresco Sharepoint integration${ques} [y/n] " -i "n" installssharepoint
+read -e -p "Install Alfresco Office Services integration${ques} [y/n] " -i "n" installssharepoint
 if [ "$installssharepoint" = "y" ]; then
     # Make sure we have unzip available
     sudo apt-get $APTVERBOSITY install unzip
