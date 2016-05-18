@@ -415,6 +415,35 @@ else
   echo
 fi
 
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+echo "Patching ImageMagick for CVE-2016–3714."
+echo "This is all automatic if present."
+echo "More info at https://imagetragick.com/"
+echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+
+IMAGEMAGICKPOLICYFILE="/etc/ImageMagick/policy.xml"
+
+if [ -f "$IMAGEMAGICKPOLICYFILE" ]; then
+    if grep -q "rights=\"none\" pattern=\"EPHEMERAL\"" "$IMAGEMAGICKPOLICYFILE"; then
+        echogreen "The policy file looks like it already contains the patch: $IMAGEMAGICKPOLICYFILE"
+    else 
+        sudo sed -i '/<policymap>/a \
+        <policy domain="coder" rights="none" pattern="EPHEMERAL" /> \
+        <policy domain="coder" rights="none" pattern="URL" /> \
+        <policy domain="coder" rights="none" pattern="HTTPS" /> \
+        <policy domain="coder" rights="none" pattern="MVG" /> \
+        <policy domain="coder" rights="none" pattern="MSL" /> \
+        <policy domain="coder" rights="none" pattern="TEXT" /> \
+        <policy domain="coder" rights="none" pattern="SHOW" /> \
+        <policy domain="coder" rights="none" pattern="WIN" /> \
+        <policy domain="coder" rights="none" pattern="PLT" />' $IMAGEMAGICKPOLICYFILE
+        
+        echogreen "Patched file: $IMAGEMAGICKPOLICYFILE" 
+    fi
+else
+    echored "Could not find file to patch: $IMAGEMAGICKPOLICYFILE"
+fi
+
 echo
 echoblue "Adding basic support files. Always installed if not present."
 echo
