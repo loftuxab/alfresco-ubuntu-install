@@ -57,7 +57,7 @@ init() {
 
     sudo mkdir -p $CONFIGDIR
     sudo mkdir -p $BASECHALLENGELOCATION
-    sud chown -r www-data:www-data $BASECHALLENGELOCATION
+    sudo chown -R www-data:www-data $BASECHALLENGELOCATION
 
     if [ ! -f "$CONFIGDIR/letsencryptc.com.conf.sample" ]; then
       echo "Downloading sample domain config..."
