@@ -13,6 +13,7 @@ export ALF_USER=alfresco
 export ALF_GROUP=$ALF_USER
 export APTVERBOSITY="-qq -y"
 export TMP_INSTALL=/tmp/alfrescoinstall
+export DEFAULTYESNO="y"
 
 # Branch name to pull from server. Use master for stable.
 BRANCH=master
@@ -143,7 +144,7 @@ echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "You need to add a system user that runs the tomcat Alfresco instance."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Add alfresco system user${ques} [y/n] " -i "n" addalfresco
+read -e -p "Add alfresco system user${ques} [y/n] " -i "$DEFAULTYESNO" addalfresco
 if [ "$addalfresco" = "y" ]; then
   sudo adduser --system --disabled-login --disabled-password --group $ALF_USER
   echo
@@ -174,7 +175,7 @@ echo "for alfresco use and tomcat may because of this stop with the error"
 echo "\"too many open files\". You should update this value if you have not done so."
 echo "Read more at http://wiki.alfresco.com/wiki/Too_many_open_files"
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Add limits.conf${ques} [y/n] " -i "n" updatelimits
+read -e -p "Add limits.conf${ques} [y/n] " -i "$DEFAULTYESNO" updatelimits
 if [ "$updatelimits" = "y" ]; then
   echo "alfresco  soft  nofile  8192" | sudo tee -a /etc/security/limits.conf
   echo "alfresco  hard  nofile  65536" | sudo tee -a /etc/security/limits.conf
@@ -197,7 +198,7 @@ echo "Tomcat is the application server that runs Alfresco."
 echo "You will also get the option to install jdbc lib for Postgresql or MySql/MariaDB."
 echo "Install the jdbc lib for the database you intend to use."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install Tomcat${ques} [y/n] " -i "n" installtomcat
+read -e -p "Install Tomcat${ques} [y/n] " -i "$DEFAULTYESNO" installtomcat
 
 if [ "$installtomcat" = "y" ]; then
   echogreen "Installing Tomcat"
@@ -246,7 +247,7 @@ if [ "$installtomcat" = "y" ]; then
   sed -i "s/@@ALFRESCO_REPO_SERVER@@/$REPO_HOSTNAME/g" $ALFRESCO_GLOBAL_PROPERTIES
   sudo mv $ALFRESCO_GLOBAL_PROPERTIES $CATALINA_HOME/shared/classes/
 
-  read -e -p "Install Share config file (recommended)${ques} [y/n] " -i "n" installshareconfig
+  read -e -p "Install Share config file (recommended)${ques} [y/n] " -i "$DEFAULTYESNO" installshareconfig
   if [ "$installshareconfig" = "y" ]; then
     SHARE_CONFIG_CUSTOM=/tmp/alfrescoinstall/share-config-custom.xml
     sudo curl -# -o $SHARE_CONFIG_CUSTOM $BASE_DOWNLOAD/tomcat/share-config-custom.xml
@@ -256,13 +257,13 @@ if [ "$installtomcat" = "y" ]; then
   fi
 
   echo
-  read -e -p "Install Postgres JDBC Connector${ques} [y/n] " -i "n" installpg
+  read -e -p "Install Postgres JDBC Connector${ques} [y/n] " -i "$DEFAULTYESNO" installpg
   if [ "$installpg" = "y" ]; then
 	curl -# -O $JDBCPOSTGRESURL/$JDBCPOSTGRES
 	sudo mv $JDBCPOSTGRES $CATALINA_HOME/lib
   fi
   echo
-  read -e -p "Install Mysql JDBC Connector${ques} [y/n] " -i "n" installmy
+  read -e -p "Install Mysql JDBC Connector${ques} [y/n] " -i "$DEFAULTYESNO" installmy
   if [ "$installmy" = "y" ]; then
     cd /tmp/alfrescoinstall
 	curl -# -L -O $JDBCMYSQLURL/$JDBCMYSQL
@@ -288,7 +289,7 @@ echo "You can run Alfresco fine without installing nginx."
 echo "If you prefer to use Apache, install that manually. Or you can use iptables"
 echo "forwarding, sample script in $ALF_HOME/scripts/iptables.sh"
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install nginx${ques} [y/n] " -i "n" installnginx
+read -e -p "Install nginx${ques} [y/n] " -i "$DEFAULTYESNO" installnginx
 if [ "$installnginx" = "y" ]; then
   echoblue "Installing nginx. Fetching packages..."
   echo
@@ -336,7 +337,7 @@ echo "Install Java JDK."
 echo "This will install Oracle Java 8 version of Java. If you prefer OpenJDK"
 echo "you need to download and install that manually."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install Oracle Java 8${ques} [y/n] " -i "n" installjdk
+read -e -p "Install Oracle Java 8${ques} [y/n] " -i "$DEFAULTYESNO" installjdk
 if [ "$installjdk" = "y" ]; then
   echoblue "Installing Oracle Java 8. Fetching packages..."
   sudo apt-get $APTVERBOSITY install python-software-properties software-properties-common
@@ -362,7 +363,7 @@ echo "Newer version of Libreoffice has better document filters, and produce bett
 echo "transformations. If you prefer to use Ubuntu standard packages you can skip"
 echo "this install."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install LibreOffice${ques} [y/n] " -i "n" installibreoffice
+read -e -p "Install LibreOffice${ques} [y/n] " -i "$DEFAULTYESNO" installibreoffice
 if [ "$installibreoffice" = "y" ]; then
 
   cd /tmp/alfrescoinstall
@@ -396,7 +397,7 @@ echo "This will ImageMagick from Ubuntu packages."
 echo "It is recommended that you install ImageMagick."
 echo "If you prefer some other way of installing ImageMagick, skip this step."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install ImageMagick${ques} [y/n] " -i "n" installimagemagick
+read -e -p "Install ImageMagick${ques} [y/n] " -i "$DEFAULTYESNO" installimagemagick
 if [ "$installimagemagick" = "y" ]; then
 
   echoblue "Installing ImageMagick. Fetching packages..."
@@ -530,7 +531,7 @@ echo
 echo "This install place downloaded files in the $ALF_HOME/addons and then use the"
 echo "apply.sh script to add them to tomcat/webapps. Se this script for more info."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Add Alfresco Repository war file${ques} [y/n] " -i "n" installwar
+read -e -p "Add Alfresco Repository war file${ques} [y/n] " -i "$DEFAULTYESNO" installwar
 if [ "$installwar" = "y" ]; then
 
   echogreen "Downloading alfresco war file..."
@@ -544,7 +545,7 @@ else
   echo
 fi
 
-read -e -p "Add Share Client war file${ques} [y/n] " -i "n" installsharewar
+read -e -p "Add Share Client war file${ques} [y/n] " -i "$DEFAULTYESNO" installsharewar
 if [ "$installsharewar" = "y" ]; then
 
   echogreen "Downloading Share war file..."
@@ -564,7 +565,7 @@ cd /tmp/alfrescoinstall
 
 #if [ "$installwar" = "y" ]; then
 #    echored "You must install Share Services if you intend to use Share Client."
-#    read -e -p "Add Share Services plugin${ques} [y/n] " -i "n" installshareservices
+#    read -e -p "Add Share Services plugin${ques} [y/n] " -i "$DEFAULTYESNO" installshareservices
 #    if [ "$installshareservices" = "y" ]; then
 #      echo "Downloading Share Services addon..."
 #      curl -# -O $ALFSHARESERVICES
@@ -572,7 +573,7 @@ cd /tmp/alfrescoinstall
 #    fi
 #fi
 
-read -e -p "Add Google docs integration${ques} [y/n] " -i "n" installgoogledocs
+read -e -p "Add Google docs integration${ques} [y/n] " -i "$DEFAULTYESNO" installgoogledocs
 if [ "$installgoogledocs" = "y" ]; then
   echo "Downloading Google docs addon..."
   if [ "$installwar" = "y" ]; then
@@ -593,7 +594,7 @@ echo "Install Alfresco Office Services (Sharepoint protocol emulation)."
 echo "This allows you to open and save Microsoft Office documents online."
 echored "This module is not Open Source (Alfresco proprietary)."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install Alfresco Office Services integration${ques} [y/n] " -i "n" installssharepoint
+read -e -p "Install Alfresco Office Services integration${ques} [y/n] " -i "$DEFAULTYESNO" installssharepoint
 if [ "$installssharepoint" = "y" ]; then
     # Make sure we have unzip available
     sudo apt-get $APTVERBOSITY install unzip
@@ -631,7 +632,7 @@ echo "Install Solr4 indexing engine."
 echo "You can run Solr4 on a separate server, unless you plan to do that you should"
 echo "install the Solr4 indexing engine on the same server as your repository server."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install Solr4 indexing engine${ques} [y/n] " -i "n" installsolr
+read -e -p "Install Solr4 indexing engine${ques} [y/n] " -i "$DEFAULTYESNO" installsolr
 if [ "$installsolr" = "y" ]; then
 
   # Make sure we have unzip available
@@ -710,7 +711,7 @@ echo "tool based on Duplicity for Alfresco backups and restore from a local file
 echo "FTP, SCP or Amazon S3 of all its components: indexes, data base, content store "
 echo "and all deployment and configuration files."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -p "Install B.A.R.T${ques} [y/n] " -i "n" installbart
+read -e -p "Install B.A.R.T${ques} [y/n] " -i "$DEFAULTYESNO" installbart
 
 if [ "$installbart" = "y" ]; then
  echogreen "Installing B.A.R.T"
