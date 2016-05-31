@@ -37,11 +37,19 @@ export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_group
 export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.f/alfresco-share-services-5.1.f.amp
 export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-mmt/5.1.f/alfresco-mmt-5.1.f.jar
 
+export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f.war
+
+export LXALFREPOWAR=http://artifacts.loftux.net/nexus/service/local/repositories/releases/content/org/alfresco/alfresco/LX91/alfresco-LX91.war
+export LXALFSHAREWAR=http://artifacts.loftux.net/nexus/service/local/repositories/releases/content/org/alfresco/share/LX91/share-LX91.war
+export LXALFSHARESERVICES=http://artifacts.loftux.net/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-share-services/LX91/alfresco-share-services-LX91.amp
+
+export LXSOLR4_CONFIG_DOWNLOAD=http://artifacts.loftux.net/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-solr4/LX91/alfresco-solr4-LX91-config-ssl.zip
+export LXSOLR4_WAR_DOWNLOAD=http://artifacts.loftux.net/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-solr4/LX91/alfresco-solr4-LX91.war
+
 export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
 export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
 
-export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f.war
 
 export AOS_DOWNLOAD=http://dl.alfresco.com/release/community/201602-build-00005/alfresco-aos-module-1.1-65.zip
 export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.f/alfresco-server-root-5.1.f.war
@@ -88,6 +96,36 @@ echogreen "Please read the documentation at"
 echogreen "https://github.com/loftuxab/alfresco-ubuntu-install."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo
+
+echo
+echo "${warn}${bldblu} - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ${warn}"
+echogreen "Do you want to install LXCommunity ECM build of Alfresco Community"
+echogreen "from Loftux AB?"
+echogreen "You can use this in place of Alfresco Community from Alfresco Software"
+echogreen "and optionally later buy a support package."
+echogreen "If you later prefer to use Alfresco Community you can always switch back"
+echogreen "by manually replacing war files."
+echo
+echogreen "Please visit https://loftux.com/alfresco for more information."
+echogreen "You are welcome to contact us at info@loftux.se"
+echo "${warn}${bldblu} - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ${warn}"
+echo
+read -e -p "Use LXCommunity ECM when installing${ques} [y/n] " -i "$DEFAULTYESNO" uselxcommunity
+if [ "$uselxcommunity" = "y" ]; then
+
+  ALFREPOWAR=$LXALFREPOWAR
+  ALFSHAREWAR=$LXALFSHAREWAR
+  ALFSHARESERVICES=$LXALFSHARESERVICES
+  SOLR4_CONFIG_DOWNLOAD=$LXSOLR4_CONFIG_DOWNLOAD
+  SOLR4_WAR_DOWNLOAD=$LXSOLR4_WAR_DOWNLOAD
+
+  echo
+  echogreen "Thanks for choosing LXCommunity ECM"
+  echo
+else
+  echo "Installing Alfresco Community edition from Alfresco Software"
+  echo
+fi
 
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
@@ -138,7 +176,6 @@ then
     echo
     exit
 fi
-
 
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
@@ -777,6 +814,7 @@ fi
 echo
 echogreen "- - - - - - - - - - - - - - - - -"
 echo "Scripted install complete"
+echo
 echored "Manual tasks remaining:"
 echo
 echo "1. Add database. Install scripts available in $ALF_HOME/scripts"

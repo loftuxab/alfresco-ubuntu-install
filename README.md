@@ -6,7 +6,7 @@ Please visit [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loft
 
 [![Loftux AB](https://loftux.se/themes/loftux_theme/assets/images/loftux-logo/logo-loftux-prefixed-small.png?ref=ubuntuinstall)](https://loftux.se?ref=ubuntuinstall)
 
-Current version : **Alfresco Community 5.1.f / 201604GA**  
+Current version : **Alfresco Community 201604GA (5.1.f)** or **LXCommunity ECM LX91**  
 Ubuntu Version : **14.04** (16.04 not yet supported, see [issue 16](https://github.com/loftuxab/alfresco-ubuntu-install/issues/16).
 
 Alfresco script based install for Ubuntu servers.
@@ -41,6 +41,14 @@ There is also lots of documentation at http://docs.alfresco.com/4.2/index.jsp. T
 More on the components/installation steps.
 =======
 Once downloaded you can modify (if needed) the script to fit your purpose. Here is a brief explanation if each section.  
+
+LXCommunity ECM
+--------
+You will be asked to select if you want to install LXCommunity ECM or Alfresco Community.  
+
+LXCommunity ECM is a custom build of Alfresco with additional fixes and enhancements and for which you can optionally buy support. You can find more information on this offering at [https://loftux.com/alfresco](https://loftux.se/en/products-and-add-ons/alfresco?ref=ubuntuinstalloffer).
+You can switch between Alfresco Community or LXCommunity ECM as long as they are based on the same schema, see [version overview](https://loftux.se/en/products-and-add-ons/alfresco/alfresco-versions).
+
 
 Alfresco User
 --------
