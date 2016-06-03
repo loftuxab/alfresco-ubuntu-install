@@ -40,12 +40,12 @@ export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repositories
 export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f-config-ssl.zip
 export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f.war
 
-export LXALFREPOWAR=http://artifacts.loftux.net/nexus/service/local/repositories/releases/content/org/alfresco/alfresco/LX91/alfresco-LX91.war
-export LXALFSHAREWAR=http://artifacts.loftux.net/nexus/service/local/repositories/releases/content/org/alfresco/share/LX91/share-LX91.war
-export LXALFSHARESERVICES=http://artifacts.loftux.net/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-share-services/LX91/alfresco-share-services-LX91.amp
+export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco/LX91/alfresco-LX91.war
+export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX91/share-LX91.war
+export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX91/alfresco-share-services-LX91.amp
 
-export LXSOLR4_CONFIG_DOWNLOAD=http://artifacts.loftux.net/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-solr4/LX91/alfresco-solr4-LX91-config-ssl.zip
-export LXSOLR4_WAR_DOWNLOAD=http://artifacts.loftux.net/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-solr4/LX91/alfresco-solr4-LX91.war
+export LXSOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX91/alfresco-solr4-LX91-config-ssl.zip
+export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX91/alfresco-solr4-LX91.war
 
 export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
 export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
