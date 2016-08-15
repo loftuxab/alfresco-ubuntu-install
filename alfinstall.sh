@@ -30,7 +30,7 @@ export JDBCPOSTGRES=postgresql-9.4.1208.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.38.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.1.3.1/deb/x86_64/LibreOffice_5.1.3.1_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.2.0.4/deb/x86_64/LibreOffice_5.2.0.4_Linux_x86-64_deb.tar.gz
 
 export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.f/alfresco-5.1.f.war
 export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.f/share-5.1.f.war
