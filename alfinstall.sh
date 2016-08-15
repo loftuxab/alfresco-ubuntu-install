@@ -26,9 +26,9 @@ export LOCALESUPPORT=en_US.utf8
 
 export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.36/bin/apache-tomcat-8.0.36.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.4.1208.jar
+export JDBCPOSTGRES=postgresql-9.4.1209.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.38.tar.gz
+export JDBCMYSQL=mysql-connector-java-5.1.39.tar.gz
 
 export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.2.0.4/deb/x86_64/LibreOffice_5.2.0.4_Linux_x86-64_deb.tar.gz
 
@@ -415,7 +415,7 @@ if [ "$installibreoffice" = "y" ]; then
   echo
   echoblue "Installing some support fonts for better transformations."
   # libxinerama1 libglu1-mesa needed to get LibreOffice 4.4 to work. Add the libraries that Alfresco mention in documentatinas required.
-  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid libxinerama1 libglu1-mesa libsm6 libxt6 libxrender1 libfontconfig1 libcups2
+  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid fontconfig libcups2 libfontconfig1 libglu1-mesa libice6 libsm6 libxinerama1 libxrender1 libxt6
   echo
   echogreen "Finished installing LibreOffice"
   echo
