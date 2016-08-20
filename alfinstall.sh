@@ -248,8 +248,11 @@ if [ "$installtomcat" = "y" ]; then
   sudo mv "$(find . -type d -name "apache-tomcat*")" $CATALINA_HOME
   # Remove apps not needed
   sudo rm -rf $CATALINA_HOME/webapps/*
+  # Create Tomcat conf folder
+  sudo mkdir -p $CATALINA_HOME/conf/Catalina/localhost
   # Get Alfresco config
   echo "Downloading tomcat configuration files..."
+  
   sudo curl -# -o $CATALINA_HOME/conf/server.xml $BASE_DOWNLOAD/tomcat/server.xml
   sudo curl -# -o $CATALINA_HOME/conf/catalina.properties $BASE_DOWNLOAD/tomcat/catalina.properties
   sudo curl -# -o $CATALINA_HOME/conf/tomcat-users.xml $BASE_DOWNLOAD/tomcat/tomcat-users.xml
@@ -701,7 +704,6 @@ if [ "$installsolr" = "y" ]; then
   echogreen "Configuring..."
 
   # Make sure dir exist
-  sudo mkdir -p $CATALINA_HOME/conf/Catalina/localhost
   sudo mkdir -p $ALF_DATA_HOME/solr4
   mkdir -p $TMP_INSTALL
 
