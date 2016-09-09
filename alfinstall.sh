@@ -248,8 +248,11 @@ if [ "$installtomcat" = "y" ]; then
   sudo mv "$(find . -type d -name "apache-tomcat*")" $CATALINA_HOME
   # Remove apps not needed
   sudo rm -rf $CATALINA_HOME/webapps/*
+  # Create Tomcat conf folder
+  sudo mkdir -p $CATALINA_HOME/conf/Catalina/localhost
   # Get Alfresco config
   echo "Downloading tomcat configuration files..."
+  
   sudo curl -# -o $CATALINA_HOME/conf/server.xml $BASE_DOWNLOAD/tomcat/server.xml
   sudo curl -# -o $CATALINA_HOME/conf/catalina.properties $BASE_DOWNLOAD/tomcat/catalina.properties
   sudo curl -# -o $CATALINA_HOME/conf/tomcat-users.xml $BASE_DOWNLOAD/tomcat/tomcat-users.xml
@@ -261,6 +264,9 @@ if [ "$installtomcat" = "y" ]; then
   sudo mkdir -p $CATALINA_HOME/shared/lib
   # Add endorsed dir
   sudo mkdir -p $CATALINA_HOME/endorsed
+  # Add default alfresco and share modules classloader config files
+  sudo curl -# -o $CATALINA_HOME/conf/Catalina/localhost/alfresco.xml $BASE_DOWNLOAD/tomcat/alfresco.xml
+  sudo curl -# -o $CATALINA_HOME/conf/Catalina/localhost/share.xml $BASE_DOWNLOAD/tomcat/share.xml
   echo
   echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
   echo "You need to add the dns name, port and protocol for your server(s)."
@@ -498,6 +504,10 @@ echo
     sudo curl -# -o $ALF_HOME/addons/alfresco-mmt.jar $ALFMMTJAR
   fi
 
+  # Add the jar modules dir
+  sudo mkdir -p $ALF_HOME/modules/platform
+  sudo mkdir -p $ALF_HOME/modules/share
+
   sudo mkdir -p $ALF_HOME/scripts
   if [ ! -f "$ALF_HOME/scripts/mariadb.sh" ]; then
     echo "Downloading mariadb.sh install and setup script..."
@@ -694,7 +704,6 @@ if [ "$installsolr" = "y" ]; then
   echogreen "Configuring..."
 
   # Make sure dir exist
-  sudo mkdir -p $CATALINA_HOME/conf/Catalina/localhost
   sudo mkdir -p $ALF_DATA_HOME/solr4
   mkdir -p $TMP_INSTALL
 
