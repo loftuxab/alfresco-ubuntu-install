@@ -6,7 +6,7 @@
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
 
-export INSTALLDIR=/opt/letsencrypt/letsencrypt
+export INSTALLDIR=/opt/letsencrypt/certbot
 # Location where you put your letsencrypt config files
 export CONFIGDIR=/etc/letsencrypt/configs/
 # Location to webpath-root where letsencrypt places domain verification files.
@@ -43,16 +43,13 @@ echogreen () {
 }
 
 init() {
-    if [ "`which git`" = "" ]; then
-    echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-    echo "You need to install git. Git is used to install (clone) letsencrypt."
-    echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-    sudo apt-get $APTVERBOSITY install git;
-    fi
-
 
     if [ ! -d "$INSTALLDIR" ]; then
-        sudo git clone https://github.com/letsencrypt/letsencrypt.git $INSTALLDIR
+        sudo mkdir -p $INSTALLDIR
+        cd $INSTALLDIR
+        sudo curl -# -O https://dl.eff.org/certbot-auto
+        sudo chmod a+x certbot-auto
+        sudo ./certbot-auto
     fi
 
     sudo mkdir -p $CONFIGDIR
@@ -73,9 +70,9 @@ create() {
     sudo chown -R www-data:www-data $BASECHALLENGELOCATION
     if [ -f "$CONFIGDIR/$1.conf" ]; then
         cd $INSTALLDIR
-        sudo ./letsencrypt-auto --config "$CONFIGDIR/$1.conf" certonly
+        sudo ./certbot-auto --config "$CONFIGDIR/$1.conf" certonly
     else
-        echored "You must supply the config file to use without .conf ending."
+        echored "You must supply the config file to use without .sample ending."
         echored "Keept the config file the same as domain name."
     fi
 
@@ -88,9 +85,7 @@ renew() {
     sudo chown -R www-data:www-data $BASECHALLENGELOCATION
 
     cd $INSTALLDIR
-    for conf in $(ls $CONFIGDIR/*.conf); do
-        sudo ./letsencrypt-auto --renew --config "$conf" certonly
-    done
+    sudo ./certbot-auto renew
     sudo service nginx restart
 }
 
