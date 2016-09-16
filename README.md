@@ -6,7 +6,7 @@ Please visit [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loft
 
 [![Loftux AB](https://loftux.se/themes/loftux_theme/assets/images/loftux-logo/logo-loftux-prefixed-small.png?ref=ubuntuinstall)](https://loftux.se?ref=ubuntuinstall)
 
-Current version : **Alfresco Community 201604GA (5.1.f)** or **LXCommunity ECM LX91**  
+Current version : **Alfresco Community 201605GA (5.1.g)** or **LXCommunity ECM LX91**  
 Ubuntu Version : **14.04** (16.04 not yet supported, see [issue 16](https://github.com/loftuxab/alfresco-ubuntu-install/issues/16).
 
 Alfresco script based install for Ubuntu servers.
