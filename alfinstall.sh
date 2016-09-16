@@ -32,13 +32,13 @@ export JDBCMYSQL=mysql-connector-java-5.1.38.tar.gz
 
 export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.1.3.1/deb/x86_64/LibreOffice_5.1.3.1_Linux_x86-64_deb.tar.gz
 
-export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.f/alfresco-5.1.f.war
-export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.f/share-5.1.f.war
-export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.f/alfresco-share-services-5.1.f.amp
-export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-mmt/5.1.f/alfresco-mmt-5.1.f.jar
+export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.g/alfresco-5.1.g.war
+export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.g/share-5.1.g.war
+export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.g/alfresco-share-services-5.1.g.amp
+export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-mmt/5.1.g/alfresco-mmt-5.1.g.jar
 
-export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f.war
+export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.g/alfresco-solr4-5.1.g-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.g/alfresco-solr4-5.1.g.war
 
 export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco/LX91/alfresco-LX91.war
 export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX91/share-LX91.war
@@ -52,7 +52,7 @@ export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/reposi
 
 
 export AOS_DOWNLOAD=http://dl.alfresco.com/release/community/201602-build-00005/alfresco-aos-module-1.1-65.zip
-export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.f/alfresco-server-root-5.1.f.war
+export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.g/alfresco-server-root-5.1.g.war
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
 
