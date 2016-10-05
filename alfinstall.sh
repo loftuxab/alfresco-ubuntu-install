@@ -140,6 +140,28 @@ echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 sudo apt-get $APTVERBOSITY update;
 echo
 
+if [ "`which systemctl`" = "" ]; then
+  export ISON1604=n
+  echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+  echo "You are installing for version 14.04 (using upstart for services)."
+  echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+  read -e -p "Is this correct [y/n] " -i "$DEFAULTYESNO" useupstart
+  if [ "$useupstart" = "n" ]; then
+    export ISON1604=y
+  fi
+else 
+  export ISON1604=y
+  echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+  echo "You are installing for version 16.04 or later (using systemd for services)."
+  echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+  read -e -p "Is this correct [y/n] " -i "$DEFAULTYESNO" useupstart
+  if [ "$useupstart" = "n" ]; then
+    export ISON1604=n
+  fi
+fi
+
+echo "Installing on 16.04 $ISON1604"
+
 if [ "`which curl`" = "" ]; then
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "You need to install curl. Curl is used for downloading components to install."
@@ -256,8 +278,19 @@ if [ "$installtomcat" = "y" ]; then
   sudo curl -# -o $CATALINA_HOME/conf/server.xml $BASE_DOWNLOAD/tomcat/server.xml
   sudo curl -# -o $CATALINA_HOME/conf/catalina.properties $BASE_DOWNLOAD/tomcat/catalina.properties
   sudo curl -# -o $CATALINA_HOME/conf/tomcat-users.xml $BASE_DOWNLOAD/tomcat/tomcat-users.xml
-  sudo curl -# -o /etc/init/alfresco.conf $BASE_DOWNLOAD/tomcat/alfresco.conf
-  sudo sed -i "s/@@LOCALESUPPORT@@/$LOCALESUPPORT/g" /etc/init/alfresco.conf
+  if [ "$ISON1604" = "y" ]; then
+    sudo curl -# -o /etc/systemd/system/alfresco.service $BASE_DOWNLOAD/tomcat/alfresco.service
+    sudo curl -# -o $ALF_HOME/alfresco-service.sh $BASE_DOWNLOAD/scripts/alfresco-service.sh
+    sudo chmod u+x $ALF_HOME/alfresco-service.sh
+    sudo sed -i "s/@@LOCALESUPPORT@@/$LOCALESUPPORT/g" /etc/systemd/system/alfresco.service
+    # Enable the service
+    sudo systemctl enable alfresco.service
+    sudo systemctl daemon-reload
+  else
+    sudo curl -# -o /etc/init/alfresco.conf $BASE_DOWNLOAD/tomcat/alfresco.conf
+    sudo sed -i "s/@@LOCALESUPPORT@@/$LOCALESUPPORT/g" /etc/init/alfresco.conf
+  fi
+
   # Create /shared
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/extension
   sudo mkdir -p $CATALINA_HOME/shared/classes/alfresco/web-extension
@@ -421,7 +454,13 @@ if [ "$installibreoffice" = "y" ]; then
   echo
   echoblue "Installing some support fonts for better transformations."
   # libxinerama1 libglu1-mesa needed to get LibreOffice 4.4 to work. Add the libraries that Alfresco mention in documentatinas required.
-  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid fontconfig libcups2 libfontconfig1 libglu1-mesa libice6 libsm6 libxinerama1 libxrender1 libxt6
+
+  ###1604 fonts-droid not available, use fonts-noto instead
+  if [ "$ISON1604" = "y" ]; then
+    sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-noto fontconfig libcups2 libfontconfig1 libglu1-mesa libice6 libsm6 libxinerama1 libxrender1 libxt6
+  else
+    sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid fontconfig libcups2 libfontconfig1 libglu1-mesa libice6 libsm6 libxinerama1 libxrender1 libxt6
+  fi
   echo
   echogreen "Finished installing LibreOffice"
   echo
@@ -465,27 +504,30 @@ echo "This is all automatic if present."
 echo "More info at https://imagetragick.com/"
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 
-IMAGEMAGICKPOLICYFILE="/etc/ImageMagick/policy.xml"
+###16.04 already Patched
+if [ "$ISON1604" = "n" ]; then
+  IMAGEMAGICKPOLICYFILE="/etc/ImageMagick/policy.xml"
 
-if [ -f "$IMAGEMAGICKPOLICYFILE" ]; then
-    if grep -q "rights=\"none\" pattern=\"EPHEMERAL\"" "$IMAGEMAGICKPOLICYFILE"; then
-        echogreen "The policy file looks like it already contains the patch: $IMAGEMAGICKPOLICYFILE"
-    else 
-        sudo sed -i '/<policymap>/a \
-        <policy domain="coder" rights="none" pattern="EPHEMERAL" /> \
-        <policy domain="coder" rights="none" pattern="URL" /> \
-        <policy domain="coder" rights="none" pattern="HTTPS" /> \
-        <policy domain="coder" rights="none" pattern="MVG" /> \
-        <policy domain="coder" rights="none" pattern="MSL" /> \
-        <policy domain="coder" rights="none" pattern="TEXT" /> \
-        <policy domain="coder" rights="none" pattern="SHOW" /> \
-        <policy domain="coder" rights="none" pattern="WIN" /> \
-        <policy domain="coder" rights="none" pattern="PLT" />' $IMAGEMAGICKPOLICYFILE
-        
-        echogreen "Patched file: $IMAGEMAGICKPOLICYFILE" 
-    fi
-else
-    echored "Could not find file to patch: $IMAGEMAGICKPOLICYFILE"
+  if [ -f "$IMAGEMAGICKPOLICYFILE" ]; then
+      if grep -q "rights=\"none\" pattern=\"EPHEMERAL\"" "$IMAGEMAGICKPOLICYFILE"; then
+          echogreen "The policy file looks like it already contains the patch: $IMAGEMAGICKPOLICYFILE"
+      else 
+          sudo sed -i '/<policymap>/a \
+          <policy domain="coder" rights="none" pattern="EPHEMERAL" /> \
+          <policy domain="coder" rights="none" pattern="URL" /> \
+          <policy domain="coder" rights="none" pattern="HTTPS" /> \
+          <policy domain="coder" rights="none" pattern="MVG" /> \
+          <policy domain="coder" rights="none" pattern="MSL" /> \
+          <policy domain="coder" rights="none" pattern="TEXT" /> \
+          <policy domain="coder" rights="none" pattern="SHOW" /> \
+          <policy domain="coder" rights="none" pattern="WIN" /> \
+          <policy domain="coder" rights="none" pattern="PLT" />' $IMAGEMAGICKPOLICYFILE
+          
+          echogreen "Patched file: $IMAGEMAGICKPOLICYFILE" 
+      fi
+  else
+      echored "Could not find file to patch: $IMAGEMAGICKPOLICYFILE"
+  fi
 fi
 
 echo

@@ -1,0 +1,17 @@
+# Alfresco Tomcat Systemd Startup script
+# Authors: loftux, housni, cuspycode
+
+[Unit]
+Description=Alfresco Community Tomcat service
+
+[Service]
+Type=forking
+ExecStart=/bin/bash /opt/alfresco/alfresco-service.sh servicestart
+ExecStop=/bin/bash /opt/alfresco/alfresco-service.sh servicestop
+Restart=always
+User=alfresco
+WorkingDirectory=/opt/alfresco/logs
+LimitNOFILE=8192:65536
+
+[Install]
+WantedBy=multi-user.target
