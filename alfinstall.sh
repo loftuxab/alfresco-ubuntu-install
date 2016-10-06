@@ -160,8 +160,6 @@ else
   fi
 fi
 
-echo "Installing on 16.04 $ISON1604"
-
 if [ "`which curl`" = "" ]; then
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "You need to install curl. Curl is used for downloading components to install."
@@ -263,8 +261,8 @@ if [ "$installtomcat" = "y" ]; then
   echogreen "Installing Tomcat"
   echo "Downloading tomcat..."
   curl -# -L -O $TOMCAT_DOWNLOAD
-  # Make sure install dir exists
-  sudo mkdir -p $ALF_HOME
+  # Make sure install dir exists, including logs dir
+  sudo mkdir -p $ALF_HOME/logs
   echo "Extracting..."
   tar xf "$(find . -type f -name "apache-tomcat*")"
   sudo mv "$(find . -type d -name "apache-tomcat*")" $CATALINA_HOME
@@ -282,7 +280,7 @@ if [ "$installtomcat" = "y" ]; then
     sudo curl -# -o /etc/systemd/system/alfresco.service $BASE_DOWNLOAD/tomcat/alfresco.service
     sudo curl -# -o $ALF_HOME/alfresco-service.sh $BASE_DOWNLOAD/scripts/alfresco-service.sh
     sudo chmod u+x $ALF_HOME/alfresco-service.sh
-    sudo sed -i "s/@@LOCALESUPPORT@@/$LOCALESUPPORT/g" /etc/systemd/system/alfresco.service
+    sudo sed -i "s/@@LOCALESUPPORT@@/$LOCALESUPPORT/g" $ALF_HOME/alfresco-service.sh 
     # Enable the service
     sudo systemctl enable alfresco.service
     sudo systemctl daemon-reload

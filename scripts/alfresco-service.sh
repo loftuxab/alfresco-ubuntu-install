@@ -6,7 +6,7 @@
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
 
-export env LC_ALL=@@LOCALESUPPORT@@
+export LC_ALL=@@LOCALESUPPORT@@
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 export ALF_HOME=/opt/alfresco
 export CATALINA_HOME=/opt/alfresco/tomcat
