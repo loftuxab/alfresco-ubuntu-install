@@ -296,9 +296,7 @@ if [ "$installtomcat" = "y" ]; then
   sudo mkdir -p $CATALINA_HOME/shared/lib
   # Add endorsed dir
   sudo mkdir -p $CATALINA_HOME/endorsed
-  # Add default alfresco and share modules classloader config files
-  sudo curl -# -o $CATALINA_HOME/conf/Catalina/localhost/alfresco.xml $BASE_DOWNLOAD/tomcat/alfresco.xml
-  sudo curl -# -o $CATALINA_HOME/conf/Catalina/localhost/share.xml $BASE_DOWNLOAD/tomcat/share.xml
+
   echo
   echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
   echo "You need to add the dns name, port and protocol for your server(s)."
@@ -626,6 +624,10 @@ if [ "$installwar" = "y" ]; then
   echogreen "Downloading alfresco war file..."
   sudo curl -# -o $ALF_HOME/addons/war/alfresco.war $ALFREPOWAR
   echo
+
+  # Add default alfresco and share modules classloader config files
+  sudo curl -# -o $CATALINA_HOME/conf/Catalina/localhost/alfresco.xml $BASE_DOWNLOAD/tomcat/alfresco.xml
+
   echogreen "Finished adding Alfresco Repository war file"
   echo
 else
@@ -639,6 +641,9 @@ if [ "$installsharewar" = "y" ]; then
 
   echogreen "Downloading Share war file..."
   sudo curl -# -o $ALF_HOME/addons/war/share.war $ALFSHAREWAR
+
+  # Add default alfresco and share modules classloader config files
+  sudo curl -# -o $CATALINA_HOME/conf/Catalina/localhost/share.xml $BASE_DOWNLOAD/tomcat/
 
   echo
   echogreen "Finished adding Share war file"
