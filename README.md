@@ -6,8 +6,8 @@ Please visit [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loft
 
 [![Loftux AB](https://loftux.se/themes/loftux_theme/assets/images/loftux-logo/logo-loftux-prefixed-small.png?ref=ubuntuinstall)](https://loftux.se?ref=ubuntuinstall)
 
-Current version : **Alfresco Community 201604GA (5.1.f)** or **LXCommunity ECM LX91**  
-Ubuntu Version : **14.04** (16.04 not yet supported, see [issue 16](https://github.com/loftuxab/alfresco-ubuntu-install/issues/16).
+Current version : **Alfresco Community 201605GA (5.1.g)** or **LXCommunity ECM LX91**  
+Ubuntu Version : **14.04**, **16.04**.
 
 Alfresco script based install for Ubuntu servers.
 ----------------------------
@@ -62,16 +62,21 @@ Ubuntu default for number of allowed open files in the file system is too low fo
 
 Tomcat
 --------
-Tomcat is the java application server used to actually run Alfresco. The script downloads the latest version of Tomcat 7, and then updates its configuration files to better support running Alfresco.  
-Ubuntu upstart is used to stop and start tomcat. You **must** have a look and verify settings in the alfresco upstart file  
-`/etc/init/alfresco.conf`  
+Tomcat is the java application server used to actually run Alfresco. The script downloads the latest version of Tomcat 8, and then updates its configuration files to better support running Alfresco.  
+Ubuntu upstart (14.04) or systemd (16.04) is used to stop and start tomcat. You **must** have a look and verify settings;    
+`/etc/init/alfresco.conf` (14.04)  
+`/opt/alfresco/alfresco-service.sh` (16.04)  
+
 Edit locale setting (LC_ALL) and the memory settings in this file to match your server.  
 About memory, it has default max set to 2G. That is good enough if you have about 5 users. So add more ram (and then some) to your server, update then Xmx setting in alfresco.conf. Your Alfresco instance will run much smoother.  
 
 You will be presented with the option to add either MySql or Postgresql jdbc libraries. You should probably add at least one of them.
 
-Once the install is complete (the entire script and the manual steps following that), run  
-`sudo service alfresco start` to start and `sudo service alfresco stop` to stop tomcat.
+Once the install is complete (the entire script and the manual steps following that), to start run  
+`sudo service alfresco start` (14.04)  
+`sudo /opt/alfresco/alfresco-service.sh start` (16.04) - this is a wrapper, using `sudo systemctl start alfresco.service` will have the same result.  
+
+To stop Tomcat for Alfresco, just swithc `start` to `stop` in the above command. Using `status` as a parameter will show status of the Alfresco Tomcat service
 
 Nginx
 --------
@@ -154,24 +159,36 @@ You can do the basic install using this script, but it is **highly recommended**
 
 Frequently Asked Questions (FAQ)  
 ===
+
 Can this script be used for any version of Alfresco?
 ---
+
 Yes, see the Addon section. But do know that it uses latest version of many components, and they may not be Alfresco officially supported stack.
+
 Can I modify the scripts?  
 ---
+
 Yes, you can either download the install script and modify as needed. Or you clone the entire thing at Github and create your own version. If you create/change anything that you think may be useful, please contribute back.
+
 Upgrading - Can I use this to upgrade an existing install?
 ---
+
 At this time, this is not the intended use. So short answer is no.  
 Longer answer is, you can probably grab pieces of the script to upgrade individual components. Or as is recommended when upgrading, test your upgrade on a separate server. So install a new server with fresh install, then grab a copy of your data and do a test upgrade. If this works, switch to this server. Did you make a backup of your data first?
+
 I want Alfresco and Share on separate server, can this script be used?
 ---
+
 Yes (and is also recommended for best performance), but all components are not needed on both servers. The Alfresco server probably doesn't need nginx, the Share server doesn't need LibreOffice, ImageMagick, Swftools and Solr. The 'Alfresco' install step will download both alfresco.war and share.war if run, just remove the one that doesn't apply from tomcat/webapps and addons/war directory.
+
 The script does not use version x of component z, can you fix this?
 ---
+
 Probably, but you can also. Just edit the script with the version you want to use, most of the specific links can be found in the beginning of the script.  
+
 Why does the script use the latest versions/not use Ubuntu packages?
 ---
+
 This combination of packages/downloaded install has been found to work well. But that may not hold true always. If you feel more confident to run a specific version of a component, or want to use a standard Ubuntu package, modify the script. Or skip that part in the install script, and just use this script as an install guide on what needs to be in place for a production server.  
 
 
