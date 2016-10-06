@@ -30,15 +30,15 @@ export JDBCPOSTGRES=postgresql-9.4.1209.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.39.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.2.0.4/deb/x86_64/LibreOffice_5.2.0.4_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.2.2.2/deb/x86_64/LibreOffice_5.2.2.2_Linux_x86-64_deb.tar.gz
 
-export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco/5.1.f/alfresco-5.1.f.war
-export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.f/share-5.1.f.war
-export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.f/alfresco-share-services-5.1.f.amp
-export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-mmt/5.1.f/alfresco-mmt-5.1.f.jar
+export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-platform/5.1.g/alfresco-platform-5.1.g.war
+export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.g/share-5.1.g.war
+export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.g/alfresco-share-services-5.1.g.amp
+export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-mmt/5.1.g/alfresco-mmt-5.1.g.jar
 
-export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.f/alfresco-solr4-5.1.f.war
+export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.g/alfresco-solr4-5.1.g-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.g/alfresco-solr4-5.1.g.war
 
 export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco/LX91/alfresco-LX91.war
 export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX91/share-LX91.war
@@ -50,9 +50,8 @@ export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4
 export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
 export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
 
-
-export AOS_DOWNLOAD=http://dl.alfresco.com/release/community/201602-build-00005/alfresco-aos-module-1.1-65.zip
-export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.f/alfresco-server-root-5.1.f.war
+export AOS_DOWNLOAD=http://dl.alfresco.com/release/community/201609-EA-build-00012/alfresco-aos-module-1.1.3.zip
+export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.g/alfresco-server-root-5.1.g.war
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
 
@@ -657,15 +656,15 @@ fi
 if [ "$installwar" = "y" ] || [ "$installsharewar" = "y" ]; then
 cd /tmp/alfrescoinstall
 
-#if [ "$installwar" = "y" ]; then
-#    echored "You must install Share Services if you intend to use Share Client."
-#    read -e -p "Add Share Services plugin${ques} [y/n] " -i "$DEFAULTYESNO" installshareservices
-#    if [ "$installshareservices" = "y" ]; then
-#      echo "Downloading Share Services addon..."
-#      curl -# -O $ALFSHARESERVICES
-#      sudo mv alfresco-share-services*.amp $ALF_HOME/addons/alfresco/
-#    fi
-#fi
+if [ "$installwar" = "y" ]; then
+    echored "You must install Share Services if you intend to use Share Client."
+    read -e -p "Add Share Services plugin${ques} [y/n] " -i "$DEFAULTYESNO" installshareservices
+    if [ "$installshareservices" = "y" ]; then
+      echo "Downloading Share Services addon..."
+      curl -# -O $ALFSHARESERVICES
+      sudo mv alfresco-share-services*.amp $ALF_HOME/addons/alfresco/
+    fi
+fi
 
 read -e -p "Add Google docs integration${ques} [y/n] " -i "$DEFAULTYESNO" installgoogledocs
 if [ "$installgoogledocs" = "y" ]; then
