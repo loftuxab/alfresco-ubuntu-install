@@ -642,7 +642,7 @@ if [ "$installsharewar" = "y" ]; then
   sudo curl -# -o $ALF_HOME/addons/war/share.war $ALFSHAREWAR
 
   # Add default alfresco and share modules classloader config files
-  sudo curl -# -o $CATALINA_HOME/conf/Catalina/localhost/share.xml $BASE_DOWNLOAD/tomcat/
+  sudo curl -# -o $CATALINA_HOME/conf/Catalina/localhost/share.xml $BASE_DOWNLOAD/tomcat/share.xml
 
   echo
   echogreen "Finished adding Share war file"
