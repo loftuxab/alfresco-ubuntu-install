@@ -78,6 +78,9 @@ create() {
 
     echoblue "You must now configure nginx manually to use"
     echoblue "the new certificates and restart."
+    echoblue "Add to your nginx conf file"
+    echoblue "ssl_certificate       /etc/letsencrypt/live/$1/fullchain.pem;"
+    echoblue "ssl_certificate_key   /etc/letsencrypt/live/$1/privkey.pem;"
 }
 
 renew() {
