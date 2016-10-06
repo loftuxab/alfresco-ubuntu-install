@@ -28,7 +28,7 @@
     <Manager pathname="" />
     -->
     
-    <!--Increase cache to support Alfresco properties files -->
+    <!--Increase cache to support Alfresco static resources -->
     <Resources
         cachingAllowed="true"
         cacheMaxSize="102400"
