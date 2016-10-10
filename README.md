@@ -1,10 +1,12 @@
-Alfresco Ubuntu Install
+[![Loftux AB](https://loftux.com/files/static/images/ubuntu_installer.png?ref=ubuntuinstall)](https://loftux.se?ref=ubuntuinstall)
+
+Alfresco Ubuntu Installer
 =======================
 
 This install script and guide was created by Peter Löfgren, Loftux AB.  
+
 Please visit [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loftux.com") (English) [https://loftux.se](https://loftux.se/sv?ref=ubuntuinstall "loftux.se") (Swedish)  for more information.
 
-[![Loftux AB](https://loftux.se/themes/loftux_theme/assets/images/loftux-logo/logo-loftux-prefixed-small.png?ref=ubuntuinstall)](https://loftux.se?ref=ubuntuinstall)
 
 Current version : **Alfresco Community 201605GA (5.1.g)** or **LXCommunity ECM LX91**  
 Ubuntu Version : **14.04**, **16.04**.
@@ -12,12 +14,15 @@ Ubuntu Version : **14.04**, **16.04**.
 Alfresco script based install for Ubuntu servers.
 ----------------------------
 
-This script will help you set up an Alfresco server instance with all necessary third party components.  
-Some will be installed via Ubuntu packages, some directly downloaded. The script will walk you through the process. In the end, there will be some manual tasks to complete the installation.
+This script will help you set up an Alfresco server instance with all necessary third party components.  Some will be installed via Ubuntu packages, some directly downloaded. The script will walk you through the process. In the end, there will be some manual tasks to complete the installation.
 
-Alfresco does have installers for Linux, and you may be better off with using those installers if you just want to do a quick test install. However, if you intend to run Alfresco in production, this script can help you both with the install, and by examining what the script does, learn what components are involved running an Alfresco instance. Any Alfresco administrator will have to learn that if you intend to use Alfresco in production.  
+Alfresco does have installers for Linux, and you may be better off with using those installers if you just want to do a quick test install.
 
-Only 64-bit Ubuntu is supported. Java cannot address enough memory to support running Alfresco on a 32-bit system.
+If you intend to run Alfresco in production, this script can help you both with the install. By examining what the script does, you can also learn what components are involved running an Alfresco instance. This is a must for any Alfresco administrator who runs Alfresco in production.  
+
+For commercial support with your installation, upgrades and running a production server, contact [Loftux AB](https://loftux.com/contact) (Worldwide).
+
+
 
 Installing
 ----
@@ -31,16 +36,17 @@ chmod u+x alfinstall.sh
 
 All install options will be presented with an introduction. They default to 'n' (no), so type y to actually install that component. You need **sudo** access to install.  
 
-But please do read all of this README before you go ahead.  
-There is also lots of documentation at http://docs.alfresco.com/4.2/index.jsp. To become an Alfresco server Administrator, read the 'Administering' section.  
+Please read all of this README before you go ahead.  
 
->###Known issues
->Many components have their download url:s point to specific version.
->Whenever a new version comes out, the older version is removed from the download server and this script breaks. I try to update as soon as I find out. This is known to happen with LibreOffice and Tomcat. The script will check if the needed components are available and break if they are not.
+There is also lots of documentation at [http://docs.alfresco.com/5.1](http://docs.alfresco.com/5.1). To get started to become an Alfresco server Administrator, read and make yourself familiar with the 'Administering' section.
+
+##Notes
+- Only 64-bit Ubuntu is supported. Java cannot address enough memory to support running Alfresco on a 32-bit system.
+- Many components have their download urls pointed to specific version. Whenever a new version comes out, the older version is removed from the download server and this script breaks. These will be updated as soon as they are made known. This is known to happen with LibreOffice and Tomcat. The script will check if the needed components are available and break if they are not.
 
 More on the components/installation steps.
 =======
-Once downloaded you can modify (if needed) the script to fit your purpose. Here is a brief explanation if each section.  
+Once the script is downloaded you can modify (if necessary) it to fit your purpose. 
 
 LXCommunity ECM
 --------
@@ -52,22 +58,26 @@ You can switch between Alfresco Community or LXCommunity ECM as long as they are
 
 Alfresco User
 --------
-The Alfresco user is the server account used to run tomcat. You should never run tomcat as root, so if you do not already have the alfresco (default in the install script) user, you should add the alfresco user.  
+The Alfresco user is the server account used to run tomcat. You should never run tomcat as `root`, so if you do not already have the alfresco (default in the install script) user, you should add the alfresco user.  
 
-In this part of the install is also an update to make sure a specific locale is supported (default sv_SE.utf8). This is useful for LibreOffice date formatting to work correctly during transformations.  
+In this part of the install is also an update to make sure a specific locale is supported (`default sv_SE.utf8`). This is useful for LibreOffice date formatting to work correctly during transformations.  
 
 Limits
 --------
-Ubuntu default for number of allowed open files in the file system is too low for alfresco use and tomcat may because of this stop with the error "too many open files". You should update this value if you have not done so. Read more at (http://wiki.alfresco.com/wiki/Too_many_open_files.
+Ubuntu default for number of allowed open files in the file system is too low for alfresco use and tomcat may because of this stop with the error "too many open files". You should update this value if you have not done so. 
+
+Read more at [http://wiki.alfresco.com/wiki/Too_many_open_files](http://wiki.alfresco.com/wiki/Too_many_open_files).
 
 Tomcat
 --------
 Tomcat is the java application server used to actually run Alfresco. The script downloads the latest version of Tomcat 8, and then updates its configuration files to better support running Alfresco.  
+
 Ubuntu upstart (14.04) or systemd (16.04) is used to stop and start tomcat. You **must** have a look and verify settings;    
 `/etc/init/alfresco.conf` (14.04)  
 `/opt/alfresco/alfresco-service.sh` (16.04)  
 
 Edit locale setting (LC_ALL) and the memory settings in this file to match your server.  
+
 About memory, it has default max set to 2G. That is good enough if you have about 5 users. So add more ram (and then some) to your server, update then Xmx setting in alfresco.conf. Your Alfresco instance will run much smoother.  
 
 You will be presented with the option to add either MySql or Postgresql jdbc libraries. You should probably add at least one of them.
@@ -90,33 +100,40 @@ The default config file is found in folder `/etc/nginx/conf.d/alfresco.conf`. If
 
 ### Maintenance message support
 If you are using Nginx as front-end there is a built in fallback to a maintenance page when the Alfresco tomcat instance is stopped. Nginx will detect that tomcat is not responding and show this page. It will display expected downtime and a progress bar.  
+
 To set the downtime (in minutes) and a custom message, call the ams.sh script found in script folder.
 `ams.sh 20 "Custom message displayed in page"`  
+
 The above example will set the downtime to 20 minutes (from when you shut down) and with a custom message. If called without parameters it defaults to 10 minutes. Custom message is optional, but if used you also must set the timeout.  
+
 The script will shut down Alfresco tomcat instance. To start it you must call `sudo start alfresco`.  
 
-The maintenance.html page is found in its default location /opt/alfresco/www and can be customized to your needs.  
+The `maintenance.html` page is found in its default location /opt/alfresco/www and can be customized to your needs.  
 
-If you want to implement this support and already have run the alfinstall.sh script, compare your nginx.conf to what is currently in git/master.
+If you want to implement this support and already have run the `alfinstall.sh` script, compare your `nginx.conf` to what is currently in `git/master`.
 
 Java JDK
 --------
-Download and install of Oracle Java 8.  
+Download and install of Oracle Java 8. 
+
 If you choose to use any other Java JDK, adjust paths setting in `/etc/init/alfresco.conf`.
 
 LibreOffice
 -------------
 Downloads and install LibreOffice from libreoffice.org (technically from a mirror). Alfresco just use LibreOffice for transformations, and later versions have better (hopefully) conversion filters.
+
 In this step ImageMagick is also installed from Ubuntu standard packages, if you skip this step install ImageMagick separately. Some extra font packages like Microsoft true type fonts is also installed, since you likely will add documents to Alfresco that have used them, this will result in better transformations.  
 
 ImageMagick  
----------  
+-----------  
 Installed using the Ubuntu default package.  
+
 If you get the error `no decode delegate for this image format` on start in the alfresco.log make sure to check that the path for `img.coders=` in alfresco-global.properties. The path may be version specific for the installed version.  
 
 Alfresco
 ---------
 Download and install of Alfresco itself. Or rather, the alfresco.war and share.war and adds them to tomcat/webapps folder.  
+
 You also have the option to install Google Docs and Sharepoint addons. Skip if you do not intend to use them, you can always add then later.
 You can completely skip this step if you intend to use Enterprise version or any other version. See also the special section about the addons directory.
 
@@ -155,7 +172,8 @@ This will make sure libreoffice is running (if not already started and tomcat is
 Alfresco BART - Backup and Recovery Tool
 ========================================
 Alfresco BART is a third party tool to aid with your Backup and Recovery requirements.  
-You can do the basic install using this script, but it is **highly recommended** that you visit https://github.com/toniblyx/alfresco-backup-and-recovery-tool/ page to learn more on how to configure this tool.  
+
+You can do the basic install using this script, but it is **highly recommended** that you visit [https://github.com/toniblyx/alfresco-backup-and-recovery-tool/](https://github.com/toniblyx/alfresco-backup-and-recovery-tool/) page to learn more on how to configure this tool.  
 
 Frequently Asked Questions (FAQ)  
 ===
@@ -174,6 +192,7 @@ Upgrading - Can I use this to upgrade an existing install?
 ---
 
 At this time, this is not the intended use. So short answer is no.  
+
 Longer answer is, you can probably grab pieces of the script to upgrade individual components. Or as is recommended when upgrading, test your upgrade on a separate server. So install a new server with fresh install, then grab a copy of your data and do a test upgrade. If this works, switch to this server. Did you make a backup of your data first?
 
 I want Alfresco and Share on separate server, can this script be used?
