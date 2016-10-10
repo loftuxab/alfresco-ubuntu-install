@@ -1,4 +1,4 @@
-[![Loftux AB](https://loftux.com/files/static/images/ubuntu_installer.png?ref=ubuntuinstall)](https://loftux.se?ref=ubuntuinstall)
+[![Loftux AB](https://loftux.com/files/static/images/ubuntu_installer.png?ref=ubuntuinstall)](https://loftux.com?ref=ubuntuinstall)
 
 Alfresco Ubuntu Installer
 =======================
