@@ -24,13 +24,13 @@ export KEYSTOREBASE=https://svn.alfresco.com/repos/alfresco-open-mirror/alfresco
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=en_US.utf8
 
-export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.37/bin/apache-tomcat-8.0.37.tar.gz
+export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.38/bin/apache-tomcat-8.0.38.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.4.1209.jar
+export JDBCPOSTGRES=postgresql-9.4.1211.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.39.tar.gz
+export JDBCMYSQL=mysql-connector-java-5.1.40.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.2.2.2/deb/x86_64/LibreOffice_5.2.2.2_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.2.3.3/deb/x86_64/LibreOffice_5.2.3.3_Linux_x86-64_deb.tar.gz
 
 export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-platform/5.1.g/alfresco-platform-5.1.g.war
 export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.g/share-5.1.g.war
@@ -40,12 +40,12 @@ export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/
 export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.g/alfresco-solr4-5.1.g-config-ssl.zip
 export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.g/alfresco-solr4-5.1.g.war
 
-export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco/LX91/alfresco-LX91.war
-export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX91/share-LX91.war
-export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX91/alfresco-share-services-LX91.amp
+export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX92/alfresco-platform-LX92.war
+export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX92/share-LX92.war
+export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX92/alfresco-share-services-LX92.amp
 
-export LXSOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX91/alfresco-solr4-LX91-config-ssl.zip
-export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX91/alfresco-solr4-LX91.war
+export LXSOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX92/alfresco-solr4-LX92-config-ssl.zip
+export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX92/alfresco-solr4-LX92.war
 
 export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
 export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
@@ -875,7 +875,12 @@ echo
 echo "1. Add database. Install scripts available in $ALF_HOME/scripts"
 echored "   It is however recommended that you use a separate database server."
 echo
-echo "2. Verify Tomcat memory and locale settings in /etc/init/alfresco.conf."
+echo "2. Verify Tomcat memory and locale settings in the file"
+if [ "$ISON1604" = "y" ]; then
+echo "   $ALF_HOME/alfresco-service.sh."
+else
+echo "   /etc/init/alfresco.conf."
+fi
 echo "   Alfresco runs best with lots of memory. Add some more to \"lots\" and you will be fine!"
 echo "   Match the locale LC_ALL (or remove) setting to the one used in this script."
 echo "   Locale setting is needed for LibreOffice date handling support."
@@ -891,7 +896,12 @@ echo "5. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have mo
 echo
 echo "6. Start nginx if you have installed it: sudo service nginx start"
 echo
-echo "7. Start Alfresco/tomcat: sudo service alfresco start"
+echo "7. Start Alfresco/tomcat:"
+if [ "$ISON1604" = "y" ]; then
+echo "   sudo $ALF_HOME/alfresco-service.sh start"
+else
+echo "   sudo service alfresco start"
+fi
 echo
 
 echo
