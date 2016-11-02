@@ -8,7 +8,7 @@ This install script and guide was created by Peter Löfgren, Loftux AB.
 Please visit [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loftux.com") (English) [https://loftux.se](https://loftux.se/sv?ref=ubuntuinstall "loftux.se") (Swedish)  for more information.
 
 
-Current version : **Alfresco Community 201605GA (5.1.g)** or **LXCommunity ECM LX91**  
+Current version : **Alfresco Community 201605GA (5.1.g)** or **LXCommunity ECM LX92**  
 Ubuntu Version : **14.04**, **16.04**.
 
 Alfresco script based install for Ubuntu servers.
@@ -18,7 +18,7 @@ This script will help you set up an Alfresco server instance with all necessary 
 
 Alfresco does have installers for Linux, and you may be better off with using those installers if you just want to do a quick test install.
 
-If you intend to run Alfresco in production, this script can help you both with the install. By examining what the script does, you can also learn what components are involved running an Alfresco instance. This is a must for any Alfresco administrator who runs Alfresco in production.  
+If you intend to run Alfresco in production, this script can help you both with the install. *By examining what the script does, you can also learn what components are involved running an Alfresco instance.* This is a must for any Alfresco administrator who runs Alfresco in production.  
 
 For commercial support with your installation, upgrades and running a production server, contact [Loftux AB](https://loftux.com/contact) (Worldwide).
 
@@ -34,13 +34,13 @@ chmod u+x alfinstall.sh
 ./alfinstall.sh
 ```
 
-All install options will be presented with an introduction. They default to 'n' (no), so type y to actually install that component. You need **sudo** access to install.  
+All install options will be presented with an introduction. They default to 'y' (yes), so type n to skip install of that component. You need **sudo** access to install.  
 
 Please read all of this README before you go ahead.  
 
 There is also lots of documentation at [http://docs.alfresco.com/5.1](http://docs.alfresco.com/5.1). To get started to become an Alfresco server Administrator, read and make yourself familiar with the 'Administering' section.
 
-##Notes
+## Notes
 - Only 64-bit Ubuntu is supported. Java cannot address enough memory to support running Alfresco on a 32-bit system.
 - Many components have their download urls pointed to specific version. Whenever a new version comes out, the older version is removed from the download server and this script breaks. These will be updated as soon as they are made known. This is known to happen with LibreOffice and Tomcat. The script will check if the needed components are available and break if they are not.
 
@@ -86,7 +86,7 @@ Once the install is complete (the entire script and the manual steps following t
 `sudo service alfresco start` (14.04)  
 `sudo /opt/alfresco/alfresco-service.sh start` (16.04) - this is a wrapper, using `sudo systemctl start alfresco.service` will have the same result.  
 
-To stop Tomcat for Alfresco, just swithc `start` to `stop` in the above command. Using `status` as a parameter will show status of the Alfresco Tomcat service
+To stop Tomcat for Alfresco, just switch `start` to `stop` in the above command. Using `status` as a parameter will show status of the Alfresco Tomcat service
 
 Nginx
 --------
@@ -106,7 +106,9 @@ To set the downtime (in minutes) and a custom message, call the ams.sh script fo
 
 The above example will set the downtime to 20 minutes (from when you shut down) and with a custom message. If called without parameters it defaults to 10 minutes. Custom message is optional, but if used you also must set the timeout.  
 
-The script will shut down Alfresco tomcat instance. To start it you must call `sudo start alfresco`.  
+The script will shut down Alfresco tomcat instance. To start it you must call `sudo start alfresco` (14.04) or `sudo /opt/alfresco/alfresco-service.sh start` (16.04).  
+
+**NOTE: 16.04 user must manually edit the ams.sh script before use to use the correct shutdown method. It is included in the script how to.**  
 
 The `maintenance.html` page is found in its default location /opt/alfresco/www and can be customized to your needs.  
 
@@ -159,13 +161,16 @@ Scripts - Supporting scripts
 ============================
 In the directory `/opt/alfresco/scripts` there are some useful scripts installed. Or if you did not run the install script, grab them from github. Here is what they do:  
 * `libreoffice.sh` - Start/stop libreoffice manually. Sometimes libreoffice crashes during a transformation, use this script to start it again. Alfresco will re-connect when the server detects libreoffice is running. You can add this to crontab for automatic checks:  
-`*/10 * * * * /opt/alfresco/scripts/libreoffice.sh start 2>&1 >> /opt/alfresco/logs/office.log`
+
+`*/10 * * * * /opt/alfresco/scripts/libreoffice.sh start 2>&1 >> /opt/alfresco/logs/office.log`  
 `0 2 * * * /opt/alfresco/scripts/libreoffice.sh restart 2>&1 > /opt/alfresco/logs/office.log`  
+
 This will make sure libreoffice is running (if not already started and tomcat is running). Once per night it will also do a complete restart (in case LibreOffice behaves badly).  
 * `iptables.sh` - Script to add port forwarding. Useful if you want to use cifs, ftp that will not run on lower port numbers if not root. Or if you´re not using nginx as front end and want to forward port 80 to 8080.  
 * `limitconvert.sh` - Script to limit the number of cpu:s ImageMagick convert can use during transformations. Some Document library views with large thumbnails can cause intensive transformation load, and this script make sure some resources are left for other work.  
 * `createssl.sh` - Create self signed certificates, useful for testing purposes. Works well with nginx.  
 * `mariadb.sh` - Install the mariadb database server (the MySql alternative). It is recommended that you instead use a dedicated database server. Seriously, do that. And do some database optimizations, out of scope for this install guide.  
+* `mysql.sh` - Install the mysql database server (the original MySql). It is recommended that you instead use a dedicated database server. Seriously, do that. And do some database optimizations, out of scope for this install guide.  
 * `postgresql.sh` - Same as for MariaDB, but the postgres version.  
 * `ams.sh` - To do a maintenance shutdown. For more, see section under nginx.  
 
