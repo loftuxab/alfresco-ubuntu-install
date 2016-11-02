@@ -875,7 +875,12 @@ echo
 echo "1. Add database. Install scripts available in $ALF_HOME/scripts"
 echored "   It is however recommended that you use a separate database server."
 echo
-echo "2. Verify Tomcat memory and locale settings in /etc/init/alfresco.conf."
+echo "2. Verify Tomcat memory and locale settings in the file"
+if [ "$ISON1604" = "y" ]; then
+echo "   $ALF_HOME/alfresco-service.sh."
+else
+echo "   /etc/init/alfresco.conf."
+fi
 echo "   Alfresco runs best with lots of memory. Add some more to \"lots\" and you will be fine!"
 echo "   Match the locale LC_ALL (or remove) setting to the one used in this script."
 echo "   Locale setting is needed for LibreOffice date handling support."
@@ -891,7 +896,12 @@ echo "5. Update cpu settings in $ALF_HOME/scripts/limitconvert.sh if you have mo
 echo
 echo "6. Start nginx if you have installed it: sudo service nginx start"
 echo
-echo "7. Start Alfresco/tomcat: sudo service alfresco start"
+echo "7. Start Alfresco/tomcat:"
+if [ "$ISON1604" = "y" ]; then
+echo "   sudo $ALF_HOME/alfresco-service.sh start"
+else
+echo "   sudo service alfresco start"
+fi
 echo
 
 echo
