@@ -64,6 +64,8 @@
 			proxy_http_version 1.1;
 			#proxy_buffering off;
 			proxy_pass http://alfresco;
+
+			proxy_set_header Proxy "";
 			proxy_set_header Host $http_host;
 			proxy_set_header X-Real-IP $remote_addr;
 			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -80,6 +82,8 @@
 			proxy_http_version 1.1;
 			#proxy_buffering off;
 			proxy_pass http://share;
+			
+			proxy_set_header Proxy "";
 			proxy_set_header Host $http_host;
 			proxy_set_header X-Real-IP $remote_addr;
 			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -98,6 +102,8 @@
 			proxy_http_version 1.1;
 			#proxy_buffering off;
 			proxy_pass http://share;
+			
+			proxy_set_header Proxy "";
 			proxy_set_header Host $http_host;
 			proxy_set_header X-Real-IP $remote_addr;
 			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -112,6 +118,8 @@
 			# Proxy all the requests to Tomcat
 			proxy_http_version 1.1;
 			proxy_pass http://share;
+			
+			proxy_set_header Proxy "";
 			proxy_set_header  Host $http_host;
 
 			proxy_cache alfrescocache;
@@ -129,6 +137,8 @@
 			proxy_http_version 1.1;
 			#proxy_buffering off;
 			proxy_pass http://alfresco;
+			
+			proxy_set_header Proxy "";
 			proxy_set_header Host $http_host;
 			proxy_set_header X-Real-IP $remote_addr;
 			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
