@@ -2,7 +2,7 @@
 # -------
 # Script for install of Alfresco
 #
-# Copyright 2013-2016 Loftux AB, Peter Löfgren
+# Copyright 2013-2017 Loftux AB, Peter Löfgren
 # Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)
 # -------
 
@@ -32,26 +32,28 @@ export JDBCMYSQL=mysql-connector-java-5.1.40.tar.gz
 
 export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.2.5.1/deb/x86_64/LibreOffice_5.2.5.1_Linux_x86-64_deb.tar.gz
 
-export ALFREPOWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-platform/5.1.g/alfresco-platform-5.1.g.war
-export ALFSHAREWAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/share/5.1.g/share-5.1.g.war
-export ALFSHARESERVICES=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-share-services/5.1.g/alfresco-share-services-5.1.g.amp
-export ALFMMTJAR=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-mmt/5.1.g/alfresco-mmt-5.1.g.jar
+export ALFREPOWAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-platform/5.2.d/alfresco-platform-5.2.d.war
+export ALFSHAREWAR=https://downloads.loftux.net/public/content/org/alfresco/share/5.2.c/share-5.2.c.war
+export ALFSHARESERVICES=https://downloads.loftux.net/public/content/org/alfresco/alfresco-share-services/5.2.c/alfresco-share-services-5.2.c.amp
 
-export SOLR4_CONFIG_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.g/alfresco-solr4-5.1.g-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://artifacts.alfresco.com/nexus/service/local/repo_groups/public/content/org/alfresco/alfresco-solr4/5.1.g/alfresco-solr4-5.1.g.war
+export ALFMMTJAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-mmt/5.2.d/alfresco-mmt-5.2.d.jar
 
-export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX92/alfresco-platform-LX92.war
-export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX92/share-LX92.war
-export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX92/alfresco-share-services-LX92.amp
+export SOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.d/alfresco-solr4-5.2.d-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.d/alfresco-solr4-5.2.d.war
 
-export LXSOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX92/alfresco-solr4-LX92-config-ssl.zip
-export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX92/alfresco-solr4-LX92.war
+export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX94/alfresco-platform-LX94.war
+export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX94/share-LX94.war
+export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX94/alfresco-share-services-LX94.amp
 
-export GOOGLEDOCSREPO=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
-export GOOGLEDOCSSHARE=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
+export LXSOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX94/alfresco-solr4-LX94-config-ssl.zip
+export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX94/alfresco-solr4-LX94.war
 
-export AOS_DOWNLOAD=http://dl.alfresco.com/release/community/201609-EA-build-00012/alfresco-aos-module-1.1.3.zip
-export AOS_SERVER_ROOT=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-server-root/5.1.g/alfresco-server-root-5.1.g.war
+export GOOGLEDOCSREPO=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
+export GOOGLEDOCSSHARE=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
+
+export AOS_VTI=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/aos-module/alfresco-vti-bin/1.1.5/alfresco-vti-bin-1.1.5.war
+export AOS_SERVER_ROOT=https://downloads.loftux.net/public/content/org/alfresco/alfresco-server-root/5.2.d/alfresco-server-root-5.2.d.war
+export AOS_AMP=https://downloads.loftux.net/public//content/org/alfresco/aos-module/alfresco-aos-module/1.1.5/alfresco-aos-module-1.1.5.amp
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
 
@@ -177,7 +179,7 @@ URLERROR=0
 
 for REMOTE in $TOMCAT_DOWNLOAD $JDBCPOSTGRESURL/$JDBCPOSTGRES $JDBCMYSQLURL/$JDBCMYSQL \
         $LIBREOFFICE $ALFREPOWAR $ALFSHAREWAR $ALFSHARESERVICES $GOOGLEDOCSREPO \
-        $GOOGLEDOCSSHARE $SOLR4_WAR_DOWNLOAD $SOLR4_CONFIG_DOWNLOAD $AOS_DOWNLOAD $AOS_SERVER_ROOT
+        $GOOGLEDOCSSHARE $SOLR4_WAR_DOWNLOAD $SOLR4_CONFIG_DOWNLOAD $AOS_VTI $AOS_SERVER_ROOT
 
 do
         wget --spider $REMOTE --no-check-certificate >& /dev/null
@@ -381,7 +383,7 @@ EOF
   sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.sample
   sudo curl -# -o /etc/nginx/nginx.conf $BASE_DOWNLOAD/nginx/nginx.conf
   sudo curl -# -o /etc/nginx/conf.d/alfresco.conf $BASE_DOWNLOAD/nginx/alfresco.conf
-  sudo curl -# -o /etc/nginx/conf.d/alfresco.conf.ssl $BASE_DOWNLOAD/nginx/alfresco.conf.ssl
+  sudo curl -# -o /etc/nginx/conf.d/alfresco.conf.ssl $BASE_DOWNLOAD/nginx/alfresco.conf.ssl 
   sudo curl -# -o /etc/nginx/conf.d/basic-settings.conf $BASE_DOWNLOAD/nginx/basic-settings.conf
   sudo mkdir -p /var/cache/nginx/alfresco
   # Make the ssl dir as this is what is used in sample config
@@ -611,7 +613,7 @@ echo "Download war files and optional addons."
 echo "If you have already downloaded your war files you can skip this step and add "
 echo "them manually."
 echo
-echo "If you use separate Alfresco and Share serv, only install the needed for each"
+echo "If you use separate Alfresco and Share server, only install the needed for each"
 echo "server. Alfresco Repository will need Share Services if you use Share."
 echo
 echo "This install place downloaded files in the $ALF_HOME/addons and then use the"
@@ -689,17 +691,13 @@ echored "This module is not Open Source (Alfresco proprietary)."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 read -e -p "Install Alfresco Office Services integration${ques} [y/n] " -i "$DEFAULTYESNO" installssharepoint
 if [ "$installssharepoint" = "y" ]; then
-    # Make sure we have unzip available
-    sudo apt-get $APTVERBOSITY install unzip
-    echogreen "Downloading Alfresco Offices Services bundle..."
-    mkdir -p $TMP_INSTALL/sharepoint
-    sudo curl -# -o $TMP_INSTALL/sharepoint/sharepoint.zip $AOS_DOWNLOAD
-    echogreen "Expanding file..."
-    cd $TMP_INSTALL/sharepoint
-    sudo unzip -q sharepoint.zip
-    sudo mv _vti_bin.war $ALF_HOME/tomcat/webapps/
-    sudo mv alfresco-aos-module*.amp $ALF_HOME/addons/alfresco/
-    echogreen "Downloading ROOT.war"
+    echogreen "Installing Alfresco Offices Services bundle..."
+    echogreen "Downloading Alfresco Office Services amp file"
+    # Sub shell to keep the file name
+    (cd $ALF_HOME/addons/alfresco;sudo curl -# -O $AOS_AMP)
+    echogreen "Downloading _vti_bin.war into tomcat/webapps"
+    sudo curl -# -o $ALF_HOME/tomcat/webapps/_vti_bin.war $AOS_VTI
+    echogreen "Downloading ROOT.war into tomcat/webapps"
     sudo curl -# -o $ALF_HOME/tomcat/webapps/ROOT.war $AOS_SERVER_ROOT
 fi
 
