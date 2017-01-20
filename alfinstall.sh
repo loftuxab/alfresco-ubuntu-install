@@ -32,14 +32,14 @@ export JDBCMYSQL=mysql-connector-java-5.1.40.tar.gz
 
 export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.2.5.1/deb/x86_64/LibreOffice_5.2.5.1_Linux_x86-64_deb.tar.gz
 
-export ALFREPOWAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-platform/5.2.d/alfresco-platform-5.2.d.war
-export ALFSHAREWAR=https://downloads.loftux.net/public/content/org/alfresco/share/5.2.c/share-5.2.c.war
-export ALFSHARESERVICES=https://downloads.loftux.net/public/content/org/alfresco/alfresco-share-services/5.2.c/alfresco-share-services-5.2.c.amp
+export ALFREPOWAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-platform/5.2.e/alfresco-platform-5.2.e.war
+export ALFSHAREWAR=https://downloads.loftux.net/public/content/org/alfresco/share/5.2.d/share-5.2.d.war
+export ALFSHARESERVICES=https://downloads.loftux.net/public/content/org/alfresco/alfresco-share-services/5.2.d/alfresco-share-services-5.2.d.amp
 
-export ALFMMTJAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-mmt/5.2.d/alfresco-mmt-5.2.d.jar
+export ALFMMTJAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-mmt/5.2.e/alfresco-mmt-5.2.e.jar
 
-export SOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.d/alfresco-solr4-5.2.d-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.d/alfresco-solr4-5.2.d.war
+export SOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.e/alfresco-solr4-5.2.e-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.e/alfresco-solr4-5.2.e.war
 
 export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX94/alfresco-platform-LX94.war
 export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX94/share-LX94.war
@@ -52,7 +52,7 @@ export GOOGLEDOCSREPO=https://downloads.loftux.net/public/content/org/alfresco/i
 export GOOGLEDOCSSHARE=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
 
 export AOS_VTI=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/aos-module/alfresco-vti-bin/1.1.5/alfresco-vti-bin-1.1.5.war
-export AOS_SERVER_ROOT=https://downloads.loftux.net/public/content/org/alfresco/alfresco-server-root/5.2.d/alfresco-server-root-5.2.d.war
+export AOS_SERVER_ROOT=https://downloads.loftux.net/public/content/org/alfresco/alfresco-server-root/5.2.e/alfresco-server-root-5.2.e.war
 export AOS_AMP=https://downloads.loftux.net/public//content/org/alfresco/aos-module/alfresco-aos-module/1.1.5/alfresco-aos-module-1.1.5.amp
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
