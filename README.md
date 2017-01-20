@@ -8,7 +8,7 @@ This install script and guide was created by Peter Löfgren, Loftux AB.
 Please visit [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loftux.com") (English) [https://loftux.se](https://loftux.se/sv?ref=ubuntuinstall "loftux.se") (Swedish)  for more information.
 
 
-Current version : **Alfresco Community 201612GA (5.2.d Repository,5.2.c Share)** or **LXCommunity ECM LX94**  
+Current version : **Alfresco Community 201701GA (5.2.e Repository,5.2.d Share)** or **LXCommunity ECM LX94**  
 Ubuntu Version : **14.04**, **16.04**.
 
 Alfresco script based install for Ubuntu servers.
