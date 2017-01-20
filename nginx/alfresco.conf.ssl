@@ -145,4 +145,9 @@
 			proxy_set_header X-Forwarded-Host $http_host;
 			proxy_set_header X-Forwarded-Server $host;
 		}
+
+		location /downtime.js {
+			# Allow the maintenance page to pick up downtime.js script
+			root   /opt/alfresco/www;
+		}
 	}
