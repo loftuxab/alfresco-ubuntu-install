@@ -281,7 +281,7 @@ if [ "$installtomcat" = "y" ]; then
   if [ "$ISON1604" = "y" ]; then
     sudo curl -# -o /etc/systemd/system/alfresco.service $BASE_DOWNLOAD/tomcat/alfresco.service
     sudo curl -# -o $ALF_HOME/alfresco-service.sh $BASE_DOWNLOAD/scripts/alfresco-service.sh
-    sudo chmod u+x $ALF_HOME/alfresco-service.sh
+    sudo chmod 755 $ALF_HOME/alfresco-service.sh
     sudo sed -i "s/@@LOCALESUPPORT@@/$LOCALESUPPORT/g" $ALF_HOME/alfresco-service.sh 
     # Enable the service
     sudo systemctl enable alfresco.service
@@ -589,7 +589,7 @@ echo
     echo "Downloading maintenance shutdown script..."
     sudo curl -# -o $ALF_HOME/scripts/ams.sh $BASE_DOWNLOAD/scripts/ams.sh
   fi
-  sudo chmod u+x $ALF_HOME/scripts/*.sh
+  sudo chmod 755 $ALF_HOME/scripts/*.sh
 
   # Keystore
   sudo mkdir -p $ALF_DATA_HOME/keystore
