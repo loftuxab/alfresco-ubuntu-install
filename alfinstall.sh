@@ -41,12 +41,12 @@ export ALFMMTJAR=https://downloads.loftux.net/public/content/org/alfresco/alfres
 export SOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.e/alfresco-solr4-5.2.e-config-ssl.zip
 export SOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.e/alfresco-solr4-5.2.e.war
 
-export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX94/alfresco-platform-LX94.war
-export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX94/share-LX94.war
-export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX94/alfresco-share-services-LX94.amp
+export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX95/alfresco-platform-LX95.war
+export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX95/share-LX95.war
+export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX95/alfresco-share-services-LX95.amp
 
-export LXSOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX94/alfresco-solr4-LX94-config-ssl.zip
-export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX94/alfresco-solr4-LX94.war
+export LXSOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX95/alfresco-solr4-LX95-config-ssl.zip
+export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX95/alfresco-solr4-LX95.war
 
 export GOOGLEDOCSREPO=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
 export GOOGLEDOCSSHARE=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
