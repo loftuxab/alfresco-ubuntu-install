@@ -26,34 +26,35 @@ export LOCALESUPPORT=en_US.utf8
 
 export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.38/bin/apache-tomcat-8.0.38.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-9.4.1211.jar
+export JDBCPOSTGRES=postgresql-42.1.4.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.40.tar.gz
+export JDBCMYSQL=mysql-connector-java-5.1.43.tar.gz
 
 export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.1.6.2/deb/x86_64/LibreOffice_5.1.6.2_Linux_x86-64_deb.tar.gz
+export ALFRESCO_PDF_RENDERER=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-pdf-renderer/1.0/alfresco-pdf-renderer-1.0-linux.tgz
 
-export ALFREPOWAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-platform/5.2.f/alfresco-platform-5.2.f.war
-export ALFSHAREWAR=https://downloads.loftux.net/public/content/org/alfresco/share/5.2.e/share-5.2.e.war
-export ALFSHARESERVICES=https://downloads.loftux.net/public/content/org/alfresco/alfresco-share-services/5.2.e/alfresco-share-services-5.2.e.amp
+export ALFREPOWAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-platform/5.2.g/alfresco-platform-5.2.g.war
+export ALFSHAREWAR=https://downloads.loftux.net/public/content/org/alfresco/share/5.2.f/share-5.2.f.war
+export ALFSHARESERVICES=https://downloads.loftux.net/public/content/org/alfresco/alfresco-share-services/5.2.f/alfresco-share-services-5.2.f.amp
 
-export ALFMMTJAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-mmt/5.2.f/alfresco-mmt-5.2.f.jar
+export ALFMMTJAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-mmt/5.2.g/alfresco-mmt-5.2.g.jar
 
-export SOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.f/alfresco-solr4-5.2.f-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.f/alfresco-solr4-5.2.f.war
+export SOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.g/alfresco-solr4-5.2.g-config-ssl.zip
+export SOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.g/alfresco-solr4-5.2.g.war
 
-export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX96/alfresco-platform-LX96.war
-export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX96/share-LX96.war
-export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX96/alfresco-share-services-LX96.amp
+export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX97/alfresco-platform-LX97.war
+export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX97/share-LX97.war
+export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX97/alfresco-share-services-LX97.amp
 
-export LXSOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX96/alfresco-solr4-LX96-config-ssl.zip
-export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX96/alfresco-solr4-LX96.war
+export LXSOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX97/alfresco-solr4-LX97-config-ssl.zip
+export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX97/alfresco-solr4-LX97.war
 
-export GOOGLEDOCSREPO=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.3/alfresco-googledocs-repo-3.0.3.amp
-export GOOGLEDOCSSHARE=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.3/alfresco-googledocs-share-3.0.3.amp
+export GOOGLEDOCSREPO=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.4.1/alfresco-googledocs-repo-3.0.4.1.amp
+export GOOGLEDOCSSHARE=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.4.1/alfresco-googledocs-share-3.0.4.1.amp
 
 export AOS_VTI=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/aos-module/alfresco-vti-bin/1.1.5/alfresco-vti-bin-1.1.5.war
-export AOS_SERVER_ROOT=https://downloads.loftux.net/public/content/org/alfresco/alfresco-server-root/5.2.f/alfresco-server-root-5.2.f.war
-export AOS_AMP=https://downloads.loftux.net/public//content/org/alfresco/aos-module/alfresco-aos-module/1.1.5/alfresco-aos-module-1.1.5.amp
+export AOS_SERVER_ROOT=https://downloads.loftux.net/public/content/org/alfresco/alfresco-server-root/5.2.g/alfresco-server-root-5.2.g.war
+export AOS_AMP=https://downloads.loftux.net/public//content/org/alfresco/aos-module/alfresco-aos-module/1.1.6/alfresco-aos-module-1.1.6.amp
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
 
@@ -548,6 +549,14 @@ echo
   # Add the jar modules dir
   sudo mkdir -p $ALF_HOME/modules/platform
   sudo mkdir -p $ALF_HOME/modules/share
+
+  sudo mkdir -p $ALF_HOME/bin
+  if [ ! -f "$ALF_HOME/bin/alfresco-pdf-renderer" ]; then
+    echo "Downloading Alfresco PDF Renderer binary (alfresco-pdf-renderer)..."
+    sudo curl -# -o $TMP_INSTALL/alfresco-pdf-renderer.tgz $ALFRESCO_PDF_RENDERER
+    sudo tar -xf $TMP_INSTALL/alfresco-pdf-renderer.tgz -C $TMP_INSTALL
+    sudo mv $TMP_INSTALL/alfresco-pdf-renderer $ALF_HOME/bin/
+  fi
 
   sudo mkdir -p $ALF_HOME/scripts
   if [ ! -f "$ALF_HOME/scripts/mariadb.sh" ]; then
