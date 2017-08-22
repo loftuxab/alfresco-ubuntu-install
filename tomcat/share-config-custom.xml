@@ -35,7 +35,7 @@
             <name>Alfresco - unauthenticated access</name>
             <description>Access to Alfresco Repository WebScripts that do not require authentication</description>
             <connector-id>alfresco</connector-id>
-            <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/s</endpoint-url>
+            <endpoint-url>http://@@SHARE_TO_REPO_SERVER@@:8080/alfresco/s</endpoint-url>
             <identity>none</identity>
          </endpoint>
 
@@ -44,7 +44,7 @@
             <name>Alfresco - user access</name>
             <description>Access to Alfresco Repository WebScripts that require user authentication</description>
             <connector-id>alfresco</connector-id>
-            <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/s</endpoint-url>
+            <endpoint-url>http://@@SHARE_TO_REPO_SERVER@@:8080/alfresco/s</endpoint-url>
             <identity>user</identity>
          </endpoint>
 
@@ -53,7 +53,7 @@
             <name>Alfresco Feed</name>
             <description>Alfresco Feed - supports basic HTTP authentication via the EndPointProxyServlet</description>
             <connector-id>http</connector-id>
-            <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/s</endpoint-url>
+            <endpoint-url>http://@@SHARE_TO_REPO_SERVER@@:8080/alfresco/s</endpoint-url>
             <basic-auth>true</basic-auth>
             <identity>user</identity>
          </endpoint>
@@ -63,7 +63,7 @@
             <name>Activiti Admin UI - user access</name>
             <description>Access to Activiti Admin UI, that requires user authentication</description>
             <connector-id>activiti-admin-connector</connector-id>
-            <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/activiti-admin</endpoint-url>
+            <endpoint-url>http://@@SHARE_TO_REPO_SERVER@@:8080/alfresco/activiti-admin</endpoint-url>
             <identity>user</identity>
         </endpoint>
 
@@ -74,7 +74,7 @@
             <description>Access to Alfresco Repository Public API that require user authentication.
                          This makes use of the authentication that is provided by parent 'alfresco' endpoint.</description>
             <connector-id>alfresco</connector-id>
-            <endpoint-url>http://@@ALFRESCO_REPO_SERVER@@:8080/alfresco/api</endpoint-url>
+            <endpoint-url>http://@@SHARE_TO_REPO_SERVER@@:8080/alfresco/api</endpoint-url>
             <identity>user</identity>
         </endpoint>
       </remote>
