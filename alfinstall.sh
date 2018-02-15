@@ -24,9 +24,9 @@ export KEYSTOREBASE=https://svn.alfresco.com/repos/alfresco-open-mirror/alfresco
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=en_US.utf8
 
-export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.46/bin/apache-tomcat-8.0.46.tar.gz
+export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-8/v8.0.50/bin/apache-tomcat-8.0.50.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-42.1.4.jar
+export JDBCPOSTGRES=postgresql-42.2.1.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.43.tar.gz
 
