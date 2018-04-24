@@ -24,13 +24,13 @@ export KEYSTOREBASE=https://svn.alfresco.com/repos/alfresco-open-mirror/alfresco
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=en_US.utf8
 
-export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.46/bin/apache-tomcat-8.0.46.tar.gz
+export TOMCAT_DOWNLOAD=http://apache.mirrors.spacedump.net/tomcat/tomcat-8/v8.0.50/bin/apache-tomcat-8.0.50.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-42.1.4.jar
+export JDBCPOSTGRES=postgresql-42.2.1.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.43.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.1.6.2/deb/x86_64/LibreOffice_5.1.6.2_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.4.5.1/deb/x86_64/LibreOffice_5.4.5.1_Linux_x86-64_deb.tar.gz
 export ALFRESCO_PDF_RENDERER=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-pdf-renderer/1.0/alfresco-pdf-renderer-1.0-linux.tgz
 
 export ALFREPOWAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-platform/5.2.g/alfresco-platform-5.2.g.war
