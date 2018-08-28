@@ -1,0 +1,23 @@
+[Unit]
+Description=Alfresco Solr6 Component
+After=network-online.target nfs.target
+
+[Service]
+ExecStartPre=/bin/mkdir -p -m 2755 /opt/alfresco/alf_data/solr6/content
+ExecStartPre=/bin/mkdir -p -m 2755 /opt/alfresco/alf_data/solr6/models
+ExecStartPre=/bin/mkdir -p -m 2755 /opt/alfresco/alf_data/solr6/index
+ExecStartPre=/bin/mkdir -p -m 2755 /opt/alfresco/alf_data/solr6/solrhome
+ExecStartPre=/bin/mkdir -p -m 2755 /opt/alfresco/logs/solr6
+ExecStartPre=/bin/cp -r /opt/alfresco/solr6/solrhome /opt/alfresco/alf_data/solr6/
+ExecStart=/opt/alfresco/solr6/solr/bin/solr start
+ExecStop=/opt/alfresco/solr6/solr/bin/solr stop
+Type=forking
+Restart=always
+User=alfresco
+Group=nogroup
+PIDFile=/var/run/alfresco-solr/solr-8983.pid
+RuntimeDirectory=alfresco-solr
+RuntimeDirectoryMode=750
+LimitNOFILE=8192:65536
+[Install]
+WantedBy=multi-user.target
