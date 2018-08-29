@@ -36,6 +36,4 @@ echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 echo "Stopping the Alfresco tomcat instance"
 echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo
-sudo service alfresco stop
-# For 16.04 change to use 
-# sudo /opt/alfresco/alfresco-service.sh stop
+sudo /opt/alfresco/alfresco-service.sh stop

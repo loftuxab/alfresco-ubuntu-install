@@ -105,9 +105,7 @@ To set the downtime (in minutes) and a custom message, call the ams.sh script fo
 
 The above example will set the downtime to 20 minutes (from when you shut down) and with a custom message. If called without parameters it defaults to 10 minutes. Custom message is optional, but if used you also must set the timeout.  
 
-The script will shut down Alfresco tomcat instance. To start it you must call `sudo start alfresco` (14.04) or `sudo /opt/alfresco/alfresco-service.sh start` (16.04).  
-
-**NOTE: 16.04 user must manually edit the ams.sh script before use to use the correct shutdown method. It is included in the script how to.**  
+The script will shut down Alfresco tomcat instance. To start it you must call `sudo /opt/alfresco/alfresco-service.sh start`.  
 
 The `maintenance.html` page is found in its default location /opt/alfresco/www and can be customized to your needs.  
 
