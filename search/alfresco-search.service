@@ -15,7 +15,6 @@ Type=forking
 Restart=always
 User=alfresco
 Group=nogroup
-PIDFile=/var/run/alfresco-solr/solr-8983.pid
 RuntimeDirectory=alfresco-solr
 RuntimeDirectoryMode=750
 LimitNOFILE=8192:65536
