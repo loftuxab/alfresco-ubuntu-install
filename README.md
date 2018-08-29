@@ -8,8 +8,8 @@ This install script and guide was created by Peter Löfgren, [Loftux AB](http://
 Please visit [https://loftux.com](https://loftux.com/en/?ref=ubuntuinstall "loftux.com") (English) [https://loftux.se](https://loftux.se/sv?ref=ubuntuinstall "loftux.se") (Swedish)  for more information.
 
 
-Current version : **Alfresco Community 201707GA (5.2.g Repository,5.2.f Share)** or **LXCommunity ECM LX99**  
-Ubuntu Version : **14.04**, **16.04**.
+Current version : **Alfresco Community 6.0 (6.0.7-ga Repository,6.0.c Share)** or **LXCommunity ECM LX101**  
+Ubuntu Version : **16.04** or later.
 
 Alfresco script based install for Ubuntu servers.
 ----------------------------
@@ -68,13 +68,12 @@ Ubuntu default for number of allowed open files in the file system is too low fo
 
 Read more at [http://wiki.alfresco.com/wiki/Too_many_open_files](http://wiki.alfresco.com/wiki/Too_many_open_files).
 
-Tomcat
+Starting/Stopping Alfresco and Search Services
 --------
 Tomcat is the java application server used to actually run Alfresco. The script downloads the latest version of Tomcat 8, and then updates its configuration files to better support running Alfresco.  
 
-Ubuntu upstart (14.04) or systemd (16.04) is used to stop and start tomcat. You **must** have a look and verify settings;    
-`/etc/init/alfresco.conf` (14.04)  
-`/opt/alfresco/alfresco-service.sh` (16.04)  
+Ubuntu systemd is used to stop and start tomcat. You **must** have a look and verify settings;     
+`/opt/alfresco/alfresco-service.sh` 
 
 Edit locale setting (LC_ALL) and the memory settings in this file to match your server.  
 
@@ -83,8 +82,8 @@ About memory, it has default max set to 2G. That is good enough if you have abou
 You will be presented with the option to add either MySql or Postgresql jdbc libraries. You should probably add at least one of them.
 
 Once the install is complete (the entire script and the manual steps following that), to start run  
-`sudo service alfresco start` (14.04)  
 `sudo /opt/alfresco/alfresco-service.sh start` (16.04) - this is a wrapper, using `sudo systemctl start alfresco.service` will have the same result.  
+It also starts/stops Alfresco Search Services, it can be started separately with `sudo systemctl start alfresco-search.service`.  
 
 To stop Tomcat for Alfresco, just switch `start` to `stop` in the above command. Using `status` as a parameter will show status of the Alfresco Tomcat service
 
@@ -161,6 +160,7 @@ Scripts - Supporting scripts
 ============================
 In the directory `/opt/alfresco/scripts` there are some useful scripts installed. Or if you did not run the install script, grab them from github. Here is what they do:  
 * `libreoffice.sh` - Start/stop libreoffice manually. Sometimes libreoffice crashes during a transformation, use this script to start it again. Alfresco will re-connect when the server detects libreoffice is running. You can add this to crontab for automatic checks:  
+NO LONGER NEEDED: Since version 6 or LX101, Alfresco uses JodConverter with built in process management.  
 
 `*/10 * * * * /opt/alfresco/scripts/libreoffice.sh start 2>&1 >> /opt/alfresco/logs/office.log`  
 `0 2 * * * /opt/alfresco/scripts/libreoffice.sh restart 2>&1 > /opt/alfresco/logs/office.log`  
@@ -218,5 +218,5 @@ This combination of packages/downloaded install has been found to work well. But
 
 License
 ===
-Copyright 2013-2017 Loftux AB, Peter Löfgren  
+Copyright 2013-2018 Loftux AB, Peter Löfgren  
 Distributed under the Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)

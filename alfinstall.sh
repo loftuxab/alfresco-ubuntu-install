@@ -156,6 +156,11 @@ else
   fi
 fi
 
+if [ "$ISON1604" = "n" ]; then
+    echored "Installing on version prior to 16.04 no longer supported"
+    exit 1
+fi
+
 if [ "`which curl`" = "" ]; then
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo "You need to install curl. Curl is used for downloading components to install."
@@ -281,9 +286,6 @@ if [ "$installtomcat" = "y" ]; then
     # Enable the service
     sudo systemctl enable alfresco.service
     sudo systemctl daemon-reload
-  else
-    sudo curl -# -o /etc/init/alfresco.conf $BASE_DOWNLOAD/tomcat/alfresco.conf
-    sudo sed -i "s/@@LOCALESUPPORT@@/$LOCALESUPPORT/g" /etc/init/alfresco.conf
   fi
 
   # Create /shared
@@ -449,11 +451,7 @@ if [ "$installibreoffice" = "y" ]; then
   # libxinerama1 libglu1-mesa needed to get LibreOffice 4.4 to work. Add the libraries that Alfresco mention in documentatinas required.
 
   ###1604 fonts-droid not available, use fonts-noto instead
-  if [ "$ISON1604" = "y" ]; then
-    sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-noto fontconfig libcups2 libfontconfig1 libglu1-mesa libice6 libsm6 libxinerama1 libxrender1 libxt6
-  else
-    sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-droid fontconfig libcups2 libfontconfig1 libglu1-mesa libice6 libsm6 libxinerama1 libxrender1 libxt6
-  fi
+  sudo apt-get $APTVERBOSITY install ttf-mscorefonts-installer fonts-noto fontconfig libcups2 libfontconfig1 libglu1-mesa libice6 libsm6 libxinerama1 libxrender1 libxt6
   echo
   echogreen "Finished installing LibreOffice"
   echo
@@ -490,38 +488,6 @@ else
   echo "Skipping install of ImageMagick"
   echored "Remember to install ImageMagick later. It is needed for thumbnail transformations."
   echo
-fi
-
-echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-echo "Patching ImageMagick for CVE-2016–3714."
-echo "This is all automatic if present."
-echo "More info at https://imagetragick.com/"
-echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-
-###16.04 already Patched
-if [ "$ISON1604" = "n" ]; then
-  IMAGEMAGICKPOLICYFILE="/etc/ImageMagick/policy.xml"
-
-  if [ -f "$IMAGEMAGICKPOLICYFILE" ]; then
-      if grep -q "rights=\"none\" pattern=\"EPHEMERAL\"" "$IMAGEMAGICKPOLICYFILE"; then
-          echogreen "The policy file looks like it already contains the patch: $IMAGEMAGICKPOLICYFILE"
-      else 
-          sudo sed -i '/<policymap>/a \
-          <policy domain="coder" rights="none" pattern="EPHEMERAL" /> \
-          <policy domain="coder" rights="none" pattern="URL" /> \
-          <policy domain="coder" rights="none" pattern="HTTPS" /> \
-          <policy domain="coder" rights="none" pattern="MVG" /> \
-          <policy domain="coder" rights="none" pattern="MSL" /> \
-          <policy domain="coder" rights="none" pattern="TEXT" /> \
-          <policy domain="coder" rights="none" pattern="SHOW" /> \
-          <policy domain="coder" rights="none" pattern="WIN" /> \
-          <policy domain="coder" rights="none" pattern="PLT" />' $IMAGEMAGICKPOLICYFILE
-          
-          echogreen "Patched file: $IMAGEMAGICKPOLICYFILE" 
-      fi
-  else
-      echored "Could not find file to patch: $IMAGEMAGICKPOLICYFILE"
-  fi
 fi
 
 echo
@@ -845,11 +811,8 @@ echo "1. Add database. Install scripts available in $ALF_HOME/scripts"
 echored "   It is however recommended that you use a separate database server."
 echo
 echo "2. Verify Tomcat memory and locale settings in the file"
-if [ "$ISON1604" = "y" ]; then
 echo "   $ALF_HOME/alfresco-service.sh."
-else
-echo "   /etc/init/alfresco.conf."
-fi
+
 echo "   Alfresco runs best with lots of memory. Add some more to \"lots\" and you will be fine!"
 echo "   Match the locale LC_ALL (or remove) setting to the one used in this script."
 echo "   Locale setting is needed for LibreOffice date handling support."
@@ -866,11 +829,9 @@ echo
 echo "6. Start nginx if you have installed it: sudo service nginx start"
 echo
 echo "7. Start Alfresco/tomcat:"
-if [ "$ISON1604" = "y" ]; then
+
 echo "   sudo $ALF_HOME/alfresco-service.sh start"
-else
-echo "   sudo service alfresco start"
-fi
+
 echo
 
 echo
