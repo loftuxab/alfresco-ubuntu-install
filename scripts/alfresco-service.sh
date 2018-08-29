@@ -42,9 +42,11 @@ JAVA_OPTS="${JAVA_OPTS} -server"
 
 start(){
     sudo systemctl start alfresco.service
+    sudo systemctl start alfresco-search.service
 }
 
 stop(){
+    sudo systemctl stop alfresco-search.service
     sudo systemctl stop alfresco.service
 }
 servicestart() {

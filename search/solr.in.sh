@@ -110,19 +110,19 @@ SOLR_HOME=/opt/alfresco/alf_data/solr6/solrhome
 
 # Location where Solr should write logs to. Absolute or relative to solr start dir
 SOLR_LOGS_DIR=/opt/alfresco/logs/solr6
-LOG4J_PROPS=$SOLR_LOGS_DIR/log4j.properties
+LOG4J_PROPS=/opt/alfresco/solr6/logs/log4j.properties
 
 # Sets the port Solr binds to, default is 8983
 #SOLR_PORT=8983
 
 # Uncomment to set SSL-related system properties
 # Be sure to update the paths to the correct keystore for your environment
-SOLR_SSL_KEY_STORE=/opt/alfresco/alf_data/keystore/ssl.keystore
-SOLR_SSL_KEY_STORE_PASSWORD=kT9X6oe68t
-SOLR_SSL_TRUST_STORE=/opt/alfresco/alf_data/keystore/ssl.truststore
-SOLR_SSL_TRUST_STORE_PASSWORD=kT9X6oe68t
-SOLR_SSL_NEED_CLIENT_AUTH=true
-SOLR_SSL_WANT_CLIENT_AUTH=false
+#SOLR_SSL_KEY_STORE=/opt/alfresco/alf_data/keystore/ssl.keystore
+#SOLR_SSL_KEY_STORE_PASSWORD=kT9X6oe68t
+#SOLR_SSL_TRUST_STORE=/opt/alfresco/alf_data/keystore/ssl.truststore
+#SOLR_SSL_TRUST_STORE_PASSWORD=kT9X6oe68t
+#SOLR_SSL_NEED_CLIENT_AUTH=true
+#SOLR_SSL_WANT_CLIENT_AUTH=false
 
 # Uncomment if you want to override previously defined SSL values for HTTP client
 # otherwise keep them commented and the above values will automatically be set for HTTP clients
@@ -146,5 +146,5 @@ SOLR_SSL_WANT_CLIENT_AUTH=false
 SOLR_ALFRESCO_HOST=localhost
 
 # Port for Alfresco
-SOLR_ALFRESCO_PORT=8443
+SOLR_ALFRESCO_PORT=8080
 SOLR_SOLR_HOST=localhost

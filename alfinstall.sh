@@ -16,7 +16,7 @@ export TMP_INSTALL=/tmp/alfrescoinstall
 export DEFAULTYESNO="y"
 
 # Branch name to pull from server. Use master for stable.
-BRANCH=master
+BRANCH=experimental
 export BASE_DOWNLOAD=https://raw.githubusercontent.com/loftuxab/alfresco-ubuntu-install/$BRANCH
 export KEYSTOREBASE=https://svn.alfresco.com/repos/alfresco-open-mirror/alfresco/HEAD/root/projects/repository/config/alfresco/keystore
 
@@ -30,31 +30,27 @@ export JDBCPOSTGRES=postgresql-42.2.1.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
 export JDBCMYSQL=mysql-connector-java-5.1.43.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/5.1.6.2/deb/x86_64/LibreOffice_5.1.6.2_Linux_x86-64_deb.tar.gz
-export ALFRESCO_PDF_RENDERER=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-pdf-renderer/1.0/alfresco-pdf-renderer-1.0-linux.tgz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/6.1.0.3/deb/x86_64/LibreOffice_6.1.0.3_Linux_x86-64_deb.tar.gz
+export ALFRESCO_PDF_RENDERER=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-pdf-renderer/1.1/alfresco-pdf-renderer-1.1-linux.tgz
 
-export ALFREPOWAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-platform/5.2.g/alfresco-platform-5.2.g.war
-export ALFSHAREWAR=https://downloads.loftux.net/public/content/org/alfresco/share/5.2.f/share-5.2.f.war
-export ALFSHARESERVICES=https://downloads.loftux.net/public/content/org/alfresco/alfresco-share-services/5.2.f/alfresco-share-services-5.2.f.amp
+export ALFREPOWAR=https://downloads.loftux.net/public/content/org/alfresco/content-services-community/6.0.7-ga/content-services-community-6.0.7-ga.war
 
-export ALFMMTJAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-mmt/5.2.g/alfresco-mmt-5.2.g.jar
+export ALFSHAREWAR=https://downloads.loftux.net/public/content/org/alfresco/share/6.0.c/share-6.0.c.war
+export ALFSHARESERVICES=https://downloads.loftux.net/public/content/org/alfresco/alfresco-share-services/6.0.c/alfresco-share-services-6.0.c.amp
+export ALFMMTJAR=https://downloads.loftux.net/public/content/org/alfresco/alfresco-mmt/6.0/alfresco-mmt-6.0.jar
 
-export SOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.g/alfresco-solr4-5.2.g-config-ssl.zip
-export SOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-solr4/5.2.g/alfresco-solr4-5.2.g.war
+export ASS_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alfresco-search-services/1.2.0/alfresco-search-services-1.2.0.zip
 
-export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX100/alfresco-platform-LX100.war
-export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX100/share-LX100.war
-export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX100/alfresco-share-services-LX100.amp
+export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX101/alfresco-platform-LX101.war
+export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX101/share-LX101.war
+export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX100/alfresco-share-services-LX101.amp
 
-export LXSOLR4_CONFIG_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX100/alfresco-solr4-LX100-config-ssl.zip
-export LXSOLR4_WAR_DOWNLOAD=https://downloads.loftux.net/alfresco/alfresco-solr4/LX100/alfresco-solr4-LX100.war
+export GOOGLEDOCSREPO=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.4.3/alfresco-googledocs-repo-3.0.4.3.amp
+export GOOGLEDOCSSHARE=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.4.3/alfresco-googledocs-share-3.0.4.3.amp
 
-export GOOGLEDOCSREPO=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.4.1/alfresco-googledocs-repo-3.0.4.1.amp
-export GOOGLEDOCSSHARE=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.4.1/alfresco-googledocs-share-3.0.4.1.amp
-
-export AOS_VTI=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/aos-module/alfresco-vti-bin/1.1.5/alfresco-vti-bin-1.1.5.war
-export AOS_SERVER_ROOT=https://downloads.loftux.net/public/content/org/alfresco/alfresco-server-root/5.2.g/alfresco-server-root-5.2.g.war
-export AOS_AMP=https://downloads.loftux.net/public//content/org/alfresco/aos-module/alfresco-aos-module/1.1.6/alfresco-aos-module-1.1.6.amp
+export AOS_VTI=https://downloads.loftux.net/public/content/org/alfresco/aos-module/alfresco-vti-bin/1.2.0/alfresco-vti-bin-1.2.0.war
+export AOS_SERVER_ROOT=https://downloads.loftux.net/public/content/org/alfresco/alfresco-server-root/6.0/alfresco-server-root-6.0.war
+export AOS_AMP=https://downloads.loftux.net/public/content/org/alfresco/aos-module/alfresco-aos-module/1.2.0/alfresco-aos-module-1.2.0.amp
 
 export BASE_BART_DOWNLOAD=https://raw.githubusercontent.com/toniblyx/alfresco-backup-and-recovery-tool/master/src/
 
@@ -118,8 +114,6 @@ if [ "$uselxcommunity" = "y" ]; then
   ALFREPOWAR=$LXALFREPOWAR
   ALFSHAREWAR=$LXALFSHAREWAR
   ALFSHARESERVICES=$LXALFSHARESERVICES
-  SOLR4_CONFIG_DOWNLOAD=$LXSOLR4_CONFIG_DOWNLOAD
-  SOLR4_WAR_DOWNLOAD=$LXSOLR4_WAR_DOWNLOAD
 
   echo
   echogreen "Thanks for choosing LXCommunity ECM"
@@ -180,7 +174,7 @@ URLERROR=0
 
 for REMOTE in $TOMCAT_DOWNLOAD $JDBCPOSTGRESURL/$JDBCPOSTGRES $JDBCMYSQLURL/$JDBCMYSQL \
         $LIBREOFFICE $ALFREPOWAR $ALFSHAREWAR $ALFSHARESERVICES $GOOGLEDOCSREPO \
-        $GOOGLEDOCSSHARE $SOLR4_WAR_DOWNLOAD $SOLR4_CONFIG_DOWNLOAD $AOS_VTI $AOS_SERVER_ROOT
+        $GOOGLEDOCSSHARE $ASS_DOWNLOAD $AOS_VTI $AOS_SERVER_ROOT
 
 do
         wget --spider $REMOTE --no-check-certificate >& /dev/null
@@ -728,77 +722,45 @@ fi
 
 echo
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-echo "Install Solr4 indexing engine."
-echo "You can run Solr4 on a separate server, unless you plan to do that you should"
-echo "install the Solr4 indexing engine on the same server as your repository server."
+echo "Install Solr6 Alfresco Search Services indexing engine."
+echo "You can run Solr6 on a separate server, unless you plan to do that you should"
+echo "install the Solr6 indexing engine on the same server as your repository server."
+echored "Alfresco Serch Services will be installed without SSL!"
+echored "Configure firewall to block port 8983 or install ssl, see"
+echored "https://docs.alfresco.com/community/tasks/solr6-install.html"
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install Solr4 indexing engine${ques} [y/n] " -i "$DEFAULTYESNO" installsolr
+read -e -p "Install Solr6 indexing engine${ques} [y/n] " -i "$DEFAULTYESNO" installsolr
 if [ "$installsolr" = "y" ]; then
 
   # Make sure we have unzip available
   sudo apt-get $APTVERBOSITY install unzip
 
-  # Check if we have an old install
-  if [ -d "$ALF_HOME/solr4" ]; then
-     sudo mv $ALF_HOME/solr4 $ALF_HOME/solr4_BACKUP_`eval date +%Y%m%d%H%M`
-  fi
-  sudo mkdir -p $ALF_HOME/solr4
-  cd $ALF_HOME/solr4
+  echogreen "Downloading Solr6 file..."
+  sudo curl -# -o $ALF_HOME/solr6.zip $ASS_DOWNLOAD
+  echogreen "Expanding Solr6 file..."
+  cd $ALF_HOME
+  sudo unzip -q solr6.zip
+  sudo mv alfresco-search-services solr6
+  sudo rm solr6.zip
 
-  echogreen "Downloading solr4.war file..."
-  sudo curl -# -o $CATALINA_HOME/webapps/solr4.war $SOLR4_WAR_DOWNLOAD
-
-  echogreen "Downloading config file..."
-  sudo curl -# -o $ALF_HOME/solr4/solrconfig.zip $SOLR4_CONFIG_DOWNLOAD
-  echogreen "Expanding config file..."
-  sudo unzip -q solrconfig.zip
-  sudo rm solrconfig.zip
-
-  echogreen "Configuring..."
-
-  # Make sure dir exist
-  sudo mkdir -p $ALF_DATA_HOME/solr4
-  mkdir -p $TMP_INSTALL
-
-  # Remove old config if exists
-  if [ -f "$CATALINA_HOME/conf/Catalina/localhost/solr.xml" ]; then
-     sudo rm $CATALINA_HOME/conf/Catalina/localhost/solr.xml
-  fi
-
-  # Set the solr data path
-  SOLRDATAPATH="$ALF_DATA_HOME/solr4"
-  # Escape for sed
-  SOLRDATAPATH="${SOLRDATAPATH//\//\\/}"
-
-  sudo mv $ALF_HOME/solr4/workspace-SpacesStore/conf/solrcore.properties $ALF_HOME/solr4/workspace-SpacesStore/conf/solrcore.properties.orig
-  sudo mv $ALF_HOME/solr4/archive-SpacesStore/conf/solrcore.properties $ALF_HOME/solr4/archive-SpacesStore/conf/solrcore.properties.orig
-  sed "s/@@ALFRESCO_SOLR4_DATA_DIR@@/$SOLRDATAPATH/g" $ALF_HOME/solr4/workspace-SpacesStore/conf/solrcore.properties.orig >  $TMP_INSTALL/solrcore.properties
-  sudo mv  $TMP_INSTALL/solrcore.properties $ALF_HOME/solr4/workspace-SpacesStore/conf/solrcore.properties
-  sed "s/@@ALFRESCO_SOLR4_DATA_DIR@@/$SOLRDATAPATH/g" $ALF_HOME/solr4/archive-SpacesStore/conf/solrcore.properties.orig >  $TMP_INSTALL/solrcore.properties
-  sudo mv  $TMP_INSTALL/solrcore.properties $ALF_HOME/solr4/archive-SpacesStore/conf/solrcore.properties
-
-  echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" > $TMP_INSTALL/solr4.xml
-  echo "<Context debug=\"0\" crossContext=\"true\">" >> $TMP_INSTALL/solr4.xml
-  echo "  <Environment name=\"solr/home\" type=\"java.lang.String\" value=\"$ALF_HOME/solr4\" override=\"true\"/>" >> $TMP_INSTALL/solr4.xml
-  echo "  <Environment name=\"solr/model/dir\" type=\"java.lang.String\" value=\"$ALF_HOME/solr4/alfrescoModels\" override=\"true\"/>" >> $TMP_INSTALL/solr4.xml
-  echo "  <Environment name=\"solr/content/dir\" type=\"java.lang.String\" value=\"$ALF_DATA_HOME/solr4/content\" override=\"true\"/>" >> $TMP_INSTALL/solr4.xml
-  echo "</Context>" >> $TMP_INSTALL/solr4.xml
-  sudo mv $TMP_INSTALL/solr4.xml $CATALINA_HOME/conf/Catalina/localhost/solr4.xml
-
-  echogreen "Setting permissions..."
-  sudo chown -R $ALF_USER:$ALF_GROUP $CATALINA_HOME/webapps
-  sudo chown -R $ALF_USER:$ALF_GROUP $ALF_DATA_HOME/solr4
-  sudo chown -R $ALF_USER:$ALF_GROUP $ALF_HOME/solr4
+  echogreen "Downloading Solr6 scripts and settings file..."
+  sudo curl -# -o /etc/systemd/system/alfresco-search.service $BASE_DOWNLOAD/search/alfresco-search.service
+  sudo curl -# -o $ALF_HOME/solr6/solrhome/conf/shared.properties $BASE_DOWNLOAD/search/shared.properties
+  sudo curl -# -o $ALF_HOME/solr6/solr.in.sh $BASE_DOWNLOAD/search/solr.in.sh
+  sudo chmod u+x $ALF_HOME/solr6/solr.in.sh
+# Enable the service
+    sudo systemctl enable alfresco-search.service
+    sudo systemctl daemon-reload
 
   echo
-  echogreen "Finished installing Solr4 engine."
+  echogreen "Finished installing Solr6 engine."
   echored "Verify your setting in alfresco-global.properties."
-  echo "Set property value index.subsystem.name=solr4"
+  echo "Set property value index.subsystem.name=solr6"
   echo
 else
   echo
-  echo "Skipping installing Solr4."
-  echo "You can always install Solr4 at a later time."
+  echo "Skipping installing Solr6."
+  echo "You can always install Solr6 at a later time."
   echo
 fi
 
@@ -825,7 +787,7 @@ if [ "$installbart" = "y" ]; then
  ALFHOMEESCAPED="${ALF_HOME//\//\\/}"
  BARTLOGPATH="$ALF_HOME/logs/bart"
  ALFBRTPATH="$ALF_HOME/scripts/bart"
- INDEXESDIR="\$\{ALF_DIRROOT\}/solr4"
+ INDEXESDIR="\$\{ALF_DIRROOT\}/solr6"
  # Escape for sed
  BARTLOGPATH="${BARTLOGPATH//\//\\/}"
  ALFBRTPATH="${ALFBRTPATH//\//\\/}"
