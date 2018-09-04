@@ -24,13 +24,13 @@ export KEYSTOREBASE=https://svn.alfresco.com/repos/alfresco-open-mirror/alfresco
 #export LOCALESUPPORT=sv_SE.utf8
 export LOCALESUPPORT=en_US.utf8
 
-export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.50/bin/apache-tomcat-8.0.50.tar.gz
+export TOMCAT_DOWNLOAD=http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.53/bin/apache-tomcat-8.0.53.tar.gz
 export JDBCPOSTGRESURL=https://jdbc.postgresql.org/download
-export JDBCPOSTGRES=postgresql-42.2.1.jar
+export JDBCPOSTGRES=postgresql-42.2.5.jar
 export JDBCMYSQLURL=https://dev.mysql.com/get/Downloads/Connector-J
-export JDBCMYSQL=mysql-connector-java-5.1.43.tar.gz
+export JDBCMYSQL=mysql-connector-java-5.1.47.tar.gz
 
-export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/6.1.0.3/deb/x86_64/LibreOffice_6.1.0.3_Linux_x86-64_deb.tar.gz
+export LIBREOFFICE=http://downloadarchive.documentfoundation.org/libreoffice/old/6.1.1.1/deb/x86_64/LibreOffice_6.1.1.1_Linux_x86-64_deb.tar.gz
 export ALFRESCO_PDF_RENDERER=https://artifacts.alfresco.com/nexus/service/local/repositories/releases/content/org/alfresco/alfresco-pdf-renderer/1.1/alfresco-pdf-renderer-1.1-linux.tgz
 
 export ALFREPOWAR=https://downloads.loftux.net/public/content/org/alfresco/content-services-community/6.0.7-ga/content-services-community-6.0.7-ga.war
@@ -43,7 +43,7 @@ export ASS_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alf
 
 export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX101/alfresco-platform-LX101.war
 export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX101/share-LX101.war
-export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX100/alfresco-share-services-LX101.amp
+export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX101/alfresco-share-services-LX101.amp
 
 export GOOGLEDOCSREPO=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.4.3/alfresco-googledocs-repo-3.0.4.3.amp
 export GOOGLEDOCSSHARE=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.4.3/alfresco-googledocs-share-3.0.4.3.amp
