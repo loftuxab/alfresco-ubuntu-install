@@ -44,6 +44,8 @@ export ASS_DOWNLOAD=https://downloads.loftux.net/public/content/org/alfresco/alf
 export LXALFREPOWAR=https://downloads.loftux.net/alfresco/alfresco-platform/LX101/alfresco-platform-LX101.war
 export LXALFSHAREWAR=https://downloads.loftux.net/alfresco/share/LX101/share-LX101.war
 export LXALFSHARESERVICES=https://downloads.loftux.net/alfresco/alfresco-share-services/LX101/alfresco-share-services-LX101.amp
+export LXAOS_AMP=https://downloads.loftux.net/alfresco/aos-module/alfresco-aos-module/1.2.0.1/alfresco-aos-module-1.2.0.1.amp
+
 
 export GOOGLEDOCSREPO=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-repo/3.0.4.3/alfresco-googledocs-repo-3.0.4.3.amp
 export GOOGLEDOCSSHARE=https://downloads.loftux.net/public/content/org/alfresco/integrations/alfresco-googledocs-share/3.0.4.3/alfresco-googledocs-share-3.0.4.3.amp
@@ -114,6 +116,7 @@ if [ "$uselxcommunity" = "y" ]; then
   ALFREPOWAR=$LXALFREPOWAR
   ALFSHAREWAR=$LXALFSHAREWAR
   ALFSHARESERVICES=$LXALFSHARESERVICES
+  AOS_AMP=$LXAOS_AMP
 
   echo
   echogreen "Thanks for choosing LXCommunity ECM"
