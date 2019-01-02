@@ -1,0 +1,22 @@
+# Alfresco IP Forwarding Startup
+# Authors: loftux, douglascrp
+#
+# If you intend to use forwarding, move this config file to /etc/systemd/system and execute:
+# sudo systemctl enable alfresco-iptables
+# sudo systemctl daemon-reload
+
+[Unit]
+Description=Alfresco IP Forwarding service
+
+[Service]
+Type=forking
+ExecStart=/opt/alfresco/scripts/iptables.sh start
+ExecStop=/opt/alfresco/scripts/iptables.sh stop
+Restart=always
+User=root
+Group=root
+WorkingDirectory=/opt/alfresco/logs
+StartLimitBurst=0
+
+[Install]
+WantedBy=multi-user.target
