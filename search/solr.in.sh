@@ -66,7 +66,7 @@ GC_LOG_OPTS=""
 # RMI_PORT=18983
 
 # Alfresco configuration. This file is automatically included by solr. You can define your custom settings here
-SOLR_OPTS="$SOLR_OPTS -Dsolr.jetty.request.header.size=1000000 -Dsolr.jetty.threads.stop.timeout=300000"
+SOLR_OPTS="$SOLR_OPTS -Dsolr.jetty.request.header.size=1000000 -Dsolr.jetty.threads.stop.timeout=300000 -Ddisable.configEdit=true""
 
 SOLR_OPTS="$SOLR_OPTS -Dsolr.content.dir=/opt/alfresco/alf_data/solr6/content -Dsolr.model.dir=/opt/alfresco/alf_data/solr6/models -Ddata.dir.root=/opt/alfresco/alf_data/solr6/index"
 #SSL Options
