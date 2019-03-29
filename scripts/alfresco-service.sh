@@ -8,7 +8,7 @@
 
 export LC_ALL=@@LOCALESUPPORT@@
 #export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
 export ALF_HOME=/opt/alfresco
 export CATALINA_HOME=/opt/alfresco/tomcat
 export CATALINA_TMPDIR=/opt/alfresco/tomcat/temp
