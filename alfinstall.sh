@@ -411,7 +411,7 @@ echo "Install Java JDK."
 echo "This will install OpenJDK 8 version of Java. If you prefer Oracle Java 8 "
 echo "you need to download and install that manually."
 echoblue "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-read -e -p "Install Oracle Java 8${ques} [y/n] " -i "$DEFAULTYESNO" installjdk
+read -e -p "Install OpenJDK${ques} [y/n] " -i "$DEFAULTYESNO" installjdk
 if [ "$installjdk" = "y" ]; then
   echoblue "Installing OpenJDK..."
   sudo apt-get $APTVERBOSITY install openjdk-8-jre-headless
