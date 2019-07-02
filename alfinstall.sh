@@ -482,7 +482,7 @@ read -e -p "Install ImageMagick${ques} [y/n] " -i "$DEFAULTYESNO" installimagema
 if [ "$installimagemagick" = "y" ]; then
 
   echoblue "Installing ImageMagick. Fetching packages..."
-  sudo apt-get $APTVERBOSITY install imagemagick ghostscript libgs-dev libjpeg62 libpng3
+  sudo apt-get $APTVERBOSITY install imagemagick ghostscript libgs-dev libjpeg62 libpng16-16
   echo
   if [ "$ISON1604" = "y" ]; then
     echoblue "Creating symbolic link for ImageMagick-6."
