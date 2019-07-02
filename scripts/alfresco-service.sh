@@ -7,7 +7,8 @@
 # -------
 
 export LC_ALL=@@LOCALESUPPORT@@
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
+#export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
+#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
 export ALF_HOME=/opt/alfresco
 export CATALINA_HOME=/opt/alfresco/tomcat
 export CATALINA_TMPDIR=/opt/alfresco/tomcat/temp
@@ -21,8 +22,7 @@ JAVA_OPTS="-Xms1G -Xmx2G -Xss1024k"
 # Below are options that can be used for dealing with memory and garbage collection
 # JAVA_OPTS="${JAVA_OPTS} -Xss1024k -XX:MaxPermSize=256m -XX:NewSize=512m -XX:+CMSIncrementalMode -XX:CMSInitiatingOccupancyFraction=80"
 
-# Recommended for Solr4
-JAVA_OPTS="${JAVA_OPTS} -XX:+UseConcMarkSweepGC -XX:+UseParNewGC"
+JAVA_OPTS="${JAVA_OPTS} -XX:+UseG1GC -XX:+UseStringDeduplication"
 
 JAVA_OPTS="${JAVA_OPTS} -Duser.country=US -Duser.region=US -Duser.language=en -Duser.timezone=\"Europe/Stockholm\" -d64"
 # Enable this if you encounter problems with transformations of certain pdfs. Side effect is disable of remote debugging
