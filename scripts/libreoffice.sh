@@ -31,7 +31,7 @@
             SHUTDOWN_PORT=`netstat -vatn|grep LISTEN|grep 8005|wc -l`
             export JAVA_HOME=$JAVA_HOME
             if [ $SHUTDOWN_PORT -ne 0 ]; then
-            /bin/su -s /bin/bash $USER -c "/opt/libreoffice6.1/program/soffice.bin \"--accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager\" \"-env:UserInstallation=file:///opt/alfresco/alf_data/oouser\" --nologo --headless --nofirststartwizard --norestore --nodefault &" >/dev/null
+            /bin/su -s /bin/bash $USER -c "/opt/libreoffice6.4/program/soffice.bin \"--accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager\" \"-env:UserInstallation=file:///opt/alfresco/alf_data/oouser\" --nologo --headless --nofirststartwizard --norestore --nodefault &" >/dev/null
             echo "Alfresco Open Office starting"
 	        logger Alfresco Open Office service started
             fi
