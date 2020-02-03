@@ -19,6 +19,7 @@ echo
 
 read -e -p "Install PostgreSQL database? [y/n] " -i "n" installpg
 if [ "$installpg" = "y" ]; then
+  sudo apt-get install software-properties-common -y
   sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main"
   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
   sudo apt-get update
