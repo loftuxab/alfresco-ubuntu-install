@@ -1,3 +1,27 @@
+PT-BR
+
+Instalação Alfresco Ubuntu
+=======================
+
+Este script de instalação e guia foi criado por Peter Löfgren, [Loftux AB](http://loftux.com).
+O script foi atualizado e corrigido por Felipe Sandes.
+
+Versão de instalada : **Alfresco Community 6.1 (6.1.1 Repository,6.1.0 Share)** também é possível a instalação da versão personalizada **LXCommunity ECM LX101**  
+
+Ubuntu : **16.04** ou superior.
+Testado na versão 20.04. 
+
+Alfresco script baseado na instalação para Server. Isso não impede de ser instalado na versão Desktop.
+----------------------------
+
+Este script o ajudará a configurar uma instância do servidor Alfresco com todos os componentes de terceiros necessários. Alguns serão instalados por meio de pacotes do Ubuntu, alguns baixados diretamente. O script o guiará pelo processo. No final, haverá algumas tarefas manuais para concluir a instalação.
+
+É importante lembrar que o Alfresco tem instaladores para Linux até a versão 6.0.2, caso não tenha conhecimento ou queira apenas testar, o mais recomendado é a instalação rápida.
+
+Se você pretende executar o Alfresco em produção, este script pode ajudá-lo tanto com a instalação. *Examinando o que o script faz, você também pode aprender quais componentes estão envolvidos na execução de uma instância do Alfresco.* Isso é obrigatório para qualquer administrador do Alfresco que executa o Alfresco em produção.
+
+Todo o procedimento de iniciação do script e iniciação do Alfresco está disponível abaixo.
+
 [![Loftux AB](https://loftux.com/files/static/images/ubuntu_installer.png?ref=ubuntuinstall)](https://loftux.com?ref=ubuntuinstall)
 
 Alfresco Ubuntu Installer
